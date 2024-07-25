@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:live_score/core/network/api_client.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -14,7 +13,7 @@ class HomeScreen extends StatelessWidget {
           children: [
             ElevatedButton(
               child: const Text('Fetch Data'),
-              onPressed: () => fetchFootballFixtures(),
+              onPressed: () => (),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
