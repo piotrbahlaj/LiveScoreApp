@@ -1,28 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:live_score/core/network/api_client.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:live_score/app_module.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
-  runApp(const MainApp());
+  runApp(
+    ModularApp(
+      module: AppModule(),
+      child: const Main(),
+    ),
+  );
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class Main extends StatelessWidget {
+  const Main({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Center(
-          child: ElevatedButton(
-            child: const Text('Fetch Data'),
-            onPressed: () => fetchFootballFixtures(),
-          ),
-        ),
-      ),
+      routerConfig: Modular.routerConfig,
     );
   }
 }
