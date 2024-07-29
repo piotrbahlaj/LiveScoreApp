@@ -11,7 +11,7 @@ class AppModule extends Module {
   void binds(i) {
     i.addLazySingleton<EnvironmentConfigInterface>(EnvironmentConfig.new);
     i.addLazySingleton(ApiClient.new);
-    i.add(ApiService.new);
+    i.addLazySingleton(ApiService.new);
   }
 
   @override

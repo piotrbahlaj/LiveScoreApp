@@ -15,7 +15,7 @@ class ApiClient {
       BaseOptions(
         baseUrl: environmentConfigInterface.baseUrl,
         headers: {
-          'x-rapidapi-key': environmentConfigInterface.apiKey,
+          'x-apisports-key': environmentConfigInterface.apiKey,
         },
       ),
     );

@@ -19,13 +19,13 @@ class _ApiService implements ApiService {
   String? baseUrl;
 
   @override
-  Future<List<Fixtures>> getFixtures() async {
+  Future<FixtureResponseModel> getFixtures() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result =
-        await _dio.fetch<List<dynamic>>(_setStreamType<List<Fixtures>>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<FixtureResponseModel>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -41,9 +41,7 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var _value = _result.data!
-        .map((dynamic i) => Fixtures.fromJson(i as Map<String, dynamic>))
-        .toList();
+    final _value = FixtureResponseModel.fromJson(_result.data!);
     return _value;
   }
 

@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:live_score/core/models/fixtures/api_model.dart';
+import 'package:live_score/core/models/fixture_response/fixture_response_model.dart';
 import 'package:live_score/core/network/api_client.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -11,5 +11,5 @@ abstract class ApiService {
       _ApiService(apiClient.dio);
 
   @GET('/fixtures')
-  Future<List<Fixtures>> getFixtures();
+  Future<FixtureResponseModel> getFixtures();
 }

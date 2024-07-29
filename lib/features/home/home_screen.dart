@@ -12,11 +12,6 @@ class HomeScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
-              child: const Text('Fetch Data'),
-              onPressed: () => (),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
               child: const Text('Navigate to dashboard'),
               onPressed: () => Modular.to.pushNamed('/dashboard'),
             ),
