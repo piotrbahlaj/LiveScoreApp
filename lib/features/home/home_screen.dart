@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:live_score/l10n/app_localizations_context.dart';
+import 'package:live_score/core/extensions/localization/app_localizations_context.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
