@@ -45,6 +45,7 @@ flutter_native_splash:
     image: assets/football_splash4_android.png
     image_dark: assets/football_splash4_android.png
     color_dark: "#ffA500"
+  web: false
 
 flutter:
   uses-material-design: true
