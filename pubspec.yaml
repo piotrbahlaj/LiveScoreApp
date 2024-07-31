@@ -33,6 +33,19 @@ dev_dependencies:
     sdk: flutter
   json_serializable: ^6.8.0
   retrofit_generator: ^8.1.2
+  flutter_native_splash: ^2.4.1
+
+flutter_native_splash:
+  color: "#ffA500"
+  image: assets/football_splash4.png
+  image_dark: assets/football_splash4.png
+  color_dark: "#ffA500"
+  android_12:
+    color: "#ffA500"
+    image: assets/football_splash4_android.png
+    image_dark: assets/football_splash4_android.png
+    color_dark: "#ffA500"
+  web: false
 
 flutter:
   uses-material-design: true
