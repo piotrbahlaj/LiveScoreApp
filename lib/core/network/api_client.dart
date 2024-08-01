@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:live_score/core/config/environment_config_interface.dart';
+import 'package:live_score/config/environment_config_interface.dart';
 
 class ApiClient {
   EnvironmentConfigInterface environmentConfigInterface;

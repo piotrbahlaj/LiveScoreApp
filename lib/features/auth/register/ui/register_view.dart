@@ -1,16 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:live_score/core/theme/app_theme.dart';
-import 'package:live_score/features/auth/register/widgets/auth_button.dart';
-import 'package:live_score/features/auth/register/widgets/auth_text_field.dart';
-
-class RegisterScreen extends StatelessWidget {
-  const RegisterScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const RegisterView();
-  }
-}
+import 'package:live_score/core/ui/confirm_button.dart';
+import 'package:live_score/core/ui/form_text_field.dart';
 
 class RegisterView extends StatelessWidget {
   const RegisterView({super.key});
@@ -36,31 +27,31 @@ class RegisterView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const AuthTextField(
+            const FormTextField(
               hint: 'Username',
               icon: Icons.person,
               obscureText: false,
             ),
             const SizedBox(height: 30),
-            const AuthTextField(
+            const FormTextField(
               hint: 'Email',
               icon: Icons.email,
               obscureText: false,
             ),
             const SizedBox(height: 30),
-            const AuthTextField(
+            const FormTextField(
               hint: 'Password',
               icon: Icons.lock,
               obscureText: true,
             ),
             const SizedBox(height: 30),
-            const AuthTextField(
+            const FormTextField(
               hint: 'Confirm Password',
               icon: Icons.lock,
               obscureText: true,
             ),
             const SizedBox(height: 40),
-            AuthButton(
+            ConfirmButton(
               onPressed: () {},
               text: 'Register',
             ),

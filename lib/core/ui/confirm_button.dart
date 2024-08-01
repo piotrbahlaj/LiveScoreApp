@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:live_score/core/theme/app_theme.dart';
 
-class AuthButton extends StatelessWidget {
-  const AuthButton({super.key, required this.text, required this.onPressed});
+class ConfirmButton extends StatelessWidget {
+  const ConfirmButton({super.key, required this.text, required this.onPressed});
   final String text;
   final VoidCallback onPressed;
 
