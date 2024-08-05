@@ -16,7 +16,7 @@ class AuthRepository implements AuthRepositoryInterface {
       );
       return credential.user;
     } on FirebaseAuthException catch (e) {
-      throw Exception(e.toString());
+      throw FirebaseAuthException(code: e.code);
     }
   }
 
@@ -28,7 +28,7 @@ class AuthRepository implements AuthRepositoryInterface {
         password: password,
       );
     } on FirebaseAuthException catch (e) {
-      throw Exception(e.toString());
+      throw FirebaseAuthException(code: e.code);
     }
   }
 
@@ -37,7 +37,7 @@ class AuthRepository implements AuthRepositoryInterface {
     try {
       await _auth.signOut();
     } on FirebaseAuthException catch (e) {
-      throw Exception(e.toString());
+      throw FirebaseAuthException(code: e.code);
     }
   }
 
@@ -46,7 +46,7 @@ class AuthRepository implements AuthRepositoryInterface {
     try {
       await _auth.sendPasswordResetEmail(email: email);
     } on FirebaseAuthException catch (e) {
-      throw Exception(e.toString());
+      throw FirebaseAuthException(code: e.code);
     }
   }
 }

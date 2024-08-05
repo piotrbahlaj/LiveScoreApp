@@ -20,49 +20,55 @@ mixin _$RegisterState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String message) success,
-    required TResult Function(String message) error,
+    required TResult Function() success,
+    required TResult Function(FirebaseAuthException error) authError,
+    required TResult Function(ValidationErrorType type) validationError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String message)? success,
-    TResult? Function(String message)? error,
+    TResult? Function()? success,
+    TResult? Function(FirebaseAuthException error)? authError,
+    TResult? Function(ValidationErrorType type)? validationError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String message)? success,
-    TResult Function(String message)? error,
+    TResult Function()? success,
+    TResult Function(FirebaseAuthException error)? authError,
+    TResult Function(ValidationErrorType type)? validationError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Success value) success,
-    required TResult Function(_Error value) error,
+    required TResult Function(Initial value) initial,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Success value) success,
+    required TResult Function(Error value) authError,
+    required TResult Function(ValidationError value) validationError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Success value)? success,
-    TResult? Function(_Error value)? error,
+    TResult? Function(Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Success value)? success,
+    TResult? Function(Error value)? authError,
+    TResult? Function(ValidationError value)? validationError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Success value)? success,
-    TResult Function(_Error value)? error,
+    TResult Function(Initial value)? initial,
+    TResult Function(Loading value)? loading,
+    TResult Function(Success value)? success,
+    TResult Function(Error value)? authError,
+    TResult Function(ValidationError value)? validationError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -104,7 +110,7 @@ class __$$InitialImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$InitialImpl implements _Initial {
+class _$InitialImpl implements Initial {
   const _$InitialImpl();
 
   @override
@@ -126,8 +132,9 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String message) success,
-    required TResult Function(String message) error,
+    required TResult Function() success,
+    required TResult Function(FirebaseAuthException error) authError,
+    required TResult Function(ValidationErrorType type) validationError,
   }) {
     return initial();
   }
@@ -137,8 +144,9 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String message)? success,
-    TResult? Function(String message)? error,
+    TResult? Function()? success,
+    TResult? Function(FirebaseAuthException error)? authError,
+    TResult? Function(ValidationErrorType type)? validationError,
   }) {
     return initial?.call();
   }
@@ -148,8 +156,9 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String message)? success,
-    TResult Function(String message)? error,
+    TResult Function()? success,
+    TResult Function(FirebaseAuthException error)? authError,
+    TResult Function(ValidationErrorType type)? validationError,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -161,10 +170,11 @@ class _$InitialImpl implements _Initial {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Success value) success,
-    required TResult Function(_Error value) error,
+    required TResult Function(Initial value) initial,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Success value) success,
+    required TResult Function(Error value) authError,
+    required TResult Function(ValidationError value) validationError,
   }) {
     return initial(this);
   }
@@ -172,10 +182,11 @@ class _$InitialImpl implements _Initial {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Success value)? success,
-    TResult? Function(_Error value)? error,
+    TResult? Function(Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Success value)? success,
+    TResult? Function(Error value)? authError,
+    TResult? Function(ValidationError value)? validationError,
   }) {
     return initial?.call(this);
   }
@@ -183,10 +194,11 @@ class _$InitialImpl implements _Initial {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Success value)? success,
-    TResult Function(_Error value)? error,
+    TResult Function(Initial value)? initial,
+    TResult Function(Loading value)? loading,
+    TResult Function(Success value)? success,
+    TResult Function(Error value)? authError,
+    TResult Function(ValidationError value)? validationError,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -196,8 +208,8 @@ class _$InitialImpl implements _Initial {
   }
 }
 
-abstract class _Initial implements RegisterState {
-  const factory _Initial() = _$InitialImpl;
+abstract class Initial implements RegisterState {
+  const factory Initial() = _$InitialImpl;
 }
 
 /// @nodoc
@@ -218,7 +230,7 @@ class __$$LoadingImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LoadingImpl implements _Loading {
+class _$LoadingImpl implements Loading {
   const _$LoadingImpl();
 
   @override
@@ -240,8 +252,9 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String message) success,
-    required TResult Function(String message) error,
+    required TResult Function() success,
+    required TResult Function(FirebaseAuthException error) authError,
+    required TResult Function(ValidationErrorType type) validationError,
   }) {
     return loading();
   }
@@ -251,8 +264,9 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String message)? success,
-    TResult? Function(String message)? error,
+    TResult? Function()? success,
+    TResult? Function(FirebaseAuthException error)? authError,
+    TResult? Function(ValidationErrorType type)? validationError,
   }) {
     return loading?.call();
   }
@@ -262,8 +276,9 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String message)? success,
-    TResult Function(String message)? error,
+    TResult Function()? success,
+    TResult Function(FirebaseAuthException error)? authError,
+    TResult Function(ValidationErrorType type)? validationError,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -275,10 +290,11 @@ class _$LoadingImpl implements _Loading {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Success value) success,
-    required TResult Function(_Error value) error,
+    required TResult Function(Initial value) initial,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Success value) success,
+    required TResult Function(Error value) authError,
+    required TResult Function(ValidationError value) validationError,
   }) {
     return loading(this);
   }
@@ -286,10 +302,11 @@ class _$LoadingImpl implements _Loading {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Success value)? success,
-    TResult? Function(_Error value)? error,
+    TResult? Function(Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Success value)? success,
+    TResult? Function(Error value)? authError,
+    TResult? Function(ValidationError value)? validationError,
   }) {
     return loading?.call(this);
   }
@@ -297,10 +314,11 @@ class _$LoadingImpl implements _Loading {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Success value)? success,
-    TResult Function(_Error value)? error,
+    TResult Function(Initial value)? initial,
+    TResult Function(Loading value)? loading,
+    TResult Function(Success value)? success,
+    TResult Function(Error value)? authError,
+    TResult Function(ValidationError value)? validationError,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -310,8 +328,8 @@ class _$LoadingImpl implements _Loading {
   }
 }
 
-abstract class _Loading implements RegisterState {
-  const factory _Loading() = _$LoadingImpl;
+abstract class Loading implements RegisterState {
+  const factory Loading() = _$LoadingImpl;
 }
 
 /// @nodoc
@@ -319,8 +337,6 @@ abstract class _$$SuccessImplCopyWith<$Res> {
   factory _$$SuccessImplCopyWith(
           _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
       __$$SuccessImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String message});
 }
 
 /// @nodoc
@@ -330,60 +346,37 @@ class __$$SuccessImplCopyWithImpl<$Res>
   __$$SuccessImplCopyWithImpl(
       _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? message = null,
-  }) {
-    return _then(_$SuccessImpl(
-      null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$SuccessImpl implements _Success {
-  const _$SuccessImpl(this.message);
-
-  @override
-  final String message;
+class _$SuccessImpl implements Success {
+  const _$SuccessImpl();
 
   @override
   String toString() {
-    return 'RegisterState.success(message: $message)';
+    return 'RegisterState.success()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$SuccessImpl &&
-            (identical(other.message, message) || other.message == message));
+        (other.runtimeType == runtimeType && other is _$SuccessImpl);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, message);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
-      __$$SuccessImplCopyWithImpl<_$SuccessImpl>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String message) success,
-    required TResult Function(String message) error,
+    required TResult Function() success,
+    required TResult Function(FirebaseAuthException error) authError,
+    required TResult Function(ValidationErrorType type) validationError,
   }) {
-    return success(message);
+    return success();
   }
 
   @override
@@ -391,10 +384,11 @@ class _$SuccessImpl implements _Success {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String message)? success,
-    TResult? Function(String message)? error,
+    TResult? Function()? success,
+    TResult? Function(FirebaseAuthException error)? authError,
+    TResult? Function(ValidationErrorType type)? validationError,
   }) {
-    return success?.call(message);
+    return success?.call();
   }
 
   @override
@@ -402,12 +396,13 @@ class _$SuccessImpl implements _Success {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String message)? success,
-    TResult Function(String message)? error,
+    TResult Function()? success,
+    TResult Function(FirebaseAuthException error)? authError,
+    TResult Function(ValidationErrorType type)? validationError,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(message);
+      return success();
     }
     return orElse();
   }
@@ -415,10 +410,11 @@ class _$SuccessImpl implements _Success {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Success value) success,
-    required TResult Function(_Error value) error,
+    required TResult Function(Initial value) initial,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Success value) success,
+    required TResult Function(Error value) authError,
+    required TResult Function(ValidationError value) validationError,
   }) {
     return success(this);
   }
@@ -426,10 +422,11 @@ class _$SuccessImpl implements _Success {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Success value)? success,
-    TResult? Function(_Error value)? error,
+    TResult? Function(Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Success value)? success,
+    TResult? Function(Error value)? authError,
+    TResult? Function(ValidationError value)? validationError,
   }) {
     return success?.call(this);
   }
@@ -437,10 +434,11 @@ class _$SuccessImpl implements _Success {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Success value)? success,
-    TResult Function(_Error value)? error,
+    TResult Function(Initial value)? initial,
+    TResult Function(Loading value)? loading,
+    TResult Function(Success value)? success,
+    TResult Function(Error value)? authError,
+    TResult Function(ValidationError value)? validationError,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -450,13 +448,8 @@ class _$SuccessImpl implements _Success {
   }
 }
 
-abstract class _Success implements RegisterState {
-  const factory _Success(final String message) = _$SuccessImpl;
-
-  String get message;
-  @JsonKey(ignore: true)
-  _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+abstract class Success implements RegisterState {
+  const factory Success() = _$SuccessImpl;
 }
 
 /// @nodoc
@@ -465,7 +458,7 @@ abstract class _$$ErrorImplCopyWith<$Res> {
           _$ErrorImpl value, $Res Function(_$ErrorImpl) then) =
       __$$ErrorImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String message});
+  $Res call({FirebaseAuthException error});
 }
 
 /// @nodoc
@@ -479,28 +472,28 @@ class __$$ErrorImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? message = null,
+    Object? error = null,
   }) {
     return _then(_$ErrorImpl(
-      null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
+      null == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as FirebaseAuthException,
     ));
   }
 }
 
 /// @nodoc
 
-class _$ErrorImpl implements _Error {
-  const _$ErrorImpl(this.message);
+class _$ErrorImpl implements Error {
+  const _$ErrorImpl(this.error);
 
   @override
-  final String message;
+  final FirebaseAuthException error;
 
   @override
   String toString() {
-    return 'RegisterState.error(message: $message)';
+    return 'RegisterState.authError(error: $error)';
   }
 
   @override
@@ -508,11 +501,11 @@ class _$ErrorImpl implements _Error {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ErrorImpl &&
-            (identical(other.message, message) || other.message == message));
+            (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, message);
+  int get hashCode => Object.hash(runtimeType, error);
 
   @JsonKey(ignore: true)
   @override
@@ -525,10 +518,11 @@ class _$ErrorImpl implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String message) success,
-    required TResult Function(String message) error,
+    required TResult Function() success,
+    required TResult Function(FirebaseAuthException error) authError,
+    required TResult Function(ValidationErrorType type) validationError,
   }) {
-    return error(message);
+    return authError(error);
   }
 
   @override
@@ -536,10 +530,11 @@ class _$ErrorImpl implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String message)? success,
-    TResult? Function(String message)? error,
+    TResult? Function()? success,
+    TResult? Function(FirebaseAuthException error)? authError,
+    TResult? Function(ValidationErrorType type)? validationError,
   }) {
-    return error?.call(message);
+    return authError?.call(error);
   }
 
   @override
@@ -547,12 +542,13 @@ class _$ErrorImpl implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String message)? success,
-    TResult Function(String message)? error,
+    TResult Function()? success,
+    TResult Function(FirebaseAuthException error)? authError,
+    TResult Function(ValidationErrorType type)? validationError,
     required TResult orElse(),
   }) {
-    if (error != null) {
-      return error(message);
+    if (authError != null) {
+      return authError(error);
     }
     return orElse();
   }
@@ -560,46 +556,202 @@ class _$ErrorImpl implements _Error {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Success value) success,
-    required TResult Function(_Error value) error,
+    required TResult Function(Initial value) initial,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Success value) success,
+    required TResult Function(Error value) authError,
+    required TResult Function(ValidationError value) validationError,
   }) {
-    return error(this);
+    return authError(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Success value)? success,
-    TResult? Function(_Error value)? error,
+    TResult? Function(Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Success value)? success,
+    TResult? Function(Error value)? authError,
+    TResult? Function(ValidationError value)? validationError,
   }) {
-    return error?.call(this);
+    return authError?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Success value)? success,
-    TResult Function(_Error value)? error,
+    TResult Function(Initial value)? initial,
+    TResult Function(Loading value)? loading,
+    TResult Function(Success value)? success,
+    TResult Function(Error value)? authError,
+    TResult Function(ValidationError value)? validationError,
     required TResult orElse(),
   }) {
-    if (error != null) {
-      return error(this);
+    if (authError != null) {
+      return authError(this);
     }
     return orElse();
   }
 }
 
-abstract class _Error implements RegisterState {
-  const factory _Error(final String message) = _$ErrorImpl;
+abstract class Error implements RegisterState {
+  const factory Error(final FirebaseAuthException error) = _$ErrorImpl;
 
-  String get message;
+  FirebaseAuthException get error;
   @JsonKey(ignore: true)
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ValidationErrorImplCopyWith<$Res> {
+  factory _$$ValidationErrorImplCopyWith(_$ValidationErrorImpl value,
+          $Res Function(_$ValidationErrorImpl) then) =
+      __$$ValidationErrorImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({ValidationErrorType type});
+}
+
+/// @nodoc
+class __$$ValidationErrorImplCopyWithImpl<$Res>
+    extends _$RegisterStateCopyWithImpl<$Res, _$ValidationErrorImpl>
+    implements _$$ValidationErrorImplCopyWith<$Res> {
+  __$$ValidationErrorImplCopyWithImpl(
+      _$ValidationErrorImpl _value, $Res Function(_$ValidationErrorImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? type = null,
+  }) {
+    return _then(_$ValidationErrorImpl(
+      null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as ValidationErrorType,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ValidationErrorImpl implements ValidationError {
+  const _$ValidationErrorImpl(this.type);
+
+  @override
+  final ValidationErrorType type;
+
+  @override
+  String toString() {
+    return 'RegisterState.validationError(type: $type)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ValidationErrorImpl &&
+            (identical(other.type, type) || other.type == type));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, type);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ValidationErrorImplCopyWith<_$ValidationErrorImpl> get copyWith =>
+      __$$ValidationErrorImplCopyWithImpl<_$ValidationErrorImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() success,
+    required TResult Function(FirebaseAuthException error) authError,
+    required TResult Function(ValidationErrorType type) validationError,
+  }) {
+    return validationError(type);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function()? success,
+    TResult? Function(FirebaseAuthException error)? authError,
+    TResult? Function(ValidationErrorType type)? validationError,
+  }) {
+    return validationError?.call(type);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? success,
+    TResult Function(FirebaseAuthException error)? authError,
+    TResult Function(ValidationErrorType type)? validationError,
+    required TResult orElse(),
+  }) {
+    if (validationError != null) {
+      return validationError(type);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Success value) success,
+    required TResult Function(Error value) authError,
+    required TResult Function(ValidationError value) validationError,
+  }) {
+    return validationError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Success value)? success,
+    TResult? Function(Error value)? authError,
+    TResult? Function(ValidationError value)? validationError,
+  }) {
+    return validationError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
+    TResult Function(Loading value)? loading,
+    TResult Function(Success value)? success,
+    TResult Function(Error value)? authError,
+    TResult Function(ValidationError value)? validationError,
+    required TResult orElse(),
+  }) {
+    if (validationError != null) {
+      return validationError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ValidationError implements RegisterState {
+  const factory ValidationError(final ValidationErrorType type) =
+      _$ValidationErrorImpl;
+
+  ValidationErrorType get type;
+  @JsonKey(ignore: true)
+  _$$ValidationErrorImplCopyWith<_$ValidationErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

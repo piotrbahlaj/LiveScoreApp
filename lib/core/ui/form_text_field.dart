@@ -6,14 +6,17 @@ class FormTextField extends StatelessWidget {
       {super.key,
       required this.hint,
       required this.icon,
-      required this.obscureText});
+      required this.obscureText,
+      required this.controller});
   final String hint;
   final IconData icon;
   final bool obscureText;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: controller,
       obscureText: obscureText,
       style: const TextStyle(color: AppTheme.onSecondary),
       decoration: InputDecoration(

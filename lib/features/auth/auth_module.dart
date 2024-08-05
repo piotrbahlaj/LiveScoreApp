@@ -8,14 +8,15 @@ import 'package:live_score/features/auth/register/ui/register_screen.dart';
 class AuthModule extends Module {
   @override
   void binds(i) {
+    i.addLazySingleton<FirebaseAuth>((i) => FirebaseAuth.instance);
     i.addLazySingleton<AuthRepositoryInterface>(
-      (i) => AuthRepository(auth: FirebaseAuth.instance),
+      (i) => AuthRepository(auth: i()),
     );
   }
 
   @override
   void routes(r) {
-    r.child('/', child: (context) => const RegisterScreen());
-    r.child('/login', child: (context) => const LoginScreen());
+    r.child('/register/', child: (context) => const RegisterScreen());
+    r.child('/login/', child: (context) => const LoginScreen());
   }
 }
