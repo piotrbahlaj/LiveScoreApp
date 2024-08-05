@@ -127,7 +127,9 @@ class RegisterView extends StatelessWidget {
                   children: [
                     Text(
                       context.localizations.alreadyHaveAnAccount,
-                      style: const TextStyle(color: AppTheme.infoText),
+                      style: const TextStyle(
+                        color: AppTheme.infoText,
+                      ),
                     ),
                     TextButton(
                       onPressed: () => Modular.to.pushNamed(Routes.login),

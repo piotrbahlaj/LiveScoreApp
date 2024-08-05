@@ -49,4 +49,13 @@ class AuthRepository implements AuthRepositoryInterface {
       throw FirebaseAuthException(code: e.code);
     }
   }
+
+  @override
+  Future<void> deleteAccount() async {
+    try {
+      await _auth.currentUser!.delete();
+    } on FirebaseAuthException catch (e) {
+      throw FirebaseAuthException(code: e.code);
+    }
+  }
 }
