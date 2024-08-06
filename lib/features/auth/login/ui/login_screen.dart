@@ -1,7 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:live_score/core/repositories/auth/auth_repository.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:live_score/features/auth/login/cubit/login_cubit.dart';
 import 'package:live_score/features/auth/login/ui/login_view.dart';
 
@@ -10,12 +9,8 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => LoginCubit(
-        AuthRepository(
-          auth: FirebaseAuth.instance,
-        ),
-      ),
+    return BlocProvider<LoginCubit>(
+      create: (context) => Modular.get<LoginCubit>(),
       child: const LoginView(),
     );
   }
