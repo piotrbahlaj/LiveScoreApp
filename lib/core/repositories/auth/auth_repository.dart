@@ -21,12 +21,14 @@ class AuthRepository implements AuthRepositoryInterface {
   }
 
   @override
-  Future<void> signInWithEmailAndPassword(String email, String password) async {
+  Future<User?> signInWithEmailAndPassword(
+      String email, String password) async {
     try {
-      await _auth.signInWithEmailAndPassword(
+      UserCredential credential = await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
+      return credential.user;
     } on FirebaseAuthException catch (e) {
       throw FirebaseAuthException(code: e.code);
     }
