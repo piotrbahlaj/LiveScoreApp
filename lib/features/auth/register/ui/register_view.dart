@@ -9,6 +9,7 @@ import 'package:live_score/core/theme/app_theme.dart';
 import 'package:live_score/core/ui/confirm_button.dart';
 import 'package:live_score/core/ui/form_text_field.dart';
 import 'package:live_score/features/auth/register/cubit/register_cubit.dart';
+import 'package:live_score/features/auth/shared/cubit/obscure_text_cubit.dart';
 
 class RegisterView extends StatelessWidget {
   const RegisterView({super.key});
@@ -40,37 +41,7 @@ class RegisterView extends StatelessWidget {
         toolbarHeight: 100,
       ),
       body: BlocConsumer<RegisterCubit, RegisterState>(
-        listener: (context, state) {
-          state.map(
-            initial: (_) {},
-            loading: (_) {},
-            success: (state) {
-              ScaffoldMessenger.of(context).clearSnackBars();
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(
-                    context.localizations.registerSuccessful,
-                  ),
-                ),
-              );
-              Modular.to.pushNamed(Routes.login);
-            },
-            authError: (state) {
-              ScaffoldMessenger.of(context).clearSnackBars();
-              final message = AuthError.fromFirebaseError(state.error).message;
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(message)),
-              );
-            },
-            validationError: (state) {
-              ScaffoldMessenger.of(context).clearSnackBars();
-              final message = AuthError.fromValidationError(state.type).message;
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(message)),
-              );
-            },
-          );
-        },
+        listener: (context, state) => onRegisterStateChanged(context, state),
         builder: (context, state) {
           return Padding(
             padding: const EdgeInsets.all(16.0),
@@ -91,18 +62,35 @@ class RegisterView extends StatelessWidget {
                   controller: emailController,
                 ),
                 const SizedBox(height: 30),
-                FormTextField(
-                  hint: context.localizations.password,
-                  icon: Icons.lock,
-                  obscureText: true,
-                  controller: passwordController,
-                ),
-                const SizedBox(height: 30),
-                FormTextField(
-                  hint: context.localizations.confirmPassword,
-                  icon: Icons.lock,
-                  obscureText: true,
-                  controller: confirmPasswordController,
+                BlocBuilder<ObscureTextCubit, bool>(
+                  builder: (context, state) {
+                    final cubit = context.read<ObscureTextCubit>();
+                    return Column(
+                      children: [
+                        FormTextField(
+                          hint: context.localizations.password,
+                          icon: Icons.lock,
+                          obscureText: cubit.state,
+                          controller: passwordController,
+                          obscureTextIcon: state == true
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                          toggleObscure: cubit.toggleObscureText,
+                        ),
+                        const SizedBox(height: 30),
+                        FormTextField(
+                          hint: context.localizations.confirmPassword,
+                          icon: Icons.lock,
+                          obscureText: cubit.state,
+                          controller: confirmPasswordController,
+                          obscureTextIcon: state == true
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                          toggleObscure: cubit.toggleObscureText,
+                        ),
+                      ],
+                    );
+                  },
                 ),
                 const SizedBox(height: 40),
                 if (state is Loading)
@@ -149,6 +137,38 @@ class RegisterView extends StatelessWidget {
           );
         },
       ),
+    );
+  }
+
+  void onRegisterStateChanged(BuildContext context, RegisterState state) {
+    state.map(
+      initial: (_) {},
+      loading: (_) {},
+      success: (state) {
+        ScaffoldMessenger.of(context).clearSnackBars();
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              context.localizations.registerSuccessful,
+            ),
+          ),
+        );
+        Modular.to.pushNamed(Routes.login);
+      },
+      authError: (state) {
+        ScaffoldMessenger.of(context).clearSnackBars();
+        final message = AuthError.fromFirebaseError(state.error).message;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(message)),
+        );
+      },
+      validationError: (state) {
+        ScaffoldMessenger.of(context).clearSnackBars();
+        final message = AuthError.fromValidationError(state.type).message;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(message)),
+        );
+      },
     );
   }
 }

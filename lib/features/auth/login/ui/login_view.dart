@@ -10,6 +10,7 @@ import 'package:live_score/core/theme/app_theme.dart';
 import 'package:live_score/core/ui/confirm_button.dart';
 import 'package:live_score/core/ui/form_text_field.dart';
 import 'package:live_score/features/auth/login/cubit/login_cubit.dart';
+import 'package:live_score/features/auth/shared/cubit/obscure_text_cubit.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
@@ -38,30 +39,7 @@ class LoginView extends StatelessWidget {
         toolbarHeight: 100,
       ),
       body: BlocConsumer<LoginCubit, LoginState>(
-        listener: (context, state) {
-          state.map(
-            initial: (_) {},
-            loading: (_) {},
-            error: (state) {
-              ScaffoldMessenger.of(context).clearSnackBars();
-              final message = AuthError.fromFirebaseError(state.error).message;
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(message)),
-              );
-            },
-            success: (state) {
-              ScaffoldMessenger.of(context).clearSnackBars();
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(
-                    context.localizations.loginSuccessful,
-                  ),
-                ),
-              );
-              Modular.to.pushNamed(Routes.dashboard);
-            },
-          );
-        },
+        listener: (context, state) => onLoginStateChanged(context, state),
         builder: (context, state) {
           return BlocBuilder<LoginCubit, LoginState>(
             builder: (context, state) {
@@ -77,11 +55,20 @@ class LoginView extends StatelessWidget {
                       controller: emailController,
                     ),
                     const SizedBox(height: 30),
-                    FormTextField(
-                      hint: context.localizations.password,
-                      icon: Icons.lock,
-                      obscureText: true,
-                      controller: passwordController,
+                    BlocBuilder<ObscureTextCubit, bool>(
+                      builder: (context, state) {
+                        final cubit = context.read<ObscureTextCubit>();
+                        return FormTextField(
+                          hint: context.localizations.password,
+                          icon: Icons.lock,
+                          obscureTextIcon: state == true
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                          obscureText: cubit.state,
+                          controller: passwordController,
+                          toggleObscure: cubit.toggleObscureText,
+                        );
+                      },
                     ),
                     const SizedBox(height: 40),
                     if (state is Loading)
@@ -132,6 +119,37 @@ class LoginView extends StatelessWidget {
           );
         },
       ),
+    );
+  }
+
+  void onLoginStateChanged(BuildContext context, LoginState state) {
+    state.map(
+      initial: (_) {
+        return null;
+      },
+      loading: (_) {
+        return null;
+      },
+      error: (state) {
+        ScaffoldMessenger.of(context).clearSnackBars();
+        final message = AuthError.fromFirebaseError(state.error).message;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(message)),
+        );
+        return null;
+      },
+      success: (state) {
+        ScaffoldMessenger.of(context).clearSnackBars();
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              context.localizations.loginSuccessful,
+            ),
+          ),
+        );
+        Modular.to.pushNamed(Routes.dashboard);
+        return null;
+      },
     );
   }
 }
