@@ -2,14 +2,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:live_score/core/repositories/auth/auth_repository_interface.dart';
 
 class AuthRepository implements AuthRepositoryInterface {
-  final FirebaseAuth _auth;
+  final FirebaseAuth auth;
 
-  AuthRepository({required FirebaseAuth auth}) : _auth = auth;
+  AuthRepository(this.auth);
 
   @override
   Future<User?> signUpWithEmailAndPassword(
       String email, String password) async {
-    UserCredential credential = await _auth.createUserWithEmailAndPassword(
+    UserCredential credential = await auth.createUserWithEmailAndPassword(
       email: email,
       password: password,
     );
@@ -17,21 +17,19 @@ class AuthRepository implements AuthRepositoryInterface {
   }
 
   @override
-  Future<void> signInWithEmailAndPassword(String email, String password) async {
-    try {
-      await _auth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-    } on FirebaseAuthException catch (e) {
-      throw FirebaseAuthException(code: e.code);
-    }
+  Future<User?> signInWithEmailAndPassword(
+      String email, String password) async {
+    UserCredential credential = await auth.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    return credential.user;
   }
 
   @override
   Future<void> logOut() async {
     try {
-      await _auth.signOut();
+      await auth.signOut();
     } on FirebaseAuthException catch (e) {
       throw FirebaseAuthException(code: e.code);
     }
@@ -40,7 +38,16 @@ class AuthRepository implements AuthRepositoryInterface {
   @override
   Future<void> resetPassword(String email) async {
     try {
-      await _auth.sendPasswordResetEmail(email: email);
+      await auth.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException catch (e) {
+      throw FirebaseAuthException(code: e.code);
+    }
+  }
+
+  @override
+  Future<void> deleteAccount() async {
+    try {
+      await auth.currentUser!.delete();
     } on FirebaseAuthException catch (e) {
       throw FirebaseAuthException(code: e.code);
     }

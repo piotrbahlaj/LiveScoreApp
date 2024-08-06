@@ -7,11 +7,15 @@ class FormTextField extends StatelessWidget {
       required this.hint,
       required this.icon,
       required this.obscureText,
-      required this.controller});
+      required this.controller,
+      this.obscureTextIcon,
+      this.toggleObscure});
   final String hint;
   final IconData icon;
   final bool obscureText;
   final TextEditingController controller;
+  final IconData? obscureTextIcon;
+  final void Function()? toggleObscure;
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +24,13 @@ class FormTextField extends StatelessWidget {
       obscureText: obscureText,
       style: const TextStyle(color: AppTheme.onSecondary),
       decoration: InputDecoration(
+        suffixIcon: GestureDetector(
+          onTap: toggleObscure,
+          child: Icon(
+            obscureTextIcon,
+            color: AppTheme.hintText,
+          ),
+        ),
         prefixIcon: Icon(icon, color: AppTheme.hintText),
         hintText: hint,
         hintStyle: const TextStyle(color: AppTheme.hintText),

@@ -17,6 +17,8 @@ class AuthError {
         return AuthError(translations.userNotFound);
       case FirebaseAuthErrorCodes.wrongPassword:
         return AuthError(translations.wrongPassword);
+      case FirebaseAuthErrorCodes.wrongEmailOrPassword:
+        return AuthError(translations.wrongEmailOrPassword);
       default:
         return AuthError(translations.defaultError);
     }
