@@ -21,5 +21,7 @@
   "defaultError": "An unexpected error occurred. Please try again.",
   "passwordsDoNotMatch": "Passwords do not match.",
   "passwordTooShort": "Password is too short. Use at least 8 characters",
-  "userNameTooShort": "Username is too short"
+  "userNameTooShort": "Username is too short",
+  "home": "Home",
+  "account": "Account"
 }
