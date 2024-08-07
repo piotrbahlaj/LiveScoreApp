@@ -30,17 +30,21 @@ class _BottomNavBarState extends State<BottomNavBar> {
       onTap: _onItemTapped,
       items: [
         BottomNavigationBarItem(
-          icon: const Icon(
-            Icons.home,
-            size: 35,
-          ),
+          icon: _selectedIndex == 0
+              ? const Icon(Icons.home, size: 30)
+              : const Icon(Icons.home_outlined, size: 30),
           label: context.localizations.home,
         ),
         BottomNavigationBarItem(
-          icon: const Icon(
-            Icons.person,
-            size: 35,
-          ),
+          icon: _selectedIndex == 1
+              ? const Icon(Icons.favorite, size: 30)
+              : const Icon(Icons.favorite_border, size: 30),
+          label: context.localizations.favorites,
+        ),
+        BottomNavigationBarItem(
+          icon: _selectedIndex == 2
+              ? const Icon(Icons.person, size: 30)
+              : const Icon(Icons.person_outlined, size: 30),
           label: context.localizations.account,
         ),
       ],

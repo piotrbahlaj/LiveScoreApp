@@ -23,5 +23,6 @@
   "passwordTooShort": "Password is too short. Use at least 8 characters",
   "userNameTooShort": "Username is too short",
   "home": "Home",
-  "account": "Account"
+  "account": "Account",
+  "favorites": "Favorites"
 }
