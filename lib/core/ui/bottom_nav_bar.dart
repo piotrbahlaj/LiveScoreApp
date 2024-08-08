@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:live_score/core/constants/routes.dart';
 import 'package:live_score/core/extensions/localization/app_localizations_context.dart';
 import 'package:live_score/core/theme/app_theme.dart';
 
@@ -15,6 +17,19 @@ class _BottomNavBarState extends State<BottomNavBar> {
     setState(() {
       _selectedIndex = index;
     });
+    switch (index) {
+      case 0:
+        Modular.to.navigate(Routes.home);
+        break;
+      case 1:
+        Modular.to.navigate(Routes.favorites);
+        break;
+      case 2:
+        Modular.to.navigate(Routes.account);
+        break;
+      default:
+        break;
+    }
   }
 
   @override

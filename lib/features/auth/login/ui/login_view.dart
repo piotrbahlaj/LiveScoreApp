@@ -147,7 +147,7 @@ class LoginView extends StatelessWidget {
             ),
           ),
         );
-        Modular.to.pushNamed(Routes.dashboard);
+        Modular.to.pushNamed(Routes.home);
         return null;
       },
     );

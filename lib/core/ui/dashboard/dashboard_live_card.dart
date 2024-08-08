@@ -26,11 +26,11 @@ class DashboardLiveCard extends StatelessWidget {
                   ),
                   const SizedBox(width: 10),
                   const Text(
-                    'liga',
+                    'league',
                     style:
                         TextStyle(color: AppTheme.cardLeagueName, fontSize: 17),
                   ),
-                  const SizedBox(width: 150),
+                  const SizedBox(width: 135),
                   Container(
                     height: 27,
                     width: 52,
@@ -96,6 +96,7 @@ class DashboardLiveCard extends StatelessWidget {
                         Icons.access_time_filled,
                         color: AppTheme.onSecondary,
                       ),
+                      SizedBox(height: 5),
                       Text(
                         'Nazwa druzyny',
                         style: TextStyle(

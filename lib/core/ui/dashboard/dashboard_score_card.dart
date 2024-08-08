@@ -12,7 +12,7 @@ class DashboardScoreCard extends StatelessWidget {
         color: AppTheme.onPrimary3,
         child: SizedBox(
           width: 360,
-          height: 90,
+          height: 80,
           child: Row(
             children: [
               Padding(
@@ -39,7 +39,7 @@ class DashboardScoreCard extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: 5,
-                  vertical: 15,
+                  vertical: 10,
                 ),
                 child: Column(
                   children: [
@@ -58,7 +58,7 @@ class DashboardScoreCard extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: 15,
-                  vertical: 15,
+                  vertical: 10,
                 ),
                 child: Column(
                   children: [
@@ -81,7 +81,7 @@ class DashboardScoreCard extends StatelessWidget {
               SizedBox(width: 130),
               Padding(
                 padding: EdgeInsets.symmetric(
-                  vertical: 15,
+                  vertical: 10,
                 ),
                 child: Column(
                   children: [

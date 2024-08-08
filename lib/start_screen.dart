@@ -3,8 +3,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:live_score/core/constants/routes.dart';
 import 'package:live_score/core/extensions/localization/app_localizations_context.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class StartScreen extends StatelessWidget {
+  const StartScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +28,7 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 50),
             ElevatedButton(
               child: const Text('Navigate to dashboard'),
-              onPressed: () => Modular.to.pushNamed(Routes.dashboard),
+              onPressed: () => Modular.to.pushNamed(Routes.home),
             ),
           ],
         ),

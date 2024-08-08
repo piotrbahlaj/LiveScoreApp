@@ -2,6 +2,8 @@ class Routes {
   //AUTH
   static const String register = '/auth/register/';
   static const String login = '/auth/login/';
-  //HOME
-  static const String dashboard = '/dashboard/';
+  //DASHBOARD
+  static const String home = '/dashboard/';
+  static const String favorites = '/dashboard/favorites';
+  static const String account = '/dashboard/account';
 }
