@@ -1,3 +1,3 @@
 class AssetImages {
-  static const footballSplash = 'assets/football_splash4.png';
+  static const String footballSplash = 'assets/football_splash4.png';
 }

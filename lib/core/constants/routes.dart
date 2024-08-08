@@ -1,7 +1,7 @@
 class Routes {
   //AUTH
-  static const register = '/auth/register/';
-  static const login = '/auth/login/';
+  static const String register = '/auth/register/';
+  static const String login = '/auth/login/';
   //HOME
-  static const dashboard = '/dashboard/';
+  static const String dashboard = '/dashboard/';
 }

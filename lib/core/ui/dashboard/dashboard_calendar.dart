@@ -1,10 +1,132 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:live_score/core/constants/dashboard_constants.dart';
+import 'package:live_score/core/theme/app_theme.dart';
+import 'package:live_score/core/ui/dashboard/dashboard_date_element.dart';
+import 'package:live_score/features/dashboard/cubit/dashboard_cubit.dart';
 
 class DashboardCalendar extends StatelessWidget {
   const DashboardCalendar({super.key});
 
+  List<DateTime> generateDates(int totalDays) {
+    DateTime now = DateTime.now();
+    DateTime startOfPeriod = now.subtract(Duration(days: totalDays ~/ 2));
+    return List<DateTime>.generate(
+      totalDays,
+      (index) => startOfPeriod.add(
+        Duration(days: index),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const SizedBox();
+    List<DateTime> weekDates = generateDates(DashboardConstants.calendarRange);
+    final ScrollController scrollController = ScrollController();
+    final cubit = context.read<DashboardCubit>();
+
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) {
+        final DateTime now = DateTime.now();
+        final int todayIndex = weekDates.indexWhere((date) =>
+            date.year == now.year &&
+            date.month == now.month &&
+            date.day == now.day);
+
+        if (todayIndex != -1) {
+          const double itemWidth = DashboardConstants.calendarItemWidth;
+          final double screenWidth = MediaQuery.of(context).size.width;
+          final double offset =
+              (todayIndex * itemWidth) - (screenWidth / 2) + (itemWidth / 2);
+
+          scrollController.jumpTo(offset);
+
+          cubit.setScrollOffset(offset);
+        }
+      },
+    );
+
+    void scrollLeft() {
+      scrollController.animateTo(
+        scrollController.offset - DashboardConstants.calendarScrollOffset,
+        duration: const Duration(
+          milliseconds: DashboardConstants.calendarScrollDuration,
+        ),
+        curve: Curves.easeInOut,
+      );
+    }
+
+    void scrollRight() {
+      scrollController.animateTo(
+        scrollController.offset + DashboardConstants.calendarScrollOffset,
+        duration: const Duration(
+          milliseconds: DashboardConstants.calendarScrollDuration,
+        ),
+        curve: Curves.easeInOut,
+      );
+    }
+
+    return BlocBuilder<DashboardCubit, DashboardState>(
+      builder: (context, state) {
+        return SizedBox(
+          height: 60,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                child: InkWell(
+                  onTap: scrollLeft,
+                  child: const Icon(
+                    Icons.arrow_back_ios,
+                    color: AppTheme.onSecondary,
+                    size: 20,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  controller: scrollController,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: weekDates.length,
+                  itemBuilder: (context, index) {
+                    final isSelected = state.maybeMap(
+                      initial: (value) => value.selectedDateIndex == index,
+                      orElse: () => index == DashboardConstants.initialDate,
+                    );
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 2),
+                      child: GestureDetector(
+                        onTap: () {
+                          cubit.selectDate(index);
+                        },
+                        child: DashboardDateElement(
+                          date: weekDates[index],
+                          isSelected: isSelected,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                child: InkWell(
+                  onTap: scrollRight,
+                  child: const Icon(
+                    Icons.arrow_forward_ios,
+                    color: AppTheme.onSecondary,
+                    size: 20,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 }

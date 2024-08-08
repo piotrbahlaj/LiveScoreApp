@@ -1,10 +1,60 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:live_score/core/extensions/localization/app_localizations_context.dart';
+import 'package:live_score/core/theme/app_theme.dart';
+import 'package:live_score/features/dashboard/cubit/dashboard_cubit.dart';
 
 class DashboardTabs extends StatelessWidget {
   const DashboardTabs({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox();
+    return BlocBuilder<DashboardCubit, DashboardState>(
+      builder: (context, state) {
+        return Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: DashboardTab.values.map((tab) {
+              final isSelected = tab == state.selectedTab;
+              String title;
+              switch (tab) {
+                case DashboardTab.upcoming:
+                  title = context.localizations.upcoming;
+                  break;
+                case DashboardTab.score:
+                  title = context.localizations.score;
+                  break;
+                case DashboardTab.favorites:
+                  title = context.localizations.favorites;
+                  break;
+              }
+              return GestureDetector(
+                onTap: () => context.read<DashboardCubit>().selectTab(tab),
+                child: Column(
+                  children: [
+                    Text(
+                      title,
+                      style: TextStyle(
+                        color: isSelected
+                            ? AppTheme.onSecondary
+                            : AppTheme.onPrimary2,
+                        fontWeight:
+                            isSelected ? FontWeight.bold : FontWeight.normal,
+                      ),
+                    ),
+                    Container(
+                      width: 80,
+                      height: 2,
+                      decoration: BoxDecoration(
+                        color: isSelected
+                            ? AppTheme.secondary
+                            : Colors.transparent,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }).toList());
+      },
+    );
   }
 }

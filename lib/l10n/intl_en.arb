@@ -24,5 +24,10 @@
   "userNameTooShort": "Username is too short",
   "home": "Home",
   "account": "Account",
-  "favorites": "Favorites"
+  "favorites": "Favorites",
+  "upcoming": "Upcoming",
+  "score": "Score",
+  "details": "Details",
+  "liveNow": "Live Now",
+  "seeMore": "See More"
 }
