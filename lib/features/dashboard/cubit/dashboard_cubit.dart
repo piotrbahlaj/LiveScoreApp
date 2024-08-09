@@ -12,15 +12,15 @@ class DashboardCubit extends Cubit<DashboardState> {
   DashboardCubit(this.repository) : super(const DashboardState.initial());
 
   void setScrollOffset(double offset) {
-    emit(DashboardState.initial(scrollOffset: offset));
+    emit(state.copyWith(scrollOffset: offset));
   }
 
   void selectDate(int itemIndex) {
-    emit(DashboardState.initial(selectedDateIndex: itemIndex));
+    emit(state.copyWith(selectedDateIndex: itemIndex));
   }
 
   void selectTab(DashboardTab tab) {
-    emit(DashboardState.initial(selectedTab: tab));
+    emit(state.copyWith(selectedTab: tab));
   }
 
   Future<void> fetchFixtures() async {

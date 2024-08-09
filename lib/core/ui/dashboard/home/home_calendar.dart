@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:live_score/core/constants/dashboard_constants.dart';
 import 'package:live_score/core/theme/app_theme.dart';
-import 'package:live_score/core/ui/dashboard/dashboard_date_element.dart';
+import 'package:live_score/core/ui/dashboard/home/home_date_element.dart';
 import 'package:live_score/features/dashboard/cubit/dashboard_cubit.dart';
 
 class DashboardCalendar extends StatelessWidget {
@@ -92,9 +92,11 @@ class DashboardCalendar extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   itemCount: weekDates.length,
                   itemBuilder: (context, index) {
-                    final isSelected = state.maybeMap(
+                    final isSelected = state.map(
                       initial: (value) => value.selectedDateIndex == index,
-                      orElse: () => index == DashboardConstants.initialDate,
+                      loading: (value) => value.selectedDateIndex == index,
+                      failure: (value) => value.selectedDateIndex == index,
+                      success: (value) => value.selectedDateIndex == index,
                     );
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 2),

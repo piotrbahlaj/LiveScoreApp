@@ -8,16 +8,23 @@ class DashboardState with _$DashboardState {
     @Default(DashboardTab.score) DashboardTab selectedTab,
   }) = Initial;
 
-  const factory DashboardState.loading(
-      {@Default(DashboardTab.score) DashboardTab selectedTab}) = Loading;
+  const factory DashboardState.loading({
+    @Default(DashboardConstants.initialScrollOffset) double scrollOffset,
+    @Default(DashboardConstants.initialDate) int selectedDateIndex,
+    @Default(DashboardTab.score) DashboardTab selectedTab,
+  }) = Loading;
 
   const factory DashboardState.failure(
     String message, {
+    @Default(DashboardConstants.initialScrollOffset) double scrollOffset,
+    @Default(DashboardConstants.initialDate) int selectedDateIndex,
     @Default(DashboardTab.score) DashboardTab selectedTab,
   }) = Failure;
 
   const factory DashboardState.success(
     FixtureResponseModel fixtures, {
+    @Default(DashboardConstants.initialScrollOffset) double scrollOffset,
+    @Default(DashboardConstants.initialDate) int selectedDateIndex,
     @Default(DashboardTab.score) DashboardTab selectedTab,
   }) = Success;
 }

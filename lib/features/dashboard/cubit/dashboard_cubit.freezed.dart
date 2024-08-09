@@ -16,16 +16,25 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$DashboardState {
+  double get scrollOffset => throw _privateConstructorUsedError;
+  int get selectedDateIndex => throw _privateConstructorUsedError;
   DashboardTab get selectedTab => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(double scrollOffset, int selectedDateIndex,
             DashboardTab selectedTab)
         initial,
-    required TResult Function(DashboardTab selectedTab) loading,
-    required TResult Function(String message, DashboardTab selectedTab) failure,
+    required TResult Function(double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)
+        loading,
+    required TResult Function(String message, double scrollOffset,
+            int selectedDateIndex, DashboardTab selectedTab)
+        failure,
     required TResult Function(
-            FixtureResponseModel fixtures, DashboardTab selectedTab)
+            FixtureResponseModel fixtures,
+            double scrollOffset,
+            int selectedDateIndex,
+            DashboardTab selectedTab)
         success,
   }) =>
       throw _privateConstructorUsedError;
@@ -34,9 +43,14 @@ mixin _$DashboardState {
     TResult? Function(double scrollOffset, int selectedDateIndex,
             DashboardTab selectedTab)?
         initial,
-    TResult? Function(DashboardTab selectedTab)? loading,
-    TResult? Function(String message, DashboardTab selectedTab)? failure,
-    TResult? Function(FixtureResponseModel fixtures, DashboardTab selectedTab)?
+    TResult? Function(double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)?
+        loading,
+    TResult? Function(String message, double scrollOffset,
+            int selectedDateIndex, DashboardTab selectedTab)?
+        failure,
+    TResult? Function(FixtureResponseModel fixtures, double scrollOffset,
+            int selectedDateIndex, DashboardTab selectedTab)?
         success,
   }) =>
       throw _privateConstructorUsedError;
@@ -45,9 +59,14 @@ mixin _$DashboardState {
     TResult Function(double scrollOffset, int selectedDateIndex,
             DashboardTab selectedTab)?
         initial,
-    TResult Function(DashboardTab selectedTab)? loading,
-    TResult Function(String message, DashboardTab selectedTab)? failure,
-    TResult Function(FixtureResponseModel fixtures, DashboardTab selectedTab)?
+    TResult Function(double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)?
+        loading,
+    TResult Function(String message, double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)?
+        failure,
+    TResult Function(FixtureResponseModel fixtures, double scrollOffset,
+            int selectedDateIndex, DashboardTab selectedTab)?
         success,
     required TResult orElse(),
   }) =>
@@ -89,7 +108,8 @@ abstract class $DashboardStateCopyWith<$Res> {
           DashboardState value, $Res Function(DashboardState) then) =
       _$DashboardStateCopyWithImpl<$Res, DashboardState>;
   @useResult
-  $Res call({DashboardTab selectedTab});
+  $Res call(
+      {double scrollOffset, int selectedDateIndex, DashboardTab selectedTab});
 }
 
 /// @nodoc
@@ -105,9 +125,19 @@ class _$DashboardStateCopyWithImpl<$Res, $Val extends DashboardState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? scrollOffset = null,
+    Object? selectedDateIndex = null,
     Object? selectedTab = null,
   }) {
     return _then(_value.copyWith(
+      scrollOffset: null == scrollOffset
+          ? _value.scrollOffset
+          : scrollOffset // ignore: cast_nullable_to_non_nullable
+              as double,
+      selectedDateIndex: null == selectedDateIndex
+          ? _value.selectedDateIndex
+          : selectedDateIndex // ignore: cast_nullable_to_non_nullable
+              as int,
       selectedTab: null == selectedTab
           ? _value.selectedTab
           : selectedTab // ignore: cast_nullable_to_non_nullable
@@ -212,10 +242,17 @@ class _$InitialImpl implements Initial {
     required TResult Function(double scrollOffset, int selectedDateIndex,
             DashboardTab selectedTab)
         initial,
-    required TResult Function(DashboardTab selectedTab) loading,
-    required TResult Function(String message, DashboardTab selectedTab) failure,
+    required TResult Function(double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)
+        loading,
+    required TResult Function(String message, double scrollOffset,
+            int selectedDateIndex, DashboardTab selectedTab)
+        failure,
     required TResult Function(
-            FixtureResponseModel fixtures, DashboardTab selectedTab)
+            FixtureResponseModel fixtures,
+            double scrollOffset,
+            int selectedDateIndex,
+            DashboardTab selectedTab)
         success,
   }) {
     return initial(scrollOffset, selectedDateIndex, selectedTab);
@@ -227,9 +264,14 @@ class _$InitialImpl implements Initial {
     TResult? Function(double scrollOffset, int selectedDateIndex,
             DashboardTab selectedTab)?
         initial,
-    TResult? Function(DashboardTab selectedTab)? loading,
-    TResult? Function(String message, DashboardTab selectedTab)? failure,
-    TResult? Function(FixtureResponseModel fixtures, DashboardTab selectedTab)?
+    TResult? Function(double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)?
+        loading,
+    TResult? Function(String message, double scrollOffset,
+            int selectedDateIndex, DashboardTab selectedTab)?
+        failure,
+    TResult? Function(FixtureResponseModel fixtures, double scrollOffset,
+            int selectedDateIndex, DashboardTab selectedTab)?
         success,
   }) {
     return initial?.call(scrollOffset, selectedDateIndex, selectedTab);
@@ -241,9 +283,14 @@ class _$InitialImpl implements Initial {
     TResult Function(double scrollOffset, int selectedDateIndex,
             DashboardTab selectedTab)?
         initial,
-    TResult Function(DashboardTab selectedTab)? loading,
-    TResult Function(String message, DashboardTab selectedTab)? failure,
-    TResult Function(FixtureResponseModel fixtures, DashboardTab selectedTab)?
+    TResult Function(double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)?
+        loading,
+    TResult Function(String message, double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)?
+        failure,
+    TResult Function(FixtureResponseModel fixtures, double scrollOffset,
+            int selectedDateIndex, DashboardTab selectedTab)?
         success,
     required TResult orElse(),
   }) {
@@ -297,7 +344,9 @@ abstract class Initial implements DashboardState {
       final int selectedDateIndex,
       final DashboardTab selectedTab}) = _$InitialImpl;
 
+  @override
   double get scrollOffset;
+  @override
   int get selectedDateIndex;
   @override
   DashboardTab get selectedTab;
@@ -315,7 +364,8 @@ abstract class _$$LoadingImplCopyWith<$Res>
       __$$LoadingImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({DashboardTab selectedTab});
+  $Res call(
+      {double scrollOffset, int selectedDateIndex, DashboardTab selectedTab});
 }
 
 /// @nodoc
@@ -329,9 +379,19 @@ class __$$LoadingImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? scrollOffset = null,
+    Object? selectedDateIndex = null,
     Object? selectedTab = null,
   }) {
     return _then(_$LoadingImpl(
+      scrollOffset: null == scrollOffset
+          ? _value.scrollOffset
+          : scrollOffset // ignore: cast_nullable_to_non_nullable
+              as double,
+      selectedDateIndex: null == selectedDateIndex
+          ? _value.selectedDateIndex
+          : selectedDateIndex // ignore: cast_nullable_to_non_nullable
+              as int,
       selectedTab: null == selectedTab
           ? _value.selectedTab
           : selectedTab // ignore: cast_nullable_to_non_nullable
@@ -343,15 +403,24 @@ class __$$LoadingImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$LoadingImpl implements Loading {
-  const _$LoadingImpl({this.selectedTab = DashboardTab.score});
+  const _$LoadingImpl(
+      {this.scrollOffset = DashboardConstants.initialScrollOffset,
+      this.selectedDateIndex = DashboardConstants.initialDate,
+      this.selectedTab = DashboardTab.score});
 
+  @override
+  @JsonKey()
+  final double scrollOffset;
+  @override
+  @JsonKey()
+  final int selectedDateIndex;
   @override
   @JsonKey()
   final DashboardTab selectedTab;
 
   @override
   String toString() {
-    return 'DashboardState.loading(selectedTab: $selectedTab)';
+    return 'DashboardState.loading(scrollOffset: $scrollOffset, selectedDateIndex: $selectedDateIndex, selectedTab: $selectedTab)';
   }
 
   @override
@@ -359,12 +428,17 @@ class _$LoadingImpl implements Loading {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoadingImpl &&
+            (identical(other.scrollOffset, scrollOffset) ||
+                other.scrollOffset == scrollOffset) &&
+            (identical(other.selectedDateIndex, selectedDateIndex) ||
+                other.selectedDateIndex == selectedDateIndex) &&
             (identical(other.selectedTab, selectedTab) ||
                 other.selectedTab == selectedTab));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, selectedTab);
+  int get hashCode =>
+      Object.hash(runtimeType, scrollOffset, selectedDateIndex, selectedTab);
 
   @JsonKey(ignore: true)
   @override
@@ -378,13 +452,20 @@ class _$LoadingImpl implements Loading {
     required TResult Function(double scrollOffset, int selectedDateIndex,
             DashboardTab selectedTab)
         initial,
-    required TResult Function(DashboardTab selectedTab) loading,
-    required TResult Function(String message, DashboardTab selectedTab) failure,
+    required TResult Function(double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)
+        loading,
+    required TResult Function(String message, double scrollOffset,
+            int selectedDateIndex, DashboardTab selectedTab)
+        failure,
     required TResult Function(
-            FixtureResponseModel fixtures, DashboardTab selectedTab)
+            FixtureResponseModel fixtures,
+            double scrollOffset,
+            int selectedDateIndex,
+            DashboardTab selectedTab)
         success,
   }) {
-    return loading(selectedTab);
+    return loading(scrollOffset, selectedDateIndex, selectedTab);
   }
 
   @override
@@ -393,12 +474,17 @@ class _$LoadingImpl implements Loading {
     TResult? Function(double scrollOffset, int selectedDateIndex,
             DashboardTab selectedTab)?
         initial,
-    TResult? Function(DashboardTab selectedTab)? loading,
-    TResult? Function(String message, DashboardTab selectedTab)? failure,
-    TResult? Function(FixtureResponseModel fixtures, DashboardTab selectedTab)?
+    TResult? Function(double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)?
+        loading,
+    TResult? Function(String message, double scrollOffset,
+            int selectedDateIndex, DashboardTab selectedTab)?
+        failure,
+    TResult? Function(FixtureResponseModel fixtures, double scrollOffset,
+            int selectedDateIndex, DashboardTab selectedTab)?
         success,
   }) {
-    return loading?.call(selectedTab);
+    return loading?.call(scrollOffset, selectedDateIndex, selectedTab);
   }
 
   @override
@@ -407,14 +493,19 @@ class _$LoadingImpl implements Loading {
     TResult Function(double scrollOffset, int selectedDateIndex,
             DashboardTab selectedTab)?
         initial,
-    TResult Function(DashboardTab selectedTab)? loading,
-    TResult Function(String message, DashboardTab selectedTab)? failure,
-    TResult Function(FixtureResponseModel fixtures, DashboardTab selectedTab)?
+    TResult Function(double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)?
+        loading,
+    TResult Function(String message, double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)?
+        failure,
+    TResult Function(FixtureResponseModel fixtures, double scrollOffset,
+            int selectedDateIndex, DashboardTab selectedTab)?
         success,
     required TResult orElse(),
   }) {
     if (loading != null) {
-      return loading(selectedTab);
+      return loading(scrollOffset, selectedDateIndex, selectedTab);
     }
     return orElse();
   }
@@ -458,8 +549,15 @@ class _$LoadingImpl implements Loading {
 }
 
 abstract class Loading implements DashboardState {
-  const factory Loading({final DashboardTab selectedTab}) = _$LoadingImpl;
+  const factory Loading(
+      {final double scrollOffset,
+      final int selectedDateIndex,
+      final DashboardTab selectedTab}) = _$LoadingImpl;
 
+  @override
+  double get scrollOffset;
+  @override
+  int get selectedDateIndex;
   @override
   DashboardTab get selectedTab;
   @override
@@ -476,7 +574,11 @@ abstract class _$$FailureImplCopyWith<$Res>
       __$$FailureImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String message, DashboardTab selectedTab});
+  $Res call(
+      {String message,
+      double scrollOffset,
+      int selectedDateIndex,
+      DashboardTab selectedTab});
 }
 
 /// @nodoc
@@ -491,6 +593,8 @@ class __$$FailureImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? message = null,
+    Object? scrollOffset = null,
+    Object? selectedDateIndex = null,
     Object? selectedTab = null,
   }) {
     return _then(_$FailureImpl(
@@ -498,6 +602,14 @@ class __$$FailureImplCopyWithImpl<$Res>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      scrollOffset: null == scrollOffset
+          ? _value.scrollOffset
+          : scrollOffset // ignore: cast_nullable_to_non_nullable
+              as double,
+      selectedDateIndex: null == selectedDateIndex
+          ? _value.selectedDateIndex
+          : selectedDateIndex // ignore: cast_nullable_to_non_nullable
+              as int,
       selectedTab: null == selectedTab
           ? _value.selectedTab
           : selectedTab // ignore: cast_nullable_to_non_nullable
@@ -509,17 +621,26 @@ class __$$FailureImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$FailureImpl implements Failure {
-  const _$FailureImpl(this.message, {this.selectedTab = DashboardTab.score});
+  const _$FailureImpl(this.message,
+      {this.scrollOffset = DashboardConstants.initialScrollOffset,
+      this.selectedDateIndex = DashboardConstants.initialDate,
+      this.selectedTab = DashboardTab.score});
 
   @override
   final String message;
+  @override
+  @JsonKey()
+  final double scrollOffset;
+  @override
+  @JsonKey()
+  final int selectedDateIndex;
   @override
   @JsonKey()
   final DashboardTab selectedTab;
 
   @override
   String toString() {
-    return 'DashboardState.failure(message: $message, selectedTab: $selectedTab)';
+    return 'DashboardState.failure(message: $message, scrollOffset: $scrollOffset, selectedDateIndex: $selectedDateIndex, selectedTab: $selectedTab)';
   }
 
   @override
@@ -528,12 +649,17 @@ class _$FailureImpl implements Failure {
         (other.runtimeType == runtimeType &&
             other is _$FailureImpl &&
             (identical(other.message, message) || other.message == message) &&
+            (identical(other.scrollOffset, scrollOffset) ||
+                other.scrollOffset == scrollOffset) &&
+            (identical(other.selectedDateIndex, selectedDateIndex) ||
+                other.selectedDateIndex == selectedDateIndex) &&
             (identical(other.selectedTab, selectedTab) ||
                 other.selectedTab == selectedTab));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, message, selectedTab);
+  int get hashCode => Object.hash(
+      runtimeType, message, scrollOffset, selectedDateIndex, selectedTab);
 
   @JsonKey(ignore: true)
   @override
@@ -547,13 +673,20 @@ class _$FailureImpl implements Failure {
     required TResult Function(double scrollOffset, int selectedDateIndex,
             DashboardTab selectedTab)
         initial,
-    required TResult Function(DashboardTab selectedTab) loading,
-    required TResult Function(String message, DashboardTab selectedTab) failure,
+    required TResult Function(double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)
+        loading,
+    required TResult Function(String message, double scrollOffset,
+            int selectedDateIndex, DashboardTab selectedTab)
+        failure,
     required TResult Function(
-            FixtureResponseModel fixtures, DashboardTab selectedTab)
+            FixtureResponseModel fixtures,
+            double scrollOffset,
+            int selectedDateIndex,
+            DashboardTab selectedTab)
         success,
   }) {
-    return failure(message, selectedTab);
+    return failure(message, scrollOffset, selectedDateIndex, selectedTab);
   }
 
   @override
@@ -562,12 +695,17 @@ class _$FailureImpl implements Failure {
     TResult? Function(double scrollOffset, int selectedDateIndex,
             DashboardTab selectedTab)?
         initial,
-    TResult? Function(DashboardTab selectedTab)? loading,
-    TResult? Function(String message, DashboardTab selectedTab)? failure,
-    TResult? Function(FixtureResponseModel fixtures, DashboardTab selectedTab)?
+    TResult? Function(double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)?
+        loading,
+    TResult? Function(String message, double scrollOffset,
+            int selectedDateIndex, DashboardTab selectedTab)?
+        failure,
+    TResult? Function(FixtureResponseModel fixtures, double scrollOffset,
+            int selectedDateIndex, DashboardTab selectedTab)?
         success,
   }) {
-    return failure?.call(message, selectedTab);
+    return failure?.call(message, scrollOffset, selectedDateIndex, selectedTab);
   }
 
   @override
@@ -576,14 +714,19 @@ class _$FailureImpl implements Failure {
     TResult Function(double scrollOffset, int selectedDateIndex,
             DashboardTab selectedTab)?
         initial,
-    TResult Function(DashboardTab selectedTab)? loading,
-    TResult Function(String message, DashboardTab selectedTab)? failure,
-    TResult Function(FixtureResponseModel fixtures, DashboardTab selectedTab)?
+    TResult Function(double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)?
+        loading,
+    TResult Function(String message, double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)?
+        failure,
+    TResult Function(FixtureResponseModel fixtures, double scrollOffset,
+            int selectedDateIndex, DashboardTab selectedTab)?
         success,
     required TResult orElse(),
   }) {
     if (failure != null) {
-      return failure(message, selectedTab);
+      return failure(message, scrollOffset, selectedDateIndex, selectedTab);
     }
     return orElse();
   }
@@ -628,9 +771,15 @@ class _$FailureImpl implements Failure {
 
 abstract class Failure implements DashboardState {
   const factory Failure(final String message,
-      {final DashboardTab selectedTab}) = _$FailureImpl;
+      {final double scrollOffset,
+      final int selectedDateIndex,
+      final DashboardTab selectedTab}) = _$FailureImpl;
 
   String get message;
+  @override
+  double get scrollOffset;
+  @override
+  int get selectedDateIndex;
   @override
   DashboardTab get selectedTab;
   @override
@@ -647,7 +796,11 @@ abstract class _$$SuccessImplCopyWith<$Res>
       __$$SuccessImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({FixtureResponseModel fixtures, DashboardTab selectedTab});
+  $Res call(
+      {FixtureResponseModel fixtures,
+      double scrollOffset,
+      int selectedDateIndex,
+      DashboardTab selectedTab});
 
   $FixtureResponseModelCopyWith<$Res> get fixtures;
 }
@@ -664,6 +817,8 @@ class __$$SuccessImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? fixtures = null,
+    Object? scrollOffset = null,
+    Object? selectedDateIndex = null,
     Object? selectedTab = null,
   }) {
     return _then(_$SuccessImpl(
@@ -671,6 +826,14 @@ class __$$SuccessImplCopyWithImpl<$Res>
           ? _value.fixtures
           : fixtures // ignore: cast_nullable_to_non_nullable
               as FixtureResponseModel,
+      scrollOffset: null == scrollOffset
+          ? _value.scrollOffset
+          : scrollOffset // ignore: cast_nullable_to_non_nullable
+              as double,
+      selectedDateIndex: null == selectedDateIndex
+          ? _value.selectedDateIndex
+          : selectedDateIndex // ignore: cast_nullable_to_non_nullable
+              as int,
       selectedTab: null == selectedTab
           ? _value.selectedTab
           : selectedTab // ignore: cast_nullable_to_non_nullable
@@ -690,17 +853,26 @@ class __$$SuccessImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SuccessImpl implements Success {
-  const _$SuccessImpl(this.fixtures, {this.selectedTab = DashboardTab.score});
+  const _$SuccessImpl(this.fixtures,
+      {this.scrollOffset = DashboardConstants.initialScrollOffset,
+      this.selectedDateIndex = DashboardConstants.initialDate,
+      this.selectedTab = DashboardTab.score});
 
   @override
   final FixtureResponseModel fixtures;
+  @override
+  @JsonKey()
+  final double scrollOffset;
+  @override
+  @JsonKey()
+  final int selectedDateIndex;
   @override
   @JsonKey()
   final DashboardTab selectedTab;
 
   @override
   String toString() {
-    return 'DashboardState.success(fixtures: $fixtures, selectedTab: $selectedTab)';
+    return 'DashboardState.success(fixtures: $fixtures, scrollOffset: $scrollOffset, selectedDateIndex: $selectedDateIndex, selectedTab: $selectedTab)';
   }
 
   @override
@@ -710,12 +882,17 @@ class _$SuccessImpl implements Success {
             other is _$SuccessImpl &&
             (identical(other.fixtures, fixtures) ||
                 other.fixtures == fixtures) &&
+            (identical(other.scrollOffset, scrollOffset) ||
+                other.scrollOffset == scrollOffset) &&
+            (identical(other.selectedDateIndex, selectedDateIndex) ||
+                other.selectedDateIndex == selectedDateIndex) &&
             (identical(other.selectedTab, selectedTab) ||
                 other.selectedTab == selectedTab));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, fixtures, selectedTab);
+  int get hashCode => Object.hash(
+      runtimeType, fixtures, scrollOffset, selectedDateIndex, selectedTab);
 
   @JsonKey(ignore: true)
   @override
@@ -729,13 +906,20 @@ class _$SuccessImpl implements Success {
     required TResult Function(double scrollOffset, int selectedDateIndex,
             DashboardTab selectedTab)
         initial,
-    required TResult Function(DashboardTab selectedTab) loading,
-    required TResult Function(String message, DashboardTab selectedTab) failure,
+    required TResult Function(double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)
+        loading,
+    required TResult Function(String message, double scrollOffset,
+            int selectedDateIndex, DashboardTab selectedTab)
+        failure,
     required TResult Function(
-            FixtureResponseModel fixtures, DashboardTab selectedTab)
+            FixtureResponseModel fixtures,
+            double scrollOffset,
+            int selectedDateIndex,
+            DashboardTab selectedTab)
         success,
   }) {
-    return success(fixtures, selectedTab);
+    return success(fixtures, scrollOffset, selectedDateIndex, selectedTab);
   }
 
   @override
@@ -744,12 +928,18 @@ class _$SuccessImpl implements Success {
     TResult? Function(double scrollOffset, int selectedDateIndex,
             DashboardTab selectedTab)?
         initial,
-    TResult? Function(DashboardTab selectedTab)? loading,
-    TResult? Function(String message, DashboardTab selectedTab)? failure,
-    TResult? Function(FixtureResponseModel fixtures, DashboardTab selectedTab)?
+    TResult? Function(double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)?
+        loading,
+    TResult? Function(String message, double scrollOffset,
+            int selectedDateIndex, DashboardTab selectedTab)?
+        failure,
+    TResult? Function(FixtureResponseModel fixtures, double scrollOffset,
+            int selectedDateIndex, DashboardTab selectedTab)?
         success,
   }) {
-    return success?.call(fixtures, selectedTab);
+    return success?.call(
+        fixtures, scrollOffset, selectedDateIndex, selectedTab);
   }
 
   @override
@@ -758,14 +948,19 @@ class _$SuccessImpl implements Success {
     TResult Function(double scrollOffset, int selectedDateIndex,
             DashboardTab selectedTab)?
         initial,
-    TResult Function(DashboardTab selectedTab)? loading,
-    TResult Function(String message, DashboardTab selectedTab)? failure,
-    TResult Function(FixtureResponseModel fixtures, DashboardTab selectedTab)?
+    TResult Function(double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)?
+        loading,
+    TResult Function(String message, double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)?
+        failure,
+    TResult Function(FixtureResponseModel fixtures, double scrollOffset,
+            int selectedDateIndex, DashboardTab selectedTab)?
         success,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(fixtures, selectedTab);
+      return success(fixtures, scrollOffset, selectedDateIndex, selectedTab);
     }
     return orElse();
   }
@@ -810,9 +1005,15 @@ class _$SuccessImpl implements Success {
 
 abstract class Success implements DashboardState {
   const factory Success(final FixtureResponseModel fixtures,
-      {final DashboardTab selectedTab}) = _$SuccessImpl;
+      {final double scrollOffset,
+      final int selectedDateIndex,
+      final DashboardTab selectedTab}) = _$SuccessImpl;
 
   FixtureResponseModel get fixtures;
+  @override
+  double get scrollOffset;
+  @override
+  int get selectedDateIndex;
   @override
   DashboardTab get selectedTab;
   @override
