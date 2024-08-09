@@ -13,19 +13,21 @@ class BottomNavBar extends StatefulWidget {
 
 class _BottomNavBarState extends State<BottomNavBar> {
   int _selectedIndex = 0;
+
   void _onItemTapped(int index) {
+    if (_selectedIndex == index) return;
     setState(() {
       _selectedIndex = index;
     });
     switch (index) {
       case 0:
-        Modular.to.navigate(Routes.home);
+        Modular.to.pushNamed(Routes.home);
         break;
       case 1:
-        Modular.to.navigate(Routes.favorites);
+        Modular.to.pushNamed(Routes.favorites);
         break;
       case 2:
-        Modular.to.navigate(Routes.account);
+        Modular.to.pushNamed(Routes.account);
         break;
       default:
         break;
