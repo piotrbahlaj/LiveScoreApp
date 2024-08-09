@@ -16,14 +16,17 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$DashboardState {
-  double get scrollOffset => throw _privateConstructorUsedError;
-  int get selectedDateIndex => throw _privateConstructorUsedError;
   DashboardTab get selectedTab => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(double scrollOffset, int selectedDateIndex,
             DashboardTab selectedTab)
         initial,
+    required TResult Function(DashboardTab selectedTab) loading,
+    required TResult Function(String message, DashboardTab selectedTab) failure,
+    required TResult Function(
+            FixtureResponseModel fixtures, DashboardTab selectedTab)
+        success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -31,6 +34,10 @@ mixin _$DashboardState {
     TResult? Function(double scrollOffset, int selectedDateIndex,
             DashboardTab selectedTab)?
         initial,
+    TResult? Function(DashboardTab selectedTab)? loading,
+    TResult? Function(String message, DashboardTab selectedTab)? failure,
+    TResult? Function(FixtureResponseModel fixtures, DashboardTab selectedTab)?
+        success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,22 +45,35 @@ mixin _$DashboardState {
     TResult Function(double scrollOffset, int selectedDateIndex,
             DashboardTab selectedTab)?
         initial,
+    TResult Function(DashboardTab selectedTab)? loading,
+    TResult Function(String message, DashboardTab selectedTab)? failure,
+    TResult Function(FixtureResponseModel fixtures, DashboardTab selectedTab)?
+        success,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Failure value) failure,
+    required TResult Function(Success value) success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Failure value)? failure,
+    TResult? Function(Success value)? success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
+    TResult Function(Loading value)? loading,
+    TResult Function(Failure value)? failure,
+    TResult Function(Success value)? success,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -69,8 +89,7 @@ abstract class $DashboardStateCopyWith<$Res> {
           DashboardState value, $Res Function(DashboardState) then) =
       _$DashboardStateCopyWithImpl<$Res, DashboardState>;
   @useResult
-  $Res call(
-      {double scrollOffset, int selectedDateIndex, DashboardTab selectedTab});
+  $Res call({DashboardTab selectedTab});
 }
 
 /// @nodoc
@@ -86,19 +105,9 @@ class _$DashboardStateCopyWithImpl<$Res, $Val extends DashboardState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? scrollOffset = null,
-    Object? selectedDateIndex = null,
     Object? selectedTab = null,
   }) {
     return _then(_value.copyWith(
-      scrollOffset: null == scrollOffset
-          ? _value.scrollOffset
-          : scrollOffset // ignore: cast_nullable_to_non_nullable
-              as double,
-      selectedDateIndex: null == selectedDateIndex
-          ? _value.selectedDateIndex
-          : selectedDateIndex // ignore: cast_nullable_to_non_nullable
-              as int,
       selectedTab: null == selectedTab
           ? _value.selectedTab
           : selectedTab // ignore: cast_nullable_to_non_nullable
@@ -203,6 +212,11 @@ class _$InitialImpl implements Initial {
     required TResult Function(double scrollOffset, int selectedDateIndex,
             DashboardTab selectedTab)
         initial,
+    required TResult Function(DashboardTab selectedTab) loading,
+    required TResult Function(String message, DashboardTab selectedTab) failure,
+    required TResult Function(
+            FixtureResponseModel fixtures, DashboardTab selectedTab)
+        success,
   }) {
     return initial(scrollOffset, selectedDateIndex, selectedTab);
   }
@@ -213,6 +227,10 @@ class _$InitialImpl implements Initial {
     TResult? Function(double scrollOffset, int selectedDateIndex,
             DashboardTab selectedTab)?
         initial,
+    TResult? Function(DashboardTab selectedTab)? loading,
+    TResult? Function(String message, DashboardTab selectedTab)? failure,
+    TResult? Function(FixtureResponseModel fixtures, DashboardTab selectedTab)?
+        success,
   }) {
     return initial?.call(scrollOffset, selectedDateIndex, selectedTab);
   }
@@ -223,6 +241,10 @@ class _$InitialImpl implements Initial {
     TResult Function(double scrollOffset, int selectedDateIndex,
             DashboardTab selectedTab)?
         initial,
+    TResult Function(DashboardTab selectedTab)? loading,
+    TResult Function(String message, DashboardTab selectedTab)? failure,
+    TResult Function(FixtureResponseModel fixtures, DashboardTab selectedTab)?
+        success,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -235,6 +257,9 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Failure value) failure,
+    required TResult Function(Success value) success,
   }) {
     return initial(this);
   }
@@ -243,6 +268,9 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Failure value)? failure,
+    TResult? Function(Success value)? success,
   }) {
     return initial?.call(this);
   }
@@ -251,6 +279,9 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
+    TResult Function(Loading value)? loading,
+    TResult Function(Failure value)? failure,
+    TResult Function(Success value)? success,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -266,14 +297,526 @@ abstract class Initial implements DashboardState {
       final int selectedDateIndex,
       final DashboardTab selectedTab}) = _$InitialImpl;
 
-  @override
   double get scrollOffset;
-  @override
   int get selectedDateIndex;
   @override
   DashboardTab get selectedTab;
   @override
   @JsonKey(ignore: true)
   _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$LoadingImplCopyWith<$Res>
+    implements $DashboardStateCopyWith<$Res> {
+  factory _$$LoadingImplCopyWith(
+          _$LoadingImpl value, $Res Function(_$LoadingImpl) then) =
+      __$$LoadingImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({DashboardTab selectedTab});
+}
+
+/// @nodoc
+class __$$LoadingImplCopyWithImpl<$Res>
+    extends _$DashboardStateCopyWithImpl<$Res, _$LoadingImpl>
+    implements _$$LoadingImplCopyWith<$Res> {
+  __$$LoadingImplCopyWithImpl(
+      _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? selectedTab = null,
+  }) {
+    return _then(_$LoadingImpl(
+      selectedTab: null == selectedTab
+          ? _value.selectedTab
+          : selectedTab // ignore: cast_nullable_to_non_nullable
+              as DashboardTab,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$LoadingImpl implements Loading {
+  const _$LoadingImpl({this.selectedTab = DashboardTab.score});
+
+  @override
+  @JsonKey()
+  final DashboardTab selectedTab;
+
+  @override
+  String toString() {
+    return 'DashboardState.loading(selectedTab: $selectedTab)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LoadingImpl &&
+            (identical(other.selectedTab, selectedTab) ||
+                other.selectedTab == selectedTab));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, selectedTab);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LoadingImplCopyWith<_$LoadingImpl> get copyWith =>
+      __$$LoadingImplCopyWithImpl<_$LoadingImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)
+        initial,
+    required TResult Function(DashboardTab selectedTab) loading,
+    required TResult Function(String message, DashboardTab selectedTab) failure,
+    required TResult Function(
+            FixtureResponseModel fixtures, DashboardTab selectedTab)
+        success,
+  }) {
+    return loading(selectedTab);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)?
+        initial,
+    TResult? Function(DashboardTab selectedTab)? loading,
+    TResult? Function(String message, DashboardTab selectedTab)? failure,
+    TResult? Function(FixtureResponseModel fixtures, DashboardTab selectedTab)?
+        success,
+  }) {
+    return loading?.call(selectedTab);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)?
+        initial,
+    TResult Function(DashboardTab selectedTab)? loading,
+    TResult Function(String message, DashboardTab selectedTab)? failure,
+    TResult Function(FixtureResponseModel fixtures, DashboardTab selectedTab)?
+        success,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading(selectedTab);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Failure value) failure,
+    required TResult Function(Success value) success,
+  }) {
+    return loading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Failure value)? failure,
+    TResult? Function(Success value)? success,
+  }) {
+    return loading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
+    TResult Function(Loading value)? loading,
+    TResult Function(Failure value)? failure,
+    TResult Function(Success value)? success,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class Loading implements DashboardState {
+  const factory Loading({final DashboardTab selectedTab}) = _$LoadingImpl;
+
+  @override
+  DashboardTab get selectedTab;
+  @override
+  @JsonKey(ignore: true)
+  _$$LoadingImplCopyWith<_$LoadingImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$FailureImplCopyWith<$Res>
+    implements $DashboardStateCopyWith<$Res> {
+  factory _$$FailureImplCopyWith(
+          _$FailureImpl value, $Res Function(_$FailureImpl) then) =
+      __$$FailureImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String message, DashboardTab selectedTab});
+}
+
+/// @nodoc
+class __$$FailureImplCopyWithImpl<$Res>
+    extends _$DashboardStateCopyWithImpl<$Res, _$FailureImpl>
+    implements _$$FailureImplCopyWith<$Res> {
+  __$$FailureImplCopyWithImpl(
+      _$FailureImpl _value, $Res Function(_$FailureImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = null,
+    Object? selectedTab = null,
+  }) {
+    return _then(_$FailureImpl(
+      null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      selectedTab: null == selectedTab
+          ? _value.selectedTab
+          : selectedTab // ignore: cast_nullable_to_non_nullable
+              as DashboardTab,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$FailureImpl implements Failure {
+  const _$FailureImpl(this.message, {this.selectedTab = DashboardTab.score});
+
+  @override
+  final String message;
+  @override
+  @JsonKey()
+  final DashboardTab selectedTab;
+
+  @override
+  String toString() {
+    return 'DashboardState.failure(message: $message, selectedTab: $selectedTab)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$FailureImpl &&
+            (identical(other.message, message) || other.message == message) &&
+            (identical(other.selectedTab, selectedTab) ||
+                other.selectedTab == selectedTab));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, message, selectedTab);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$FailureImplCopyWith<_$FailureImpl> get copyWith =>
+      __$$FailureImplCopyWithImpl<_$FailureImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)
+        initial,
+    required TResult Function(DashboardTab selectedTab) loading,
+    required TResult Function(String message, DashboardTab selectedTab) failure,
+    required TResult Function(
+            FixtureResponseModel fixtures, DashboardTab selectedTab)
+        success,
+  }) {
+    return failure(message, selectedTab);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)?
+        initial,
+    TResult? Function(DashboardTab selectedTab)? loading,
+    TResult? Function(String message, DashboardTab selectedTab)? failure,
+    TResult? Function(FixtureResponseModel fixtures, DashboardTab selectedTab)?
+        success,
+  }) {
+    return failure?.call(message, selectedTab);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)?
+        initial,
+    TResult Function(DashboardTab selectedTab)? loading,
+    TResult Function(String message, DashboardTab selectedTab)? failure,
+    TResult Function(FixtureResponseModel fixtures, DashboardTab selectedTab)?
+        success,
+    required TResult orElse(),
+  }) {
+    if (failure != null) {
+      return failure(message, selectedTab);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Failure value) failure,
+    required TResult Function(Success value) success,
+  }) {
+    return failure(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Failure value)? failure,
+    TResult? Function(Success value)? success,
+  }) {
+    return failure?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
+    TResult Function(Loading value)? loading,
+    TResult Function(Failure value)? failure,
+    TResult Function(Success value)? success,
+    required TResult orElse(),
+  }) {
+    if (failure != null) {
+      return failure(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class Failure implements DashboardState {
+  const factory Failure(final String message,
+      {final DashboardTab selectedTab}) = _$FailureImpl;
+
+  String get message;
+  @override
+  DashboardTab get selectedTab;
+  @override
+  @JsonKey(ignore: true)
+  _$$FailureImplCopyWith<_$FailureImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SuccessImplCopyWith<$Res>
+    implements $DashboardStateCopyWith<$Res> {
+  factory _$$SuccessImplCopyWith(
+          _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
+      __$$SuccessImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({FixtureResponseModel fixtures, DashboardTab selectedTab});
+
+  $FixtureResponseModelCopyWith<$Res> get fixtures;
+}
+
+/// @nodoc
+class __$$SuccessImplCopyWithImpl<$Res>
+    extends _$DashboardStateCopyWithImpl<$Res, _$SuccessImpl>
+    implements _$$SuccessImplCopyWith<$Res> {
+  __$$SuccessImplCopyWithImpl(
+      _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? fixtures = null,
+    Object? selectedTab = null,
+  }) {
+    return _then(_$SuccessImpl(
+      null == fixtures
+          ? _value.fixtures
+          : fixtures // ignore: cast_nullable_to_non_nullable
+              as FixtureResponseModel,
+      selectedTab: null == selectedTab
+          ? _value.selectedTab
+          : selectedTab // ignore: cast_nullable_to_non_nullable
+              as DashboardTab,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $FixtureResponseModelCopyWith<$Res> get fixtures {
+    return $FixtureResponseModelCopyWith<$Res>(_value.fixtures, (value) {
+      return _then(_value.copyWith(fixtures: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$SuccessImpl implements Success {
+  const _$SuccessImpl(this.fixtures, {this.selectedTab = DashboardTab.score});
+
+  @override
+  final FixtureResponseModel fixtures;
+  @override
+  @JsonKey()
+  final DashboardTab selectedTab;
+
+  @override
+  String toString() {
+    return 'DashboardState.success(fixtures: $fixtures, selectedTab: $selectedTab)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SuccessImpl &&
+            (identical(other.fixtures, fixtures) ||
+                other.fixtures == fixtures) &&
+            (identical(other.selectedTab, selectedTab) ||
+                other.selectedTab == selectedTab));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, fixtures, selectedTab);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
+      __$$SuccessImplCopyWithImpl<_$SuccessImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)
+        initial,
+    required TResult Function(DashboardTab selectedTab) loading,
+    required TResult Function(String message, DashboardTab selectedTab) failure,
+    required TResult Function(
+            FixtureResponseModel fixtures, DashboardTab selectedTab)
+        success,
+  }) {
+    return success(fixtures, selectedTab);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)?
+        initial,
+    TResult? Function(DashboardTab selectedTab)? loading,
+    TResult? Function(String message, DashboardTab selectedTab)? failure,
+    TResult? Function(FixtureResponseModel fixtures, DashboardTab selectedTab)?
+        success,
+  }) {
+    return success?.call(fixtures, selectedTab);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)?
+        initial,
+    TResult Function(DashboardTab selectedTab)? loading,
+    TResult Function(String message, DashboardTab selectedTab)? failure,
+    TResult Function(FixtureResponseModel fixtures, DashboardTab selectedTab)?
+        success,
+    required TResult orElse(),
+  }) {
+    if (success != null) {
+      return success(fixtures, selectedTab);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Failure value) failure,
+    required TResult Function(Success value) success,
+  }) {
+    return success(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Failure value)? failure,
+    TResult? Function(Success value)? success,
+  }) {
+    return success?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
+    TResult Function(Loading value)? loading,
+    TResult Function(Failure value)? failure,
+    TResult Function(Success value)? success,
+    required TResult orElse(),
+  }) {
+    if (success != null) {
+      return success(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class Success implements DashboardState {
+  const factory Success(final FixtureResponseModel fixtures,
+      {final DashboardTab selectedTab}) = _$SuccessImpl;
+
+  FixtureResponseModel get fixtures;
+  @override
+  DashboardTab get selectedTab;
+  @override
+  @JsonKey(ignore: true)
+  _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

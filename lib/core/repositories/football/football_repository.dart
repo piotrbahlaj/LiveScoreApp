@@ -12,7 +12,7 @@ class FootballRepository implements FootballRepositoryInterface {
       final response = await service.getFixtures();
       return response;
     } catch (e) {
-      throw Exception(e);
+      throw Exception(e.toString());
     }
   }
 }

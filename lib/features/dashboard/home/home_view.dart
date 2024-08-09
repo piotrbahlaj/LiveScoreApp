@@ -16,6 +16,7 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<DashboardCubit>().fetchFixtures();
     return Scaffold(
       backgroundColor: AppTheme.primary,
       appBar: DashboardAppBar(),
@@ -87,7 +88,7 @@ class HomeView extends StatelessWidget {
                             ),
                             SizedBox(width: 10),
                             Text(
-                              'liga',
+                              'league',
                               style: TextStyle(
                                 color: AppTheme.cardLeagueName,
                                 fontSize: 17,

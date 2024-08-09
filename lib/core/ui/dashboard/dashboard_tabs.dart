@@ -9,6 +9,7 @@ class DashboardTabs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<DashboardCubit>();
     return BlocBuilder<DashboardCubit, DashboardState>(
       builder: (context, state) {
         return Row(
@@ -28,7 +29,7 @@ class DashboardTabs extends StatelessWidget {
                   break;
               }
               return GestureDetector(
-                onTap: () => context.read<DashboardCubit>().selectTab(tab),
+                onTap: () => cubit.selectTab(tab),
                 child: Column(
                   children: [
                     Text(

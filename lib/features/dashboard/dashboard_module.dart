@@ -1,12 +1,27 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:live_score/config/environment_config.dart';
+import 'package:live_score/config/environment_config_interface.dart';
+import 'package:live_score/core/network/api_client.dart';
+import 'package:live_score/core/repositories/football/football_repository.dart';
+import 'package:live_score/core/repositories/football/football_repository_interface.dart';
 import 'package:live_score/features/dashboard/account/account_screen.dart';
+import 'package:live_score/features/dashboard/cubit/dashboard_cubit.dart';
 import 'package:live_score/features/dashboard/dashboard_layout.dart';
 import 'package:live_score/features/dashboard/favorites/favorites_screen.dart';
-import 'package:live_score/features/dashboard/home/ui/home_screen.dart';
+import 'package:live_score/features/dashboard/home/home_screen.dart';
+import 'package:live_score/services/api_service.dart';
 
 class DashboardModule extends Module {
   @override
-  void binds(i) {}
+  void binds(i) {
+    i.addLazySingleton<EnvironmentConfigInterface>(EnvironmentConfig.new);
+    i.addLazySingleton(ApiClient.new);
+    i.addLazySingleton(ApiService.new);
+    i.addLazySingleton<DashboardCubit>(DashboardCubit.new);
+    i.addLazySingleton<FootballRepositoryInterface>(
+      FootballRepository.new,
+    );
+  }
 
   @override
   void routes(r) {
