@@ -7,7 +7,7 @@ part 'home_team_model.g.dart';
 class Home with _$Home {
   const factory Home({
     required String name,
-    required bool winner,
+    required bool? winner,
   }) = _Home;
 
   factory Home.fromJson(Map<String, dynamic> json) => _$HomeFromJson(json);

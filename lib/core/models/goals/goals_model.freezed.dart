@@ -20,8 +20,8 @@ Goals _$GoalsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Goals {
-  int get home => throw _privateConstructorUsedError;
-  int get away => throw _privateConstructorUsedError;
+  int? get home => throw _privateConstructorUsedError;
+  int? get away => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -33,7 +33,7 @@ abstract class $GoalsCopyWith<$Res> {
   factory $GoalsCopyWith(Goals value, $Res Function(Goals) then) =
       _$GoalsCopyWithImpl<$Res, Goals>;
   @useResult
-  $Res call({int home, int away});
+  $Res call({int? home, int? away});
 }
 
 /// @nodoc
@@ -49,18 +49,18 @@ class _$GoalsCopyWithImpl<$Res, $Val extends Goals>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? home = null,
-    Object? away = null,
+    Object? home = freezed,
+    Object? away = freezed,
   }) {
     return _then(_value.copyWith(
-      home: null == home
+      home: freezed == home
           ? _value.home
           : home // ignore: cast_nullable_to_non_nullable
-              as int,
-      away: null == away
+              as int?,
+      away: freezed == away
           ? _value.away
           : away // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ) as $Val);
   }
 }
@@ -72,7 +72,7 @@ abstract class _$$GoalsImplCopyWith<$Res> implements $GoalsCopyWith<$Res> {
       __$$GoalsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int home, int away});
+  $Res call({int? home, int? away});
 }
 
 /// @nodoc
@@ -86,18 +86,18 @@ class __$$GoalsImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? home = null,
-    Object? away = null,
+    Object? home = freezed,
+    Object? away = freezed,
   }) {
     return _then(_$GoalsImpl(
-      home: null == home
+      home: freezed == home
           ? _value.home
           : home // ignore: cast_nullable_to_non_nullable
-              as int,
-      away: null == away
+              as int?,
+      away: freezed == away
           ? _value.away
           : away // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ));
   }
 }
@@ -111,9 +111,9 @@ class _$GoalsImpl implements _Goals {
       _$$GoalsImplFromJson(json);
 
   @override
-  final int home;
+  final int? home;
   @override
-  final int away;
+  final int? away;
 
   @override
   String toString() {
@@ -148,15 +148,15 @@ class _$GoalsImpl implements _Goals {
 }
 
 abstract class _Goals implements Goals {
-  const factory _Goals({required final int home, required final int away}) =
+  const factory _Goals({required final int? home, required final int? away}) =
       _$GoalsImpl;
 
   factory _Goals.fromJson(Map<String, dynamic> json) = _$GoalsImpl.fromJson;
 
   @override
-  int get home;
+  int? get home;
   @override
-  int get away;
+  int? get away;
   @override
   @JsonKey(ignore: true)
   _$$GoalsImplCopyWith<_$GoalsImpl> get copyWith =>

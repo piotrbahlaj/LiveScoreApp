@@ -30,5 +30,7 @@
   "details": "Details",
   "liveNow": "Live Now",
   "seeMore": "See More",
-  "myAccount": "My Account"
+  "myAccount": "My Account",
+  "noLiveMatches": "Currently there are no live matches",
+  "noMatchesFound": "No matches found"
 }

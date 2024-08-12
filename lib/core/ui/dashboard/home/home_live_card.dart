@@ -32,7 +32,6 @@ class DashboardLiveCard extends StatelessWidget {
                         const SizedBox(width: 10),
                         const Text(
                           'league',
-                          //state.fixtures.response.first.league.name,
                           style: TextStyle(
                               color: AppTheme.cardLeagueName, fontSize: 17),
                         ),
@@ -121,16 +120,7 @@ class DashboardLiveCard extends StatelessWidget {
             ),
           );
         }
-        return const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 100),
-          child: Center(
-            child: CircularProgressIndicator(
-              backgroundColor: AppTheme.secondary,
-              color: AppTheme.onSecondary,
-              strokeWidth: 3,
-            ),
-          ),
-        );
+        return const SizedBox();
       },
     );
   }

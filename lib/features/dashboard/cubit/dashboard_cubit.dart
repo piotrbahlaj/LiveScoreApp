@@ -1,7 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:intl/intl.dart';
 import 'package:live_score/core/constants/dashboard_constants.dart';
-import 'package:live_score/core/models/fixture_response/fixture_response_model.dart';
+import 'package:live_score/core/models/fixtures_endpoint/fixtures_endpoint_model.dart';
 import 'package:live_score/core/repositories/football/football_repository_interface.dart';
 
 part 'dashboard_cubit.freezed.dart';
@@ -26,7 +27,8 @@ class DashboardCubit extends Cubit<DashboardState> {
   Future<void> fetchFixtures() async {
     emit(const DashboardState.loading());
     try {
-      final FixtureResponseModel fixtures = await repository.getFixtures();
+      final today = DateFormat('yyyy-MM-dd').format(DateTime.now());
+      final fixtures = await repository.getFixtures(date: today);
       emit(DashboardState.success(fixtures));
     } catch (e) {
       emit(DashboardState.failure(e.toString()));

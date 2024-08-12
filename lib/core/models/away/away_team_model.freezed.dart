@@ -21,7 +21,7 @@ Away _$AwayFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Away {
   String get name => throw _privateConstructorUsedError;
-  bool get winner => throw _privateConstructorUsedError;
+  bool? get winner => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -33,7 +33,7 @@ abstract class $AwayCopyWith<$Res> {
   factory $AwayCopyWith(Away value, $Res Function(Away) then) =
       _$AwayCopyWithImpl<$Res, Away>;
   @useResult
-  $Res call({String name, bool winner});
+  $Res call({String name, bool? winner});
 }
 
 /// @nodoc
@@ -50,17 +50,17 @@ class _$AwayCopyWithImpl<$Res, $Val extends Away>
   @override
   $Res call({
     Object? name = null,
-    Object? winner = null,
+    Object? winner = freezed,
   }) {
     return _then(_value.copyWith(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      winner: null == winner
+      winner: freezed == winner
           ? _value.winner
           : winner // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
     ) as $Val);
   }
 }
@@ -72,7 +72,7 @@ abstract class _$$AwayImplCopyWith<$Res> implements $AwayCopyWith<$Res> {
       __$$AwayImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, bool winner});
+  $Res call({String name, bool? winner});
 }
 
 /// @nodoc
@@ -86,17 +86,17 @@ class __$$AwayImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = null,
-    Object? winner = null,
+    Object? winner = freezed,
   }) {
     return _then(_$AwayImpl(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      winner: null == winner
+      winner: freezed == winner
           ? _value.winner
           : winner // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
     ));
   }
 }
@@ -112,7 +112,7 @@ class _$AwayImpl implements _Away {
   @override
   final String name;
   @override
-  final bool winner;
+  final bool? winner;
 
   @override
   String toString() {
@@ -148,14 +148,14 @@ class _$AwayImpl implements _Away {
 
 abstract class _Away implements Away {
   const factory _Away(
-      {required final String name, required final bool winner}) = _$AwayImpl;
+      {required final String name, required final bool? winner}) = _$AwayImpl;
 
   factory _Away.fromJson(Map<String, dynamic> json) = _$AwayImpl.fromJson;
 
   @override
   String get name;
   @override
-  bool get winner;
+  bool? get winner;
   @override
   @JsonKey(ignore: true)
   _$$AwayImplCopyWith<_$AwayImpl> get copyWith =>

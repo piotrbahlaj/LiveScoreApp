@@ -22,7 +22,6 @@ League _$LeagueFromJson(Map<String, dynamic> json) {
 mixin _$League {
   String get name => throw _privateConstructorUsedError;
   String get country => throw _privateConstructorUsedError;
-  int get season => throw _privateConstructorUsedError;
   String get round => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -35,7 +34,7 @@ abstract class $LeagueCopyWith<$Res> {
   factory $LeagueCopyWith(League value, $Res Function(League) then) =
       _$LeagueCopyWithImpl<$Res, League>;
   @useResult
-  $Res call({String name, String country, int season, String round});
+  $Res call({String name, String country, String round});
 }
 
 /// @nodoc
@@ -53,7 +52,6 @@ class _$LeagueCopyWithImpl<$Res, $Val extends League>
   $Res call({
     Object? name = null,
     Object? country = null,
-    Object? season = null,
     Object? round = null,
   }) {
     return _then(_value.copyWith(
@@ -65,10 +63,6 @@ class _$LeagueCopyWithImpl<$Res, $Val extends League>
           ? _value.country
           : country // ignore: cast_nullable_to_non_nullable
               as String,
-      season: null == season
-          ? _value.season
-          : season // ignore: cast_nullable_to_non_nullable
-              as int,
       round: null == round
           ? _value.round
           : round // ignore: cast_nullable_to_non_nullable
@@ -84,7 +78,7 @@ abstract class _$$LeagueImplCopyWith<$Res> implements $LeagueCopyWith<$Res> {
       __$$LeagueImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, String country, int season, String round});
+  $Res call({String name, String country, String round});
 }
 
 /// @nodoc
@@ -100,7 +94,6 @@ class __$$LeagueImplCopyWithImpl<$Res>
   $Res call({
     Object? name = null,
     Object? country = null,
-    Object? season = null,
     Object? round = null,
   }) {
     return _then(_$LeagueImpl(
@@ -112,10 +105,6 @@ class __$$LeagueImplCopyWithImpl<$Res>
           ? _value.country
           : country // ignore: cast_nullable_to_non_nullable
               as String,
-      season: null == season
-          ? _value.season
-          : season // ignore: cast_nullable_to_non_nullable
-              as int,
       round: null == round
           ? _value.round
           : round // ignore: cast_nullable_to_non_nullable
@@ -128,10 +117,7 @@ class __$$LeagueImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$LeagueImpl implements _League {
   const _$LeagueImpl(
-      {required this.name,
-      required this.country,
-      required this.season,
-      required this.round});
+      {required this.name, required this.country, required this.round});
 
   factory _$LeagueImpl.fromJson(Map<String, dynamic> json) =>
       _$$LeagueImplFromJson(json);
@@ -141,13 +127,11 @@ class _$LeagueImpl implements _League {
   @override
   final String country;
   @override
-  final int season;
-  @override
   final String round;
 
   @override
   String toString() {
-    return 'League(name: $name, country: $country, season: $season, round: $round)';
+    return 'League(name: $name, country: $country, round: $round)';
   }
 
   @override
@@ -157,13 +141,12 @@ class _$LeagueImpl implements _League {
             other is _$LeagueImpl &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.country, country) || other.country == country) &&
-            (identical(other.season, season) || other.season == season) &&
             (identical(other.round, round) || other.round == round));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, name, country, season, round);
+  int get hashCode => Object.hash(runtimeType, name, country, round);
 
   @JsonKey(ignore: true)
   @override
@@ -183,7 +166,6 @@ abstract class _League implements League {
   const factory _League(
       {required final String name,
       required final String country,
-      required final int season,
       required final String round}) = _$LeagueImpl;
 
   factory _League.fromJson(Map<String, dynamic> json) = _$LeagueImpl.fromJson;
@@ -192,8 +174,6 @@ abstract class _League implements League {
   String get name;
   @override
   String get country;
-  @override
-  int get season;
   @override
   String get round;
   @override

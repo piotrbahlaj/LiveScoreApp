@@ -31,7 +31,7 @@ mixin _$DashboardState {
             int selectedDateIndex, DashboardTab selectedTab)
         failure,
     required TResult Function(
-            FixtureResponseModel fixtures,
+            FixturesEndpointModel fixtures,
             double scrollOffset,
             int selectedDateIndex,
             DashboardTab selectedTab)
@@ -49,7 +49,7 @@ mixin _$DashboardState {
     TResult? Function(String message, double scrollOffset,
             int selectedDateIndex, DashboardTab selectedTab)?
         failure,
-    TResult? Function(FixtureResponseModel fixtures, double scrollOffset,
+    TResult? Function(FixturesEndpointModel fixtures, double scrollOffset,
             int selectedDateIndex, DashboardTab selectedTab)?
         success,
   }) =>
@@ -65,7 +65,7 @@ mixin _$DashboardState {
     TResult Function(String message, double scrollOffset, int selectedDateIndex,
             DashboardTab selectedTab)?
         failure,
-    TResult Function(FixtureResponseModel fixtures, double scrollOffset,
+    TResult Function(FixturesEndpointModel fixtures, double scrollOffset,
             int selectedDateIndex, DashboardTab selectedTab)?
         success,
     required TResult orElse(),
@@ -249,7 +249,7 @@ class _$InitialImpl implements Initial {
             int selectedDateIndex, DashboardTab selectedTab)
         failure,
     required TResult Function(
-            FixtureResponseModel fixtures,
+            FixturesEndpointModel fixtures,
             double scrollOffset,
             int selectedDateIndex,
             DashboardTab selectedTab)
@@ -270,7 +270,7 @@ class _$InitialImpl implements Initial {
     TResult? Function(String message, double scrollOffset,
             int selectedDateIndex, DashboardTab selectedTab)?
         failure,
-    TResult? Function(FixtureResponseModel fixtures, double scrollOffset,
+    TResult? Function(FixturesEndpointModel fixtures, double scrollOffset,
             int selectedDateIndex, DashboardTab selectedTab)?
         success,
   }) {
@@ -289,7 +289,7 @@ class _$InitialImpl implements Initial {
     TResult Function(String message, double scrollOffset, int selectedDateIndex,
             DashboardTab selectedTab)?
         failure,
-    TResult Function(FixtureResponseModel fixtures, double scrollOffset,
+    TResult Function(FixturesEndpointModel fixtures, double scrollOffset,
             int selectedDateIndex, DashboardTab selectedTab)?
         success,
     required TResult orElse(),
@@ -459,7 +459,7 @@ class _$LoadingImpl implements Loading {
             int selectedDateIndex, DashboardTab selectedTab)
         failure,
     required TResult Function(
-            FixtureResponseModel fixtures,
+            FixturesEndpointModel fixtures,
             double scrollOffset,
             int selectedDateIndex,
             DashboardTab selectedTab)
@@ -480,7 +480,7 @@ class _$LoadingImpl implements Loading {
     TResult? Function(String message, double scrollOffset,
             int selectedDateIndex, DashboardTab selectedTab)?
         failure,
-    TResult? Function(FixtureResponseModel fixtures, double scrollOffset,
+    TResult? Function(FixturesEndpointModel fixtures, double scrollOffset,
             int selectedDateIndex, DashboardTab selectedTab)?
         success,
   }) {
@@ -499,7 +499,7 @@ class _$LoadingImpl implements Loading {
     TResult Function(String message, double scrollOffset, int selectedDateIndex,
             DashboardTab selectedTab)?
         failure,
-    TResult Function(FixtureResponseModel fixtures, double scrollOffset,
+    TResult Function(FixturesEndpointModel fixtures, double scrollOffset,
             int selectedDateIndex, DashboardTab selectedTab)?
         success,
     required TResult orElse(),
@@ -680,7 +680,7 @@ class _$FailureImpl implements Failure {
             int selectedDateIndex, DashboardTab selectedTab)
         failure,
     required TResult Function(
-            FixtureResponseModel fixtures,
+            FixturesEndpointModel fixtures,
             double scrollOffset,
             int selectedDateIndex,
             DashboardTab selectedTab)
@@ -701,7 +701,7 @@ class _$FailureImpl implements Failure {
     TResult? Function(String message, double scrollOffset,
             int selectedDateIndex, DashboardTab selectedTab)?
         failure,
-    TResult? Function(FixtureResponseModel fixtures, double scrollOffset,
+    TResult? Function(FixturesEndpointModel fixtures, double scrollOffset,
             int selectedDateIndex, DashboardTab selectedTab)?
         success,
   }) {
@@ -720,7 +720,7 @@ class _$FailureImpl implements Failure {
     TResult Function(String message, double scrollOffset, int selectedDateIndex,
             DashboardTab selectedTab)?
         failure,
-    TResult Function(FixtureResponseModel fixtures, double scrollOffset,
+    TResult Function(FixturesEndpointModel fixtures, double scrollOffset,
             int selectedDateIndex, DashboardTab selectedTab)?
         success,
     required TResult orElse(),
@@ -797,12 +797,12 @@ abstract class _$$SuccessImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {FixtureResponseModel fixtures,
+      {FixturesEndpointModel fixtures,
       double scrollOffset,
       int selectedDateIndex,
       DashboardTab selectedTab});
 
-  $FixtureResponseModelCopyWith<$Res> get fixtures;
+  $FixturesEndpointModelCopyWith<$Res> get fixtures;
 }
 
 /// @nodoc
@@ -825,7 +825,7 @@ class __$$SuccessImplCopyWithImpl<$Res>
       null == fixtures
           ? _value.fixtures
           : fixtures // ignore: cast_nullable_to_non_nullable
-              as FixtureResponseModel,
+              as FixturesEndpointModel,
       scrollOffset: null == scrollOffset
           ? _value.scrollOffset
           : scrollOffset // ignore: cast_nullable_to_non_nullable
@@ -843,8 +843,8 @@ class __$$SuccessImplCopyWithImpl<$Res>
 
   @override
   @pragma('vm:prefer-inline')
-  $FixtureResponseModelCopyWith<$Res> get fixtures {
-    return $FixtureResponseModelCopyWith<$Res>(_value.fixtures, (value) {
+  $FixturesEndpointModelCopyWith<$Res> get fixtures {
+    return $FixturesEndpointModelCopyWith<$Res>(_value.fixtures, (value) {
       return _then(_value.copyWith(fixtures: value));
     });
   }
@@ -859,7 +859,7 @@ class _$SuccessImpl implements Success {
       this.selectedTab = DashboardTab.score});
 
   @override
-  final FixtureResponseModel fixtures;
+  final FixturesEndpointModel fixtures;
   @override
   @JsonKey()
   final double scrollOffset;
@@ -913,7 +913,7 @@ class _$SuccessImpl implements Success {
             int selectedDateIndex, DashboardTab selectedTab)
         failure,
     required TResult Function(
-            FixtureResponseModel fixtures,
+            FixturesEndpointModel fixtures,
             double scrollOffset,
             int selectedDateIndex,
             DashboardTab selectedTab)
@@ -934,7 +934,7 @@ class _$SuccessImpl implements Success {
     TResult? Function(String message, double scrollOffset,
             int selectedDateIndex, DashboardTab selectedTab)?
         failure,
-    TResult? Function(FixtureResponseModel fixtures, double scrollOffset,
+    TResult? Function(FixturesEndpointModel fixtures, double scrollOffset,
             int selectedDateIndex, DashboardTab selectedTab)?
         success,
   }) {
@@ -954,7 +954,7 @@ class _$SuccessImpl implements Success {
     TResult Function(String message, double scrollOffset, int selectedDateIndex,
             DashboardTab selectedTab)?
         failure,
-    TResult Function(FixtureResponseModel fixtures, double scrollOffset,
+    TResult Function(FixturesEndpointModel fixtures, double scrollOffset,
             int selectedDateIndex, DashboardTab selectedTab)?
         success,
     required TResult orElse(),
@@ -1004,12 +1004,12 @@ class _$SuccessImpl implements Success {
 }
 
 abstract class Success implements DashboardState {
-  const factory Success(final FixtureResponseModel fixtures,
+  const factory Success(final FixturesEndpointModel fixtures,
       {final double scrollOffset,
       final int selectedDateIndex,
       final DashboardTab selectedTab}) = _$SuccessImpl;
 
-  FixtureResponseModel get fixtures;
+  FixturesEndpointModel get fixtures;
   @override
   double get scrollOffset;
   @override

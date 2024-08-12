@@ -22,7 +22,7 @@ class DashboardState with _$DashboardState {
   }) = Failure;
 
   const factory DashboardState.success(
-    FixtureResponseModel fixtures, {
+    FixturesEndpointModel fixtures, {
     @Default(DashboardConstants.initialScrollOffset) double scrollOffset,
     @Default(DashboardConstants.initialDate) int selectedDateIndex,
     @Default(DashboardTab.score) DashboardTab selectedTab,

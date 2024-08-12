@@ -8,7 +8,6 @@ class League with _$League {
   const factory League({
     required String name,
     required String country,
-    required int season,
     required String round,
   }) = _League;
 

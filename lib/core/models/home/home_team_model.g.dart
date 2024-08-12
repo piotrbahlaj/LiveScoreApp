@@ -8,7 +8,7 @@ part of 'home_team_model.dart';
 
 _$HomeImpl _$$HomeImplFromJson(Map<String, dynamic> json) => _$HomeImpl(
       name: json['name'] as String,
-      winner: json['winner'] as bool,
+      winner: json['winner'] as bool?,
     );
 
 Map<String, dynamic> _$$HomeImplToJson(_$HomeImpl instance) =>

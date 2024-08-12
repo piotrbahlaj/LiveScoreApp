@@ -4,6 +4,7 @@ import 'package:live_score/core/theme/app_theme.dart';
 class DashboardAppBar extends AppBar {
   DashboardAppBar({super.key})
       : super(
+          forceMaterialTransparency: true,
           leading: Stack(
             children: [
               const Positioned(
@@ -35,7 +36,7 @@ class DashboardAppBar extends AppBar {
           toolbarHeight: 70,
           leadingWidth: 150,
           centerTitle: false,
-          backgroundColor: AppTheme.transparent,
+          backgroundColor: Colors.transparent,
           elevation: 0,
           actions: const [
             Icon(

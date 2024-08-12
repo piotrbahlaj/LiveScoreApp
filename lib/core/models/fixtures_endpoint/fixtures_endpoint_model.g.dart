@@ -1,21 +1,21 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'fixture_response_model.dart';
+part of 'fixtures_endpoint_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$FixtureResponseModelImpl _$$FixtureResponseModelImplFromJson(
+_$FixturesEndpointModelImpl _$$FixturesEndpointModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$FixtureResponseModelImpl(
+    _$FixturesEndpointModelImpl(
       response: (json['response'] as List<dynamic>)
-          .map((e) => FixturesData.fromJson(e as Map<String, dynamic>))
+          .map((e) => ResponseDataModel.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$$FixtureResponseModelImplToJson(
-        _$FixtureResponseModelImpl instance) =>
+Map<String, dynamic> _$$FixturesEndpointModelImplToJson(
+        _$FixturesEndpointModelImpl instance) =>
     <String, dynamic>{
       'response': instance.response,
     };

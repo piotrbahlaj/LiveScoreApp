@@ -4,15 +4,28 @@ import 'package:live_score/core/theme/app_theme.dart';
 import 'package:live_score/features/dashboard/cubit/dashboard_cubit.dart';
 
 class DashboardScoreCard extends StatelessWidget {
-  const DashboardScoreCard({super.key});
+  const DashboardScoreCard(
+      {super.key,
+      required this.homeTeam,
+      required this.awayTeam,
+      required this.homeScore,
+      required this.awayScore,
+      required this.status,
+      required this.date});
+  final String homeTeam;
+  final String awayTeam;
+  final int? homeScore;
+  final int? awayScore;
+  final String status;
+  final String date;
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<DashboardCubit, DashboardState>(
       builder: (context, state) {
         if (state is Success) {
-          return const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             child: Card(
               color: AppTheme.onPrimary3,
               child: SizedBox(
@@ -21,27 +34,27 @@ class DashboardScoreCard extends StatelessWidget {
                 child: Row(
                   children: [
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 15),
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'status',
-                            style: TextStyle(
+                            status,
+                            style: const TextStyle(
                               color: AppTheme.onPrimary2,
                             ),
                           ),
-                          SizedBox(height: 5),
+                          const SizedBox(height: 5),
                           Text(
-                            'date',
-                            style: TextStyle(
+                            date,
+                            style: const TextStyle(
                               color: AppTheme.onPrimary2,
                             ),
                           )
                         ],
                       ),
                     ),
-                    Padding(
+                    const Padding(
                       padding: EdgeInsets.symmetric(
                         horizontal: 5,
                         vertical: 10,
@@ -61,45 +74,45 @@ class DashboardScoreCard extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                         horizontal: 15,
                         vertical: 10,
                       ),
                       child: Column(
                         children: [
                           Text(
-                            'home team',
-                            style: TextStyle(
+                            homeTeam,
+                            style: const TextStyle(
                               color: AppTheme.onSecondary,
                             ),
                           ),
-                          SizedBox(height: 15),
+                          const SizedBox(height: 15),
                           Text(
-                            'away team',
-                            style: TextStyle(
+                            awayTeam,
+                            style: const TextStyle(
                               color: AppTheme.onSecondary,
                             ),
                           ),
                         ],
                       ),
                     ),
-                    SizedBox(width: 130),
+                    const SizedBox(width: 130),
                     Padding(
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                         vertical: 10,
                       ),
                       child: Column(
                         children: [
                           Text(
-                            '0',
-                            style: TextStyle(
+                            homeScore.toString(),
+                            style: const TextStyle(
                               color: AppTheme.onSecondary,
                             ),
                           ),
-                          SizedBox(height: 15),
+                          const SizedBox(height: 15),
                           Text(
-                            '0',
-                            style: TextStyle(
+                            awayScore.toString(),
+                            style: const TextStyle(
                               color: AppTheme.onSecondary,
                             ),
                           ),
