@@ -30,7 +30,7 @@ class LoginView extends StatelessWidget {
         backgroundColor: AppTheme.transparent,
         elevation: 0,
         title: Text(
-          context.localizations.welcome,
+          context.localizations.logInToYourAccount,
           style: const TextStyle(
             color: AppTheme.onSecondary,
             fontWeight: FontWeight.bold,
@@ -147,7 +147,7 @@ class LoginView extends StatelessWidget {
             ),
           ),
         );
-        Modular.to.pushNamed(Routes.home);
+        Modular.to.navigate(Routes.home);
         return null;
       },
     );

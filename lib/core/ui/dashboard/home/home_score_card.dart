@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:live_score/core/theme/app_theme.dart';
@@ -11,13 +12,17 @@ class DashboardScoreCard extends StatelessWidget {
       required this.homeScore,
       required this.awayScore,
       required this.status,
-      required this.date});
+      required this.date,
+      required this.homeLogo,
+      required this.awayLogo});
   final String homeTeam;
   final String awayTeam;
   final int? homeScore;
   final int? awayScore;
   final String status;
   final String date;
+  final String? homeLogo;
+  final String? awayLogo;
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +37,7 @@ class DashboardScoreCard extends StatelessWidget {
                 width: 360,
                 height: 80,
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -54,28 +60,48 @@ class DashboardScoreCard extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
                         horizontal: 5,
                         vertical: 10,
                       ),
                       child: Column(
                         children: [
-                          Icon(
-                            Icons.access_time_filled,
-                            color: AppTheme.onSecondary,
+                          SizedBox(
+                            width: 20,
+                            height: 20,
+                            child: CachedNetworkImage(
+                              imageUrl: homeLogo!,
+                              placeholder: (context, url) =>
+                                  const CircularProgressIndicator(
+                                backgroundColor: AppTheme.secondary,
+                                color: AppTheme.onSecondary,
+                              ),
+                              errorWidget: (context, url, error) =>
+                                  const Icon(Icons.error),
+                            ),
                           ),
-                          SizedBox(height: 10),
-                          Icon(
-                            Icons.access_time_filled,
-                            color: AppTheme.onSecondary,
+                          const SizedBox(height: 15),
+                          SizedBox(
+                            width: 20,
+                            height: 20,
+                            child: CachedNetworkImage(
+                              imageUrl: awayLogo!,
+                              placeholder: (context, url) =>
+                                  const CircularProgressIndicator(
+                                backgroundColor: AppTheme.secondary,
+                                color: AppTheme.onSecondary,
+                              ),
+                              errorWidget: (context, url, error) =>
+                                  const Icon(Icons.error),
+                            ),
                           ),
                         ],
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                        horizontal: 15,
+                        horizontal: 10,
                         vertical: 10,
                       ),
                       child: Column(
@@ -96,22 +122,24 @@ class DashboardScoreCard extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const SizedBox(width: 130),
+                    const Spacer(),
                     Padding(
                       padding: const EdgeInsets.symmetric(
                         vertical: 10,
+                        horizontal: 10,
                       ),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Text(
-                            homeScore.toString(),
+                            homeScore?.toString() ?? '',
                             style: const TextStyle(
                               color: AppTheme.onSecondary,
                             ),
                           ),
                           const SizedBox(height: 15),
                           Text(
-                            awayScore.toString(),
+                            awayScore?.toString() ?? '',
                             style: const TextStyle(
                               color: AppTheme.onSecondary,
                             ),

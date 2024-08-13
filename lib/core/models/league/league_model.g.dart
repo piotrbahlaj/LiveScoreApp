@@ -10,6 +10,7 @@ _$LeagueImpl _$$LeagueImplFromJson(Map<String, dynamic> json) => _$LeagueImpl(
       name: json['name'] as String,
       country: json['country'] as String,
       round: json['round'] as String,
+      logo: json['logo'] as String?,
     );
 
 Map<String, dynamic> _$$LeagueImplToJson(_$LeagueImpl instance) =>
@@ -17,4 +18,5 @@ Map<String, dynamic> _$$LeagueImplToJson(_$LeagueImpl instance) =>
       'name': instance.name,
       'country': instance.country,
       'round': instance.round,
+      'logo': instance.logo,
     };

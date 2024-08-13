@@ -1,7 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:live_score/config/environment_config.dart';
 import 'package:live_score/config/environment_config_interface.dart';
 import 'package:live_score/core/network/api_client.dart';
+import 'package:live_score/core/repositories/auth/auth_repository.dart';
+import 'package:live_score/core/repositories/auth/auth_repository_interface.dart';
 import 'package:live_score/core/repositories/football/football_repository.dart';
 import 'package:live_score/core/repositories/football/football_repository_interface.dart';
 import 'package:live_score/features/dashboard/account/account_screen.dart';
@@ -21,6 +24,8 @@ class DashboardModule extends Module {
     i.addLazySingleton<FootballRepositoryInterface>(
       FootballRepository.new,
     );
+    i.addLazySingleton<AuthRepositoryInterface>(AuthRepository.new);
+    i.addLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
   }
 
   @override

@@ -22,11 +22,18 @@ class DashboardState with _$DashboardState {
   }) = Failure;
 
   const factory DashboardState.success(
-    FixturesEndpointModel fixtures, {
+    FixturesEndpointModel fixtures,
+    FixturesEndpointModel liveFixtures, {
     @Default(DashboardConstants.initialScrollOffset) double scrollOffset,
     @Default(DashboardConstants.initialDate) int selectedDateIndex,
     @Default(DashboardTab.score) DashboardTab selectedTab,
   }) = Success;
+
+  const factory DashboardState.loggedOut({
+    @Default(DashboardConstants.initialScrollOffset) double scrollOffset,
+    @Default(DashboardConstants.initialDate) int selectedDateIndex,
+    @Default(DashboardTab.score) DashboardTab selectedTab,
+  }) = LoggedOut;
 }
 
 enum DashboardTab { upcoming, score, favorites }

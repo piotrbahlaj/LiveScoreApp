@@ -1,31 +1,91 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart'
+    hide ModularWatchExtension;
+import 'package:live_score/core/constants/routes.dart';
 import 'package:live_score/core/extensions/localization/app_localizations_context.dart';
 import 'package:live_score/core/theme/app_theme.dart';
+import 'package:live_score/core/ui/dashboard/account/log_out_button.dart';
+import 'package:live_score/features/dashboard/cubit/dashboard_cubit.dart';
 
 class AccountView extends StatelessWidget {
   const AccountView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppTheme.primary,
-      appBar: AppBar(
-        leadingWidth: 200,
-        toolbarHeight: 100,
+    final cubit = context.read<DashboardCubit>();
+    return BlocListener<DashboardCubit, DashboardState>(
+      listener: (context, state) {
+        if (state is LoggedOut) {
+          ScaffoldMessenger.of(context).clearSnackBars();
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                context.localizations.loggedOutSuccessfully,
+              ),
+            ),
+          );
+          Modular.to.navigate(Routes.login);
+        }
+      },
+      child: Scaffold(
         backgroundColor: AppTheme.primary,
-        leading: Padding(
-          padding: const EdgeInsets.all(15),
-          child: Text(
-            context.localizations.myAccount,
-            style: const TextStyle(
-              color: AppTheme.onSecondary,
-              fontSize: 23,
-              fontWeight: FontWeight.bold,
+        appBar: AppBar(
+          leadingWidth: 200,
+          toolbarHeight: 100,
+          backgroundColor: AppTheme.primary,
+          leading: Padding(
+            padding: const EdgeInsets.all(15),
+            child: Text(
+              context.localizations.myAccount,
+              style: const TextStyle(
+                color: AppTheme.onSecondary,
+                fontSize: 23,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ),
+        body: Center(
+          child: Column(
+            children: [
+              Stack(
+                children: [
+                  Container(
+                    height: 60,
+                    width: 60,
+                    decoration: BoxDecoration(
+                      color: AppTheme.avatarBackground,
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                  ),
+                  const Positioned.fill(
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Icon(
+                        Icons.person_outline_outlined,
+                        size: 45,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              const SizedBox(height: 20),
+              const Text(
+                'John Doe',
+                style: TextStyle(
+                  color: AppTheme.avatarBackground,
+                  fontSize: 20,
+                ),
+              ),
+              const SizedBox(height: 50),
+              LogOutButton(
+                onPressed: () => cubit.logOut(),
+              ),
+            ],
+          ),
+        ),
       ),
-      body: const Column(),
     );
   }
 }

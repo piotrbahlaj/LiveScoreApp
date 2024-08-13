@@ -9,10 +9,12 @@ part of 'status_model.dart';
 _$StatusImpl _$$StatusImplFromJson(Map<String, dynamic> json) => _$StatusImpl(
       short: json['short'] as String,
       long: json['long'] as String,
+      elapsed: (json['elapsed'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$StatusImplToJson(_$StatusImpl instance) =>
     <String, dynamic>{
       'short': instance.short,
       'long': instance.long,
+      'elapsed': instance.elapsed,
     };

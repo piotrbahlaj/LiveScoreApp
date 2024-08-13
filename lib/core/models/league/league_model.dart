@@ -9,6 +9,7 @@ class League with _$League {
     required String name,
     required String country,
     required String round,
+    required String? logo,
   }) = _League;
 
   factory League.fromJson(Map<String, dynamic> json) => _$LeagueFromJson(json);

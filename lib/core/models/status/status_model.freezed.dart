@@ -22,6 +22,7 @@ Status _$StatusFromJson(Map<String, dynamic> json) {
 mixin _$Status {
   String get short => throw _privateConstructorUsedError;
   String get long => throw _privateConstructorUsedError;
+  int? get elapsed => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -33,7 +34,7 @@ abstract class $StatusCopyWith<$Res> {
   factory $StatusCopyWith(Status value, $Res Function(Status) then) =
       _$StatusCopyWithImpl<$Res, Status>;
   @useResult
-  $Res call({String short, String long});
+  $Res call({String short, String long, int? elapsed});
 }
 
 /// @nodoc
@@ -51,6 +52,7 @@ class _$StatusCopyWithImpl<$Res, $Val extends Status>
   $Res call({
     Object? short = null,
     Object? long = null,
+    Object? elapsed = freezed,
   }) {
     return _then(_value.copyWith(
       short: null == short
@@ -61,6 +63,10 @@ class _$StatusCopyWithImpl<$Res, $Val extends Status>
           ? _value.long
           : long // ignore: cast_nullable_to_non_nullable
               as String,
+      elapsed: freezed == elapsed
+          ? _value.elapsed
+          : elapsed // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -72,7 +78,7 @@ abstract class _$$StatusImplCopyWith<$Res> implements $StatusCopyWith<$Res> {
       __$$StatusImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String short, String long});
+  $Res call({String short, String long, int? elapsed});
 }
 
 /// @nodoc
@@ -88,6 +94,7 @@ class __$$StatusImplCopyWithImpl<$Res>
   $Res call({
     Object? short = null,
     Object? long = null,
+    Object? elapsed = freezed,
   }) {
     return _then(_$StatusImpl(
       short: null == short
@@ -98,6 +105,10 @@ class __$$StatusImplCopyWithImpl<$Res>
           ? _value.long
           : long // ignore: cast_nullable_to_non_nullable
               as String,
+      elapsed: freezed == elapsed
+          ? _value.elapsed
+          : elapsed // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -105,7 +116,8 @@ class __$$StatusImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$StatusImpl implements _Status {
-  const _$StatusImpl({required this.short, required this.long});
+  const _$StatusImpl(
+      {required this.short, required this.long, required this.elapsed});
 
   factory _$StatusImpl.fromJson(Map<String, dynamic> json) =>
       _$$StatusImplFromJson(json);
@@ -114,10 +126,12 @@ class _$StatusImpl implements _Status {
   final String short;
   @override
   final String long;
+  @override
+  final int? elapsed;
 
   @override
   String toString() {
-    return 'Status(short: $short, long: $long)';
+    return 'Status(short: $short, long: $long, elapsed: $elapsed)';
   }
 
   @override
@@ -126,12 +140,13 @@ class _$StatusImpl implements _Status {
         (other.runtimeType == runtimeType &&
             other is _$StatusImpl &&
             (identical(other.short, short) || other.short == short) &&
-            (identical(other.long, long) || other.long == long));
+            (identical(other.long, long) || other.long == long) &&
+            (identical(other.elapsed, elapsed) || other.elapsed == elapsed));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, short, long);
+  int get hashCode => Object.hash(runtimeType, short, long, elapsed);
 
   @JsonKey(ignore: true)
   @override
@@ -149,7 +164,9 @@ class _$StatusImpl implements _Status {
 
 abstract class _Status implements Status {
   const factory _Status(
-      {required final String short, required final String long}) = _$StatusImpl;
+      {required final String short,
+      required final String long,
+      required final int? elapsed}) = _$StatusImpl;
 
   factory _Status.fromJson(Map<String, dynamic> json) = _$StatusImpl.fromJson;
 
@@ -157,6 +174,8 @@ abstract class _Status implements Status {
   String get short;
   @override
   String get long;
+  @override
+  int? get elapsed;
   @override
   @JsonKey(ignore: true)
   _$$StatusImplCopyWith<_$StatusImpl> get copyWith =>

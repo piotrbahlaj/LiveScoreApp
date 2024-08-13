@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:live_score/core/theme/app_theme.dart';
@@ -5,7 +6,26 @@ import 'package:live_score/core/ui/dashboard/home/home_details_button.dart';
 import 'package:live_score/features/dashboard/cubit/dashboard_cubit.dart';
 
 class DashboardLiveCard extends StatelessWidget {
-  const DashboardLiveCard({super.key});
+  const DashboardLiveCard(
+      {super.key,
+      required this.leagueName,
+      required this.homeName,
+      required this.awayName,
+      required this.leagueLogo,
+      required this.homeLogo,
+      required this.awayLogo,
+      required this.homeScore,
+      required this.awayScore,
+      required this.time});
+  final String leagueName;
+  final String homeName;
+  final String awayName;
+  final String leagueLogo;
+  final String homeLogo;
+  final String awayLogo;
+  final int? homeScore;
+  final int? awayScore;
+  final int? time;
 
   @override
   Widget build(BuildContext context) {
@@ -13,29 +33,50 @@ class DashboardLiveCard extends StatelessWidget {
       builder: (context, state) {
         if (state is Success) {
           return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 5),
             child: SizedBox(
               width: 320,
-              height: 190,
+              height: 200,
               child: Card(
                 color: AppTheme.onPrimary3,
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     const SizedBox(height: 10),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        const SizedBox(width: 20),
-                        const Icon(
-                          Icons.access_time_filled_outlined,
-                          color: AppTheme.onSecondary,
+                        SizedBox(
+                          width: 150,
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                width: 30,
+                                height: 30,
+                                child: CachedNetworkImage(
+                                  imageUrl: leagueLogo,
+                                  placeholder: (context, url) =>
+                                      const CircularProgressIndicator(
+                                    backgroundColor: AppTheme.secondary,
+                                    color: AppTheme.onSecondary,
+                                  ),
+                                  errorWidget: (context, url, error) =>
+                                      const Icon(Icons.error),
+                                ),
+                              ),
+                              const SizedBox(width: 10),
+                              Flexible(
+                                child: Text(
+                                  leagueName,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                      color: AppTheme.cardLeagueName,
+                                      fontSize: 17),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                        const SizedBox(width: 10),
-                        const Text(
-                          'league',
-                          style: TextStyle(
-                              color: AppTheme.cardLeagueName, fontSize: 17),
-                        ),
-                        const SizedBox(width: 135),
                         Container(
                           height: 27,
                           width: 52,
@@ -57,10 +98,10 @@ class DashboardLiveCard extends StatelessWidget {
                                 ),
                                 const SizedBox(width: 10),
                                 Text(
-                                  '78',
+                                  time.toString(),
                                   style: TextStyle(
-                                    color: AppTheme.cardClockTime,
-                                  ),
+                                      color: AppTheme.cardClockTime,
+                                      fontSize: 8),
                                 ),
                               ],
                             ),
@@ -68,51 +109,85 @@ class DashboardLiveCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 30),
-                    const Row(
+                    const SizedBox(height: 4),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        SizedBox(width: 50),
-                        Column(
-                          children: [
-                            Icon(
-                              Icons.access_time_filled,
-                              color: AppTheme.onSecondary,
-                            ),
-                            SizedBox(height: 5),
-                            Text(
-                              'home team',
-                              style: TextStyle(
-                                color: AppTheme.onSecondary,
+                        Flexible(
+                          flex: 1,
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                width: 40,
+                                height: 50,
+                                child: CachedNetworkImage(
+                                  imageUrl: homeLogo,
+                                  placeholder: (context, url) =>
+                                      const CircularProgressIndicator(
+                                    backgroundColor: AppTheme.secondary,
+                                    color: AppTheme.onSecondary,
+                                  ),
+                                  errorWidget: (context, url, error) =>
+                                      const Icon(Icons.error),
+                                ),
                               ),
-                            )
-                          ],
-                        ),
-                        SizedBox(width: 10),
-                        Text(
-                          'score',
-                          style: TextStyle(
-                            color: AppTheme.onSecondary,
+                              const SizedBox(height: 5),
+                              Text(
+                                homeName,
+                                softWrap: true,
+                                overflow: TextOverflow.clip,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  color: AppTheme.onSecondary,
+                                ),
+                              )
+                            ],
                           ),
                         ),
-                        SizedBox(width: 10),
-                        Column(
-                          children: [
-                            Icon(
-                              Icons.access_time_filled,
-                              color: AppTheme.onSecondary,
-                            ),
-                            SizedBox(height: 5),
-                            Text(
-                              'away team',
-                              style: TextStyle(
-                                color: AppTheme.onSecondary,
+                        const SizedBox(width: 10),
+                        Text(
+                          '${homeScore.toString()} - ${awayScore.toString()}',
+                          style: const TextStyle(
+                            color: AppTheme.onSecondary,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 23,
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        Flexible(
+                          flex: 1,
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                width: 40,
+                                height: 50,
+                                child: CachedNetworkImage(
+                                  imageUrl: awayLogo,
+                                  placeholder: (context, url) =>
+                                      const CircularProgressIndicator(
+                                    backgroundColor: AppTheme.secondary,
+                                    color: AppTheme.onSecondary,
+                                  ),
+                                  errorWidget: (context, url, error) =>
+                                      const Icon(Icons.error),
+                                ),
                               ),
-                            )
-                          ],
+                              const SizedBox(height: 5),
+                              Text(
+                                awayName,
+                                softWrap: true,
+                                overflow: TextOverflow.clip,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  color: AppTheme.onSecondary,
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 5),
                     const DetailsButton()
                   ],
                 ),

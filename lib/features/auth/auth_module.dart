@@ -15,7 +15,12 @@ class AuthModule extends Module {
       AuthRepository.new,
     );
     i.addLazySingleton<RegisterCubit>(RegisterCubit.new);
-    i.addLazySingleton<LoginCubit>(LoginCubit.new);
+    i.addLazySingleton<LoginCubit>(
+      LoginCubit.new,
+      config: BindConfig(
+        onDispose: (cubit) => cubit.close(),
+      ),
+    );
   }
 
   @override

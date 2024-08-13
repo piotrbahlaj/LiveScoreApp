@@ -8,6 +8,7 @@ class Status with _$Status {
   const factory Status({
     required String short,
     required String long,
+    required int? elapsed,
   }) = _Status;
 
   factory Status.fromJson(Map<String, dynamic> json) => _$StatusFromJson(json);

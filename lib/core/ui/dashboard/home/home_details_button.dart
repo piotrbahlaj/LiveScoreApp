@@ -12,7 +12,7 @@ class DetailsButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(13),
         ),
         backgroundColor: AppTheme.secondary,
-        fixedSize: const Size(300, 30),
+        fixedSize: const Size(300, 20),
       ),
       onPressed: () {},
       child: const Text(

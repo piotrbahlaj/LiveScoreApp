@@ -11,6 +11,7 @@
   "logIn": "Log In",
   "signUp": "Sign Up",
   "registerTitle": "Enter your account details",
+  "logInToYourAccount": "Log in to your account",
   "registerSuccessful": "Successfully registered! You can now log in.",
   "loginSuccessful": "Successfully logged in",
   "emailAlreadyInUse": "Email already in use. Please use a different email.",
@@ -32,5 +33,7 @@
   "seeMore": "See More",
   "myAccount": "My Account",
   "noLiveMatches": "Currently there are no live matches",
-  "noMatchesFound": "No matches found"
+  "noMatchesFound": "No matches found",
+  "loggedOutSuccessfully": "Logged out successfully",
+  "logInOrRegister": "Create an account or log in to continue"
 }

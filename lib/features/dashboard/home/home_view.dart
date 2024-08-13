@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -57,7 +58,7 @@ class HomeView extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 190,
+                height: 200,
                 child: Builder(
                   builder: (context) {
                     if (state is Success) {
@@ -74,9 +75,21 @@ class HomeView extends StatelessWidget {
                       }
                       return ListView.builder(
                         scrollDirection: Axis.horizontal,
-                        itemCount: 5,
+                        itemCount: state.liveFixtures.response.length,
                         itemBuilder: (context, index) {
-                          return const DashboardLiveCard();
+                          final liveFixture =
+                              state.liveFixtures.response[index];
+                          return DashboardLiveCard(
+                            time: liveFixture.fixture.status.elapsed,
+                            leagueName: liveFixture.league.name,
+                            homeName: liveFixture.teams.home.name,
+                            awayName: liveFixture.teams.away.name,
+                            leagueLogo: liveFixture.league.logo!,
+                            homeLogo: liveFixture.teams.home.logo!,
+                            awayLogo: liveFixture.teams.away.logo!,
+                            homeScore: liveFixture.goals.home,
+                            awayScore: liveFixture.goals.away,
+                          );
                         },
                       );
                     }
@@ -99,7 +112,7 @@ class HomeView extends StatelessWidget {
                     if (state.fixtures.response.isEmpty) {
                       return Center(
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 110),
+                          padding: const EdgeInsets.symmetric(vertical: 100),
                           child: Text(
                             context.localizations.noMatchesFound,
                             style: const TextStyle(
@@ -144,47 +157,66 @@ class HomeView extends StatelessWidget {
                         );
                       case DashboardTab.score:
                         return Expanded(
-                          child: Column(
-                            children: [
-                              Row(
+                          child: ListView.builder(
+                            itemCount: state.fixtures.response.length,
+                            itemBuilder: (context, index) {
+                              final fixtureDateTime = DateTime.parse(
+                                  state.fixtures.response[index].fixture.date);
+                              final formattedDate =
+                                  DateFormat('MM/dd').format(fixtureDateTime);
+                              final fixtures = state.fixtures.response[index];
+                              return Column(
                                 children: [
-                                  const SizedBox(width: 20),
-                                  const Icon(
-                                    Icons.access_time_filled_outlined,
-                                    color: AppTheme.onSecondary,
+                                  Row(
+                                    children: [
+                                      const SizedBox(width: 20),
+                                      SizedBox(
+                                        width: 50,
+                                        height: 20,
+                                        child: CachedNetworkImage(
+                                          imageUrl: fixtures.league.logo!,
+                                          placeholder: (context, url) =>
+                                              const Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 5),
+                                            child: Center(
+                                              child: CircularProgressIndicator(
+                                                backgroundColor:
+                                                    AppTheme.secondary,
+                                                color: AppTheme.onSecondary,
+                                              ),
+                                            ),
+                                          ),
+                                          errorWidget: (context, url, error) =>
+                                              const Icon(Icons.error),
+                                        ),
+                                      ),
+                                      const SizedBox(width: 10),
+                                      Flexible(
+                                        child: Text(
+                                          fixtures.league.name,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: const TextStyle(
+                                            color: AppTheme.cardLeagueName,
+                                            fontSize: 17,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                  const SizedBox(width: 10),
-                                  Text(
-                                    state.fixtures.response.first.league.name,
-                                    style: const TextStyle(
-                                      color: AppTheme.cardLeagueName,
-                                      fontSize: 17,
-                                    ),
+                                  DashboardScoreCard(
+                                    homeLogo: fixtures.teams.home.logo,
+                                    awayLogo: fixtures.teams.away.logo,
+                                    homeScore: fixtures.goals.home,
+                                    awayScore: fixtures.goals.away,
+                                    homeTeam: fixtures.teams.home.name,
+                                    awayTeam: fixtures.teams.away.name,
+                                    status: fixtures.fixture.status.short,
+                                    date: formattedDate,
                                   ),
                                 ],
-                              ),
-                              Expanded(
-                                child: ListView.builder(
-                                  itemCount: state.fixtures.response.length,
-                                  itemBuilder: (context, index) {
-                                    final fixtureDateTime = DateTime.parse(state
-                                        .fixtures.response[index].fixture.date);
-                                    final formattedDate = DateFormat('MM/dd')
-                                        .format(fixtureDateTime);
-                                    final fixtures =
-                                        state.fixtures.response[index];
-                                    return DashboardScoreCard(
-                                      homeScore: fixtures.goals.home,
-                                      awayScore: fixtures.goals.away,
-                                      homeTeam: fixtures.teams.home.name,
-                                      awayTeam: fixtures.teams.away.name,
-                                      status: fixtures.fixture.status.short,
-                                      date: formattedDate,
-                                    );
-                                  },
-                                ),
-                              ),
-                            ],
+                              );
+                            },
                           ),
                         );
                       case DashboardTab.favorites:

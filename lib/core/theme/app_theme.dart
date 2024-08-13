@@ -13,4 +13,5 @@ class AppTheme {
   static const cardLeagueName = Color.fromARGB(255, 182, 182, 182);
   static const cardClock = Colors.green;
   static final cardClockTime = Colors.green[900];
+  static const avatarBackground = Colors.grey;
 }

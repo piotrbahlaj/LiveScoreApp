@@ -15,4 +15,14 @@ class FootballRepository implements FootballRepositoryInterface {
       throw Exception(e.toString());
     }
   }
+
+  @override
+  Future<FixturesEndpointModel> getLiveFixtures({required String live}) async {
+    try {
+      final response = await service.getLiveFixtures(live);
+      return response;
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
 }

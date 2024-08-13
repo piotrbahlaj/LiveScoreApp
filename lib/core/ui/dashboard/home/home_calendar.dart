@@ -97,6 +97,7 @@ class DashboardCalendar extends StatelessWidget {
                       loading: (value) => value.selectedDateIndex == index,
                       failure: (value) => value.selectedDateIndex == index,
                       success: (value) => value.selectedDateIndex == index,
+                      loggedOut: (value) => value.selectedDateIndex == index,
                     );
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 2),
