@@ -6,6 +6,7 @@ import 'package:live_score/core/constants/dashboard_constants.dart';
 import 'package:live_score/core/models/fixtures_endpoint/fixtures_endpoint_model.dart';
 import 'package:live_score/core/repositories/auth/auth_repository_interface.dart';
 import 'package:live_score/core/repositories/football/football_repository_interface.dart';
+import 'package:live_score/core/utils/date_util.dart';
 
 part 'dashboard_cubit.freezed.dart';
 part 'dashboard_state.dart';
@@ -21,6 +22,9 @@ class DashboardCubit extends Cubit<DashboardState> {
   }
 
   void selectDate(int itemIndex) {
+    final selectedDate = DateFormat('yyyy-MM-dd').format(
+        DateUtil.generateDates(DashboardConstants.calendarRange)[itemIndex]);
+    fetchFixtures(selectedDate);
     emit(state.copyWith(selectedDateIndex: itemIndex));
   }
 
@@ -28,13 +32,15 @@ class DashboardCubit extends Cubit<DashboardState> {
     emit(state.copyWith(selectedTab: tab));
   }
 
-  Future<void> fetchFixtures() async {
+  Future<void> fetchFixtures(String? date) async {
     emit(const DashboardState.loading());
     try {
-      final today = DateFormat('yyyy-MM-dd').format(DateTime.now());
-      final fixtures = await repository.getFixtures(date: today);
+      final selectedDate =
+          date ?? DateFormat('yyyy-MM-dd').format(DateTime.now());
+      final fixtures = await repository.getFixtures(date: selectedDate);
       final liveFixtures = await repository.getLiveFixtures(live: 'all');
-      emit(DashboardState.success(fixtures, liveFixtures));
+      emit(DashboardState.success(fixtures, liveFixtures,
+          selectedDateIndex: state.selectedDateIndex));
     } catch (e) {
       emit(DashboardState.failure(e.toString()));
     }
@@ -46,7 +52,6 @@ class DashboardCubit extends Cubit<DashboardState> {
       await auth.logOut();
       emit(const DashboardState.loggedOut());
     } on FirebaseAuthException catch (e) {
-      print('Logout error: $e');
       throw FirebaseAuthException(code: e.code);
     }
   }

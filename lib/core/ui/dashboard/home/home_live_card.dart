@@ -35,7 +35,7 @@ class DashboardLiveCard extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5),
             child: SizedBox(
-              width: 320,
+              width: 340,
               height: 200,
               child: Card(
                 color: AppTheme.onPrimary3,
@@ -70,8 +70,9 @@ class DashboardLiveCard extends StatelessWidget {
                                   leagueName,
                                   overflow: TextOverflow.ellipsis,
                                   style: const TextStyle(
-                                      color: AppTheme.cardLeagueName,
-                                      fontSize: 17),
+                                    color: AppTheme.cardLeagueName,
+                                    fontSize: 16,
+                                  ),
                                 ),
                               ),
                             ],
@@ -100,8 +101,9 @@ class DashboardLiveCard extends StatelessWidget {
                                 Text(
                                   time.toString(),
                                   style: TextStyle(
-                                      color: AppTheme.cardClockTime,
-                                      fontSize: 8),
+                                    color: AppTheme.cardClockTime,
+                                    fontSize: 16,
+                                  ),
                                 ),
                               ],
                             ),
@@ -111,7 +113,7 @@ class DashboardLiveCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Flexible(
                           flex: 1,
@@ -122,10 +124,13 @@ class DashboardLiveCard extends StatelessWidget {
                                 height: 50,
                                 child: CachedNetworkImage(
                                   imageUrl: homeLogo,
-                                  placeholder: (context, url) =>
-                                      const CircularProgressIndicator(
-                                    backgroundColor: AppTheme.secondary,
-                                    color: AppTheme.onSecondary,
+                                  placeholder: (context, url) => const SizedBox(
+                                    height: 30,
+                                    width: 30,
+                                    child: CircularProgressIndicator(
+                                      backgroundColor: AppTheme.secondary,
+                                      color: AppTheme.onSecondary,
+                                    ),
                                   ),
                                   errorWidget: (context, url, error) =>
                                       const Icon(Icons.error),
@@ -163,10 +168,13 @@ class DashboardLiveCard extends StatelessWidget {
                                 height: 50,
                                 child: CachedNetworkImage(
                                   imageUrl: awayLogo,
-                                  placeholder: (context, url) =>
-                                      const CircularProgressIndicator(
-                                    backgroundColor: AppTheme.secondary,
-                                    color: AppTheme.onSecondary,
+                                  placeholder: (context, url) => const SizedBox(
+                                    width: 20,
+                                    height: 20,
+                                    child: CircularProgressIndicator(
+                                      backgroundColor: AppTheme.secondary,
+                                      color: AppTheme.onSecondary,
+                                    ),
                                   ),
                                   errorWidget: (context, url, error) =>
                                       const Icon(Icons.error),
@@ -187,8 +195,8 @@ class DashboardLiveCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 5),
-                    const DetailsButton()
+                    const SizedBox(height: 4),
+                    const DetailsButton(),
                   ],
                 ),
               ),

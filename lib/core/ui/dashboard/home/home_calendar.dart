@@ -3,25 +3,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:live_score/core/constants/dashboard_constants.dart';
 import 'package:live_score/core/theme/app_theme.dart';
 import 'package:live_score/core/ui/dashboard/home/home_date_element.dart';
+import 'package:live_score/core/utils/date_util.dart';
 import 'package:live_score/features/dashboard/cubit/dashboard_cubit.dart';
 
 class DashboardCalendar extends StatelessWidget {
   const DashboardCalendar({super.key});
 
-  List<DateTime> generateDates(int totalDays) {
-    DateTime now = DateTime.now();
-    DateTime startOfPeriod = now.subtract(Duration(days: totalDays ~/ 2));
-    return List<DateTime>.generate(
-      totalDays,
-      (index) => startOfPeriod.add(
-        Duration(days: index),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    List<DateTime> weekDates = generateDates(DashboardConstants.calendarRange);
+    List<DateTime> weekDates =
+        DateUtil.generateDates(DashboardConstants.calendarRange);
     final ScrollController scrollController = ScrollController();
     final cubit = context.read<DashboardCubit>();
 
@@ -92,13 +83,7 @@ class DashboardCalendar extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   itemCount: weekDates.length,
                   itemBuilder: (context, index) {
-                    final isSelected = state.map(
-                      initial: (value) => value.selectedDateIndex == index,
-                      loading: (value) => value.selectedDateIndex == index,
-                      failure: (value) => value.selectedDateIndex == index,
-                      success: (value) => value.selectedDateIndex == index,
-                      loggedOut: (value) => value.selectedDateIndex == index,
-                    );
+                    final isSelected = state.selectedDateIndex == index;
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 2),
                       child: GestureDetector(

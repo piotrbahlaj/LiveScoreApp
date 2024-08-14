@@ -18,7 +18,8 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<DashboardCubit>().fetchFixtures();
+    final String currentDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
+    context.read<DashboardCubit>().fetchFixtures(currentDate);
     return BlocBuilder<DashboardCubit, DashboardState>(
       builder: (context, state) {
         return Scaffold(
@@ -62,7 +63,7 @@ class HomeView extends StatelessWidget {
                 child: Builder(
                   builder: (context) {
                     if (state is Success) {
-                      if (state.fixtures.response.isEmpty) {
+                      if (state.liveFixtures.response.isEmpty) {
                         return Center(
                           child: Text(
                             context.localizations.noLiveMatches,
@@ -180,10 +181,15 @@ class HomeView extends StatelessWidget {
                                             padding: EdgeInsets.symmetric(
                                                 horizontal: 5),
                                             child: Center(
-                                              child: CircularProgressIndicator(
-                                                backgroundColor:
-                                                    AppTheme.secondary,
-                                                color: AppTheme.onSecondary,
+                                              child: SizedBox(
+                                                width: 20,
+                                                height: 20,
+                                                child:
+                                                    CircularProgressIndicator(
+                                                  backgroundColor:
+                                                      AppTheme.secondary,
+                                                  color: AppTheme.onSecondary,
+                                                ),
                                               ),
                                             ),
                                           ),
