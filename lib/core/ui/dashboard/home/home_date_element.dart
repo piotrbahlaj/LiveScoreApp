@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:live_score/core/theme/app_theme.dart';
+import 'package:live_score/core/utils/date_util.dart';
 
 class DashboardDateElement extends StatelessWidget {
   const DashboardDateElement({
@@ -13,26 +13,17 @@ class DashboardDateElement extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DateFormat dayFormat = DateFormat('E');
-    DateFormat monthDayFormat = DateFormat('d MMM');
-    DateTime today = DateTime.now();
-    String day = date.year == today.year &&
-            date.month == today.month &&
-            date.day == today.day
-        ? 'Today'
-        : dayFormat.format(date);
-    String monthDay = monthDayFormat.format(date);
     return Column(
       children: [
         Text(
-          day,
+          DateUtil.getFormattedDay(date),
           style: TextStyle(
             color: isSelected ? AppTheme.onSecondary : AppTheme.onPrimary2,
             fontWeight: FontWeight.bold,
           ),
         ),
         Text(
-          monthDay,
+          DateUtil.getFormattedMonthDay(date),
           style: TextStyle(
             color: isSelected ? AppTheme.onSecondary : AppTheme.onPrimary2,
             fontWeight: FontWeight.bold,

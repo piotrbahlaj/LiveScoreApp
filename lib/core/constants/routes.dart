@@ -1,9 +1,9 @@
 class Routes {
   //AUTH
-  static const String register = '/auth/register/';
-  static const String login = '/auth/login/';
+  static const register = '/auth/register/';
+  static const login = '/auth/login/';
   //DASHBOARD
-  static const String home = '/dashboard/home';
-  static const String favorites = '/dashboard/favorites';
-  static const String account = '/dashboard/account';
+  static const home = '/dashboard/home';
+  static const favorites = '/dashboard/favorites';
+  static const account = '/dashboard/account';
 }

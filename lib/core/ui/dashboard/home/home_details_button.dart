@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:live_score/core/extensions/localization/app_localizations_context.dart';
 import 'package:live_score/core/theme/app_theme.dart';
 
 class DetailsButton extends StatelessWidget {
@@ -16,9 +17,9 @@ class DetailsButton extends StatelessWidget {
         maximumSize: const Size(300, 40),
       ),
       onPressed: () {},
-      child: const Text(
-        'Details',
-        style: TextStyle(
+      child: Text(
+        context.localizations.details,
+        style: const TextStyle(
           color: AppTheme.onSecondary,
           fontWeight: FontWeight.w600,
         ),

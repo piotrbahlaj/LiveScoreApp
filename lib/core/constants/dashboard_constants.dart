@@ -1,8 +1,8 @@
-class DashboardConstants {
-  static const int calendarRange = 120;
-  static const double calendarItemWidth = 69.65;
-  static const int calendarScrollOffset = 280;
-  static const int calendarScrollDuration = 300;
-  static const int initialDate = 60;
-  static const double initialScrollOffset = 0.0;
+abstract class DashboardConstants {
+  static const calendarRange = 120;
+  static const calendarItemWidth = 69.65;
+  static const calendarScrollOffset = 280;
+  static const calendarScrollDuration = 300;
+  static const initialDate = 60;
+  static const initialScrollOffset = 0.0;
 }

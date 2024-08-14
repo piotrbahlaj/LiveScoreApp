@@ -1,22 +1,24 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:live_score/core/theme/app_theme.dart';
 import 'package:live_score/core/ui/dashboard/home/home_details_button.dart';
+import 'package:live_score/core/ui/dashboard/home/home_live_card_team.dart';
+import 'package:live_score/core/ui/dashboard/home/home_live_card_title.dart';
 import 'package:live_score/features/dashboard/cubit/dashboard_cubit.dart';
 
 class DashboardLiveCard extends StatelessWidget {
-  const DashboardLiveCard(
-      {super.key,
-      required this.leagueName,
-      required this.homeName,
-      required this.awayName,
-      required this.leagueLogo,
-      required this.homeLogo,
-      required this.awayLogo,
-      required this.homeScore,
-      required this.awayScore,
-      required this.time});
+  const DashboardLiveCard({
+    super.key,
+    required this.leagueName,
+    required this.homeName,
+    required this.awayName,
+    required this.leagueLogo,
+    required this.homeLogo,
+    required this.awayLogo,
+    required this.homeScore,
+    required this.awayScore,
+    required this.time,
+  });
   final String leagueName;
   final String homeName;
   final String awayName;
@@ -43,112 +45,16 @@ class DashboardLiveCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     const SizedBox(height: 10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        SizedBox(
-                          width: 150,
-                          child: Row(
-                            children: [
-                              SizedBox(
-                                width: 30,
-                                height: 30,
-                                child: CachedNetworkImage(
-                                  imageUrl: leagueLogo,
-                                  placeholder: (context, url) =>
-                                      const CircularProgressIndicator(
-                                    backgroundColor: AppTheme.secondary,
-                                    color: AppTheme.onSecondary,
-                                  ),
-                                  errorWidget: (context, url, error) =>
-                                      const Icon(Icons.error),
-                                ),
-                              ),
-                              const SizedBox(width: 10),
-                              Flexible(
-                                child: Text(
-                                  leagueName,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: const TextStyle(
-                                    color: AppTheme.cardLeagueName,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          height: 27,
-                          width: 52,
-                          decoration: BoxDecoration(
-                            color: AppTheme.onSecondary,
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 6),
-                            child: Row(
-                              children: [
-                                Container(
-                                  height: 10,
-                                  width: 10,
-                                  decoration: BoxDecoration(
-                                    color: AppTheme.cardClock,
-                                    borderRadius: BorderRadius.circular(30),
-                                  ),
-                                ),
-                                const SizedBox(width: 10),
-                                Text(
-                                  time.toString(),
-                                  style: TextStyle(
-                                    color: AppTheme.cardClockTime,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
+                    HomeLiveCardTitle(
+                      name: leagueName,
+                      logo: leagueLogo,
+                      time: time,
                     ),
                     const SizedBox(height: 4),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Flexible(
-                          flex: 1,
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                width: 40,
-                                height: 50,
-                                child: CachedNetworkImage(
-                                  imageUrl: homeLogo,
-                                  placeholder: (context, url) => const SizedBox(
-                                    height: 30,
-                                    width: 30,
-                                    child: CircularProgressIndicator(
-                                      backgroundColor: AppTheme.secondary,
-                                      color: AppTheme.onSecondary,
-                                    ),
-                                  ),
-                                  errorWidget: (context, url, error) =>
-                                      const Icon(Icons.error),
-                                ),
-                              ),
-                              const SizedBox(height: 5),
-                              Text(
-                                homeName,
-                                softWrap: true,
-                                overflow: TextOverflow.clip,
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  color: AppTheme.onSecondary,
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
+                        HomeLiveCardTeam(logo: homeLogo, name: homeName),
                         const SizedBox(width: 10),
                         Text(
                           '${homeScore.toString()} - ${awayScore.toString()}',
@@ -159,40 +65,7 @@ class DashboardLiveCard extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 10),
-                        Flexible(
-                          flex: 1,
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                width: 40,
-                                height: 50,
-                                child: CachedNetworkImage(
-                                  imageUrl: awayLogo,
-                                  placeholder: (context, url) => const SizedBox(
-                                    width: 20,
-                                    height: 20,
-                                    child: CircularProgressIndicator(
-                                      backgroundColor: AppTheme.secondary,
-                                      color: AppTheme.onSecondary,
-                                    ),
-                                  ),
-                                  errorWidget: (context, url, error) =>
-                                      const Icon(Icons.error),
-                                ),
-                              ),
-                              const SizedBox(height: 5),
-                              Text(
-                                awayName,
-                                softWrap: true,
-                                overflow: TextOverflow.clip,
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  color: AppTheme.onSecondary,
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
+                        HomeLiveCardTeam(logo: awayLogo, name: awayName),
                       ],
                     ),
                     const SizedBox(height: 4),

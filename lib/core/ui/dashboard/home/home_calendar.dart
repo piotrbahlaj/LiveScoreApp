@@ -13,7 +13,7 @@ class DashboardCalendar extends StatelessWidget {
   Widget build(BuildContext context) {
     List<DateTime> weekDates =
         DateUtil.generateDates(DashboardConstants.calendarRange);
-    final ScrollController scrollController = ScrollController();
+    final ScrollController scrollController = DateUtil.scrollController;
     final cubit = context.read<DashboardCubit>();
 
     WidgetsBinding.instance.addPostFrameCallback(
@@ -37,26 +37,6 @@ class DashboardCalendar extends StatelessWidget {
       },
     );
 
-    void scrollLeft() {
-      scrollController.animateTo(
-        scrollController.offset - DashboardConstants.calendarScrollOffset,
-        duration: const Duration(
-          milliseconds: DashboardConstants.calendarScrollDuration,
-        ),
-        curve: Curves.easeInOut,
-      );
-    }
-
-    void scrollRight() {
-      scrollController.animateTo(
-        scrollController.offset + DashboardConstants.calendarScrollOffset,
-        duration: const Duration(
-          milliseconds: DashboardConstants.calendarScrollDuration,
-        ),
-        curve: Curves.easeInOut,
-      );
-    }
-
     return BlocBuilder<DashboardCubit, DashboardState>(
       builder: (context, state) {
         return SizedBox(
@@ -64,12 +44,11 @@ class DashboardCalendar extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 child: InkWell(
-                  onTap: scrollLeft,
-                  child: const Icon(
+                  onTap: DateUtil.scrollLeft,
+                  child: Icon(
                     Icons.arrow_back_ios,
                     color: AppTheme.onSecondary,
                     size: 20,
@@ -99,12 +78,11 @@ class DashboardCalendar extends StatelessWidget {
                   },
                 ),
               ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 child: InkWell(
-                  onTap: scrollRight,
-                  child: const Icon(
+                  onTap: DateUtil.scrollRight,
+                  child: Icon(
                     Icons.arrow_forward_ios,
                     color: AppTheme.onSecondary,
                     size: 20,

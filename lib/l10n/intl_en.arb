@@ -1,5 +1,6 @@
 {
   "@@locale": "en",
+  "liveScore": "LiveScore",
   "welcome": "Welcome to LiveScore!",
   "username": "Username",
   "email": "Email",
@@ -9,6 +10,7 @@
   "doNotHaveAnAccount": "Don't have an account yet?",
   "alreadyHaveAnAccount": "Already have an account?",
   "logIn": "Log In",
+  "logOut": "Log Out",
   "signUp": "Sign Up",
   "registerTitle": "Enter your account details",
   "logInToYourAccount": "Log in to your account",
