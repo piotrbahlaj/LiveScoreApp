@@ -37,6 +37,9 @@ mixin _$DashboardState {
             int selectedDateIndex,
             DashboardTab selectedTab)
         success,
+    required TResult Function(User? user, double scrollOffset,
+            int selectedDateIndex, DashboardTab selectedTab)
+        loggedIn,
     required TResult Function(double scrollOffset, int selectedDateIndex,
             DashboardTab selectedTab)
         loggedOut,
@@ -60,6 +63,9 @@ mixin _$DashboardState {
             int selectedDateIndex,
             DashboardTab selectedTab)?
         success,
+    TResult? Function(User? user, double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)?
+        loggedIn,
     TResult? Function(double scrollOffset, int selectedDateIndex,
             DashboardTab selectedTab)?
         loggedOut,
@@ -83,6 +89,9 @@ mixin _$DashboardState {
             int selectedDateIndex,
             DashboardTab selectedTab)?
         success,
+    TResult Function(User? user, double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)?
+        loggedIn,
     TResult Function(double scrollOffset, int selectedDateIndex,
             DashboardTab selectedTab)?
         loggedOut,
@@ -95,6 +104,7 @@ mixin _$DashboardState {
     required TResult Function(Loading value) loading,
     required TResult Function(Failure value) failure,
     required TResult Function(Success value) success,
+    required TResult Function(LoggedIn value) loggedIn,
     required TResult Function(LoggedOut value) loggedOut,
   }) =>
       throw _privateConstructorUsedError;
@@ -104,6 +114,7 @@ mixin _$DashboardState {
     TResult? Function(Loading value)? loading,
     TResult? Function(Failure value)? failure,
     TResult? Function(Success value)? success,
+    TResult? Function(LoggedIn value)? loggedIn,
     TResult? Function(LoggedOut value)? loggedOut,
   }) =>
       throw _privateConstructorUsedError;
@@ -113,6 +124,7 @@ mixin _$DashboardState {
     TResult Function(Loading value)? loading,
     TResult Function(Failure value)? failure,
     TResult Function(Success value)? success,
+    TResult Function(LoggedIn value)? loggedIn,
     TResult Function(LoggedOut value)? loggedOut,
     required TResult orElse(),
   }) =>
@@ -276,6 +288,9 @@ class _$InitialImpl implements Initial {
             int selectedDateIndex,
             DashboardTab selectedTab)
         success,
+    required TResult Function(User? user, double scrollOffset,
+            int selectedDateIndex, DashboardTab selectedTab)
+        loggedIn,
     required TResult Function(double scrollOffset, int selectedDateIndex,
             DashboardTab selectedTab)
         loggedOut,
@@ -302,6 +317,9 @@ class _$InitialImpl implements Initial {
             int selectedDateIndex,
             DashboardTab selectedTab)?
         success,
+    TResult? Function(User? user, double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)?
+        loggedIn,
     TResult? Function(double scrollOffset, int selectedDateIndex,
             DashboardTab selectedTab)?
         loggedOut,
@@ -328,6 +346,9 @@ class _$InitialImpl implements Initial {
             int selectedDateIndex,
             DashboardTab selectedTab)?
         success,
+    TResult Function(User? user, double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)?
+        loggedIn,
     TResult Function(double scrollOffset, int selectedDateIndex,
             DashboardTab selectedTab)?
         loggedOut,
@@ -346,6 +367,7 @@ class _$InitialImpl implements Initial {
     required TResult Function(Loading value) loading,
     required TResult Function(Failure value) failure,
     required TResult Function(Success value) success,
+    required TResult Function(LoggedIn value) loggedIn,
     required TResult Function(LoggedOut value) loggedOut,
   }) {
     return initial(this);
@@ -358,6 +380,7 @@ class _$InitialImpl implements Initial {
     TResult? Function(Loading value)? loading,
     TResult? Function(Failure value)? failure,
     TResult? Function(Success value)? success,
+    TResult? Function(LoggedIn value)? loggedIn,
     TResult? Function(LoggedOut value)? loggedOut,
   }) {
     return initial?.call(this);
@@ -370,6 +393,7 @@ class _$InitialImpl implements Initial {
     TResult Function(Loading value)? loading,
     TResult Function(Failure value)? failure,
     TResult Function(Success value)? success,
+    TResult Function(LoggedIn value)? loggedIn,
     TResult Function(LoggedOut value)? loggedOut,
     required TResult orElse(),
   }) {
@@ -507,6 +531,9 @@ class _$LoadingImpl implements Loading {
             int selectedDateIndex,
             DashboardTab selectedTab)
         success,
+    required TResult Function(User? user, double scrollOffset,
+            int selectedDateIndex, DashboardTab selectedTab)
+        loggedIn,
     required TResult Function(double scrollOffset, int selectedDateIndex,
             DashboardTab selectedTab)
         loggedOut,
@@ -533,6 +560,9 @@ class _$LoadingImpl implements Loading {
             int selectedDateIndex,
             DashboardTab selectedTab)?
         success,
+    TResult? Function(User? user, double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)?
+        loggedIn,
     TResult? Function(double scrollOffset, int selectedDateIndex,
             DashboardTab selectedTab)?
         loggedOut,
@@ -559,6 +589,9 @@ class _$LoadingImpl implements Loading {
             int selectedDateIndex,
             DashboardTab selectedTab)?
         success,
+    TResult Function(User? user, double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)?
+        loggedIn,
     TResult Function(double scrollOffset, int selectedDateIndex,
             DashboardTab selectedTab)?
         loggedOut,
@@ -577,6 +610,7 @@ class _$LoadingImpl implements Loading {
     required TResult Function(Loading value) loading,
     required TResult Function(Failure value) failure,
     required TResult Function(Success value) success,
+    required TResult Function(LoggedIn value) loggedIn,
     required TResult Function(LoggedOut value) loggedOut,
   }) {
     return loading(this);
@@ -589,6 +623,7 @@ class _$LoadingImpl implements Loading {
     TResult? Function(Loading value)? loading,
     TResult? Function(Failure value)? failure,
     TResult? Function(Success value)? success,
+    TResult? Function(LoggedIn value)? loggedIn,
     TResult? Function(LoggedOut value)? loggedOut,
   }) {
     return loading?.call(this);
@@ -601,6 +636,7 @@ class _$LoadingImpl implements Loading {
     TResult Function(Loading value)? loading,
     TResult Function(Failure value)? failure,
     TResult Function(Success value)? success,
+    TResult Function(LoggedIn value)? loggedIn,
     TResult Function(LoggedOut value)? loggedOut,
     required TResult orElse(),
   }) {
@@ -749,6 +785,9 @@ class _$FailureImpl implements Failure {
             int selectedDateIndex,
             DashboardTab selectedTab)
         success,
+    required TResult Function(User? user, double scrollOffset,
+            int selectedDateIndex, DashboardTab selectedTab)
+        loggedIn,
     required TResult Function(double scrollOffset, int selectedDateIndex,
             DashboardTab selectedTab)
         loggedOut,
@@ -775,6 +814,9 @@ class _$FailureImpl implements Failure {
             int selectedDateIndex,
             DashboardTab selectedTab)?
         success,
+    TResult? Function(User? user, double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)?
+        loggedIn,
     TResult? Function(double scrollOffset, int selectedDateIndex,
             DashboardTab selectedTab)?
         loggedOut,
@@ -801,6 +843,9 @@ class _$FailureImpl implements Failure {
             int selectedDateIndex,
             DashboardTab selectedTab)?
         success,
+    TResult Function(User? user, double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)?
+        loggedIn,
     TResult Function(double scrollOffset, int selectedDateIndex,
             DashboardTab selectedTab)?
         loggedOut,
@@ -819,6 +864,7 @@ class _$FailureImpl implements Failure {
     required TResult Function(Loading value) loading,
     required TResult Function(Failure value) failure,
     required TResult Function(Success value) success,
+    required TResult Function(LoggedIn value) loggedIn,
     required TResult Function(LoggedOut value) loggedOut,
   }) {
     return failure(this);
@@ -831,6 +877,7 @@ class _$FailureImpl implements Failure {
     TResult? Function(Loading value)? loading,
     TResult? Function(Failure value)? failure,
     TResult? Function(Success value)? success,
+    TResult? Function(LoggedIn value)? loggedIn,
     TResult? Function(LoggedOut value)? loggedOut,
   }) {
     return failure?.call(this);
@@ -843,6 +890,7 @@ class _$FailureImpl implements Failure {
     TResult Function(Loading value)? loading,
     TResult Function(Failure value)? failure,
     TResult Function(Success value)? success,
+    TResult Function(LoggedIn value)? loggedIn,
     TResult Function(LoggedOut value)? loggedOut,
     required TResult orElse(),
   }) {
@@ -1022,6 +1070,9 @@ class _$SuccessImpl implements Success {
             int selectedDateIndex,
             DashboardTab selectedTab)
         success,
+    required TResult Function(User? user, double scrollOffset,
+            int selectedDateIndex, DashboardTab selectedTab)
+        loggedIn,
     required TResult Function(double scrollOffset, int selectedDateIndex,
             DashboardTab selectedTab)
         loggedOut,
@@ -1049,6 +1100,9 @@ class _$SuccessImpl implements Success {
             int selectedDateIndex,
             DashboardTab selectedTab)?
         success,
+    TResult? Function(User? user, double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)?
+        loggedIn,
     TResult? Function(double scrollOffset, int selectedDateIndex,
             DashboardTab selectedTab)?
         loggedOut,
@@ -1076,6 +1130,9 @@ class _$SuccessImpl implements Success {
             int selectedDateIndex,
             DashboardTab selectedTab)?
         success,
+    TResult Function(User? user, double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)?
+        loggedIn,
     TResult Function(double scrollOffset, int selectedDateIndex,
             DashboardTab selectedTab)?
         loggedOut,
@@ -1095,6 +1152,7 @@ class _$SuccessImpl implements Success {
     required TResult Function(Loading value) loading,
     required TResult Function(Failure value) failure,
     required TResult Function(Success value) success,
+    required TResult Function(LoggedIn value) loggedIn,
     required TResult Function(LoggedOut value) loggedOut,
   }) {
     return success(this);
@@ -1107,6 +1165,7 @@ class _$SuccessImpl implements Success {
     TResult? Function(Loading value)? loading,
     TResult? Function(Failure value)? failure,
     TResult? Function(Success value)? success,
+    TResult? Function(LoggedIn value)? loggedIn,
     TResult? Function(LoggedOut value)? loggedOut,
   }) {
     return success?.call(this);
@@ -1119,6 +1178,7 @@ class _$SuccessImpl implements Success {
     TResult Function(Loading value)? loading,
     TResult Function(Failure value)? failure,
     TResult Function(Success value)? success,
+    TResult Function(LoggedIn value)? loggedIn,
     TResult Function(LoggedOut value)? loggedOut,
     required TResult orElse(),
   }) {
@@ -1147,6 +1207,261 @@ abstract class Success implements DashboardState {
   @override
   @JsonKey(ignore: true)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$LoggedInImplCopyWith<$Res>
+    implements $DashboardStateCopyWith<$Res> {
+  factory _$$LoggedInImplCopyWith(
+          _$LoggedInImpl value, $Res Function(_$LoggedInImpl) then) =
+      __$$LoggedInImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {User? user,
+      double scrollOffset,
+      int selectedDateIndex,
+      DashboardTab selectedTab});
+}
+
+/// @nodoc
+class __$$LoggedInImplCopyWithImpl<$Res>
+    extends _$DashboardStateCopyWithImpl<$Res, _$LoggedInImpl>
+    implements _$$LoggedInImplCopyWith<$Res> {
+  __$$LoggedInImplCopyWithImpl(
+      _$LoggedInImpl _value, $Res Function(_$LoggedInImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? user = freezed,
+    Object? scrollOffset = null,
+    Object? selectedDateIndex = null,
+    Object? selectedTab = null,
+  }) {
+    return _then(_$LoggedInImpl(
+      freezed == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User?,
+      scrollOffset: null == scrollOffset
+          ? _value.scrollOffset
+          : scrollOffset // ignore: cast_nullable_to_non_nullable
+              as double,
+      selectedDateIndex: null == selectedDateIndex
+          ? _value.selectedDateIndex
+          : selectedDateIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      selectedTab: null == selectedTab
+          ? _value.selectedTab
+          : selectedTab // ignore: cast_nullable_to_non_nullable
+              as DashboardTab,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$LoggedInImpl implements LoggedIn {
+  const _$LoggedInImpl(this.user,
+      {this.scrollOffset = DashboardConstants.initialScrollOffset,
+      this.selectedDateIndex = DashboardConstants.initialDate,
+      this.selectedTab = DashboardTab.score});
+
+  @override
+  final User? user;
+  @override
+  @JsonKey()
+  final double scrollOffset;
+  @override
+  @JsonKey()
+  final int selectedDateIndex;
+  @override
+  @JsonKey()
+  final DashboardTab selectedTab;
+
+  @override
+  String toString() {
+    return 'DashboardState.loggedIn(user: $user, scrollOffset: $scrollOffset, selectedDateIndex: $selectedDateIndex, selectedTab: $selectedTab)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LoggedInImpl &&
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.scrollOffset, scrollOffset) ||
+                other.scrollOffset == scrollOffset) &&
+            (identical(other.selectedDateIndex, selectedDateIndex) ||
+                other.selectedDateIndex == selectedDateIndex) &&
+            (identical(other.selectedTab, selectedTab) ||
+                other.selectedTab == selectedTab));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, user, scrollOffset, selectedDateIndex, selectedTab);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LoggedInImplCopyWith<_$LoggedInImpl> get copyWith =>
+      __$$LoggedInImplCopyWithImpl<_$LoggedInImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)
+        initial,
+    required TResult Function(double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)
+        loading,
+    required TResult Function(String message, double scrollOffset,
+            int selectedDateIndex, DashboardTab selectedTab)
+        failure,
+    required TResult Function(
+            FixturesEndpointModel fixtures,
+            FixturesEndpointModel liveFixtures,
+            double scrollOffset,
+            int selectedDateIndex,
+            DashboardTab selectedTab)
+        success,
+    required TResult Function(User? user, double scrollOffset,
+            int selectedDateIndex, DashboardTab selectedTab)
+        loggedIn,
+    required TResult Function(double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)
+        loggedOut,
+  }) {
+    return loggedIn(user, scrollOffset, selectedDateIndex, selectedTab);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)?
+        initial,
+    TResult? Function(double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)?
+        loading,
+    TResult? Function(String message, double scrollOffset,
+            int selectedDateIndex, DashboardTab selectedTab)?
+        failure,
+    TResult? Function(
+            FixturesEndpointModel fixtures,
+            FixturesEndpointModel liveFixtures,
+            double scrollOffset,
+            int selectedDateIndex,
+            DashboardTab selectedTab)?
+        success,
+    TResult? Function(User? user, double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)?
+        loggedIn,
+    TResult? Function(double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)?
+        loggedOut,
+  }) {
+    return loggedIn?.call(user, scrollOffset, selectedDateIndex, selectedTab);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)?
+        initial,
+    TResult Function(double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)?
+        loading,
+    TResult Function(String message, double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)?
+        failure,
+    TResult Function(
+            FixturesEndpointModel fixtures,
+            FixturesEndpointModel liveFixtures,
+            double scrollOffset,
+            int selectedDateIndex,
+            DashboardTab selectedTab)?
+        success,
+    TResult Function(User? user, double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)?
+        loggedIn,
+    TResult Function(double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)?
+        loggedOut,
+    required TResult orElse(),
+  }) {
+    if (loggedIn != null) {
+      return loggedIn(user, scrollOffset, selectedDateIndex, selectedTab);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Failure value) failure,
+    required TResult Function(Success value) success,
+    required TResult Function(LoggedIn value) loggedIn,
+    required TResult Function(LoggedOut value) loggedOut,
+  }) {
+    return loggedIn(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Failure value)? failure,
+    TResult? Function(Success value)? success,
+    TResult? Function(LoggedIn value)? loggedIn,
+    TResult? Function(LoggedOut value)? loggedOut,
+  }) {
+    return loggedIn?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
+    TResult Function(Loading value)? loading,
+    TResult Function(Failure value)? failure,
+    TResult Function(Success value)? success,
+    TResult Function(LoggedIn value)? loggedIn,
+    TResult Function(LoggedOut value)? loggedOut,
+    required TResult orElse(),
+  }) {
+    if (loggedIn != null) {
+      return loggedIn(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class LoggedIn implements DashboardState {
+  const factory LoggedIn(final User? user,
+      {final double scrollOffset,
+      final int selectedDateIndex,
+      final DashboardTab selectedTab}) = _$LoggedInImpl;
+
+  User? get user;
+  @override
+  double get scrollOffset;
+  @override
+  int get selectedDateIndex;
+  @override
+  DashboardTab get selectedTab;
+  @override
+  @JsonKey(ignore: true)
+  _$$LoggedInImplCopyWith<_$LoggedInImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1259,6 +1574,9 @@ class _$LoggedOutImpl implements LoggedOut {
             int selectedDateIndex,
             DashboardTab selectedTab)
         success,
+    required TResult Function(User? user, double scrollOffset,
+            int selectedDateIndex, DashboardTab selectedTab)
+        loggedIn,
     required TResult Function(double scrollOffset, int selectedDateIndex,
             DashboardTab selectedTab)
         loggedOut,
@@ -1285,6 +1603,9 @@ class _$LoggedOutImpl implements LoggedOut {
             int selectedDateIndex,
             DashboardTab selectedTab)?
         success,
+    TResult? Function(User? user, double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)?
+        loggedIn,
     TResult? Function(double scrollOffset, int selectedDateIndex,
             DashboardTab selectedTab)?
         loggedOut,
@@ -1311,6 +1632,9 @@ class _$LoggedOutImpl implements LoggedOut {
             int selectedDateIndex,
             DashboardTab selectedTab)?
         success,
+    TResult Function(User? user, double scrollOffset, int selectedDateIndex,
+            DashboardTab selectedTab)?
+        loggedIn,
     TResult Function(double scrollOffset, int selectedDateIndex,
             DashboardTab selectedTab)?
         loggedOut,
@@ -1329,6 +1653,7 @@ class _$LoggedOutImpl implements LoggedOut {
     required TResult Function(Loading value) loading,
     required TResult Function(Failure value) failure,
     required TResult Function(Success value) success,
+    required TResult Function(LoggedIn value) loggedIn,
     required TResult Function(LoggedOut value) loggedOut,
   }) {
     return loggedOut(this);
@@ -1341,6 +1666,7 @@ class _$LoggedOutImpl implements LoggedOut {
     TResult? Function(Loading value)? loading,
     TResult? Function(Failure value)? failure,
     TResult? Function(Success value)? success,
+    TResult? Function(LoggedIn value)? loggedIn,
     TResult? Function(LoggedOut value)? loggedOut,
   }) {
     return loggedOut?.call(this);
@@ -1353,6 +1679,7 @@ class _$LoggedOutImpl implements LoggedOut {
     TResult Function(Loading value)? loading,
     TResult Function(Failure value)? failure,
     TResult Function(Success value)? success,
+    TResult Function(LoggedIn value)? loggedIn,
     TResult Function(LoggedOut value)? loggedOut,
     required TResult orElse(),
   }) {

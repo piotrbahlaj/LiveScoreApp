@@ -14,7 +14,8 @@ part 'dashboard_state.dart';
 class DashboardCubit extends Cubit<DashboardState> {
   final FootballRepositoryInterface repository;
   final AuthRepositoryInterface auth;
-  DashboardCubit(this.repository, this.auth)
+  final FirebaseAuth firebaseAuth;
+  DashboardCubit(this.repository, this.auth, this.firebaseAuth)
       : super(const DashboardState.initial());
 
   void setScrollOffset(double offset) {
@@ -39,8 +40,14 @@ class DashboardCubit extends Cubit<DashboardState> {
           date ?? DateFormat('yyyy-MM-dd').format(DateTime.now());
       final fixtures = await repository.getFixtures(date: selectedDate);
       final liveFixtures = await repository.getLiveFixtures(live: 'all');
-      emit(DashboardState.success(fixtures, liveFixtures,
-          selectedDateIndex: state.selectedDateIndex));
+
+      emit(
+        DashboardState.success(
+          fixtures,
+          liveFixtures,
+          selectedDateIndex: state.selectedDateIndex,
+        ),
+      );
     } catch (e) {
       emit(DashboardState.failure(e.toString()));
     }
@@ -54,5 +61,13 @@ class DashboardCubit extends Cubit<DashboardState> {
     } on FirebaseAuthException catch (e) {
       throw FirebaseAuthException(code: e.code);
     }
+  }
+
+  Future<void> loadUser() async {
+    emit(const DashboardState.loading());
+    final user = firebaseAuth.currentUser;
+    emit(
+      DashboardState.loggedIn(user),
+    );
   }
 }

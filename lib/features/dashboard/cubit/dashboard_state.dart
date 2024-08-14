@@ -29,6 +29,13 @@ class DashboardState with _$DashboardState {
     @Default(DashboardTab.score) DashboardTab selectedTab,
   }) = Success;
 
+  const factory DashboardState.loggedIn(
+    User? user, {
+    @Default(DashboardConstants.initialScrollOffset) double scrollOffset,
+    @Default(DashboardConstants.initialDate) int selectedDateIndex,
+    @Default(DashboardTab.score) DashboardTab selectedTab,
+  }) = LoggedIn;
+
   const factory DashboardState.loggedOut({
     @Default(DashboardConstants.initialScrollOffset) double scrollOffset,
     @Default(DashboardConstants.initialDate) int selectedDateIndex,

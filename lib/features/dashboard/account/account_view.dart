@@ -14,78 +14,86 @@ class AccountView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<DashboardCubit>();
-    return BlocListener<DashboardCubit, DashboardState>(
-      listener: (context, state) {
-        if (state is LoggedOut) {
-          ScaffoldMessenger.of(context).clearSnackBars();
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(
-                context.localizations.loggedOutSuccessfully,
-              ),
-            ),
-          );
-          Modular.to.navigate(Routes.login);
-        }
-      },
-      child: Scaffold(
-        backgroundColor: AppTheme.primary,
-        appBar: AppBar(
-          leadingWidth: 200,
-          toolbarHeight: 100,
-          backgroundColor: AppTheme.primary,
-          leading: Padding(
-            padding: const EdgeInsets.all(15),
-            child: Text(
-              context.localizations.myAccount,
-              style: const TextStyle(
-                color: AppTheme.onSecondary,
-                fontSize: 23,
-                fontWeight: FontWeight.bold,
-              ),
+    cubit.loadUser();
+    return BlocConsumer<DashboardCubit, DashboardState>(
+        listener: (context, state) {
+      if (state is LoggedOut) {
+        ScaffoldMessenger.of(context).clearSnackBars();
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              context.localizations.loggedOutSuccessfully,
             ),
           ),
-        ),
-        body: Center(
-          child: Column(
-            children: [
-              Stack(
-                children: [
-                  Container(
-                    height: 60,
-                    width: 60,
-                    decoration: BoxDecoration(
-                      color: AppTheme.avatarBackground,
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                  ),
-                  const Positioned.fill(
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Icon(
-                        Icons.person_outline_outlined,
-                        size: 45,
-                      ),
-                    ),
-                  )
-                ],
-              ),
-              const SizedBox(height: 20),
-              const Text(
-                'John Doe',
-                style: TextStyle(
-                  color: AppTheme.avatarBackground,
-                  fontSize: 20,
+        );
+        Modular.to.navigate(Routes.login);
+      }
+    }, builder: (context, state) {
+      if (state is LoggedIn) {
+        final user = state.user;
+        final email = user?.email ?? 'John Doe';
+        return Scaffold(
+          backgroundColor: AppTheme.primary,
+          appBar: AppBar(
+            leadingWidth: 200,
+            toolbarHeight: 100,
+            backgroundColor: AppTheme.primary,
+            leading: Padding(
+              padding: const EdgeInsets.all(15),
+              child: Text(
+                context.localizations.myAccount,
+                style: const TextStyle(
+                  color: AppTheme.onSecondary,
+                  fontSize: 23,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 50),
-              LogOutButton(
-                onPressed: () => cubit.logOut(),
-              ),
-            ],
+            ),
           ),
-        ),
-      ),
-    );
+          body: Center(
+            child: Column(
+              children: [
+                Stack(
+                  children: [
+                    Container(
+                      height: 60,
+                      width: 60,
+                      decoration: BoxDecoration(
+                        color: AppTheme.avatarBackground,
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                    ),
+                    const Positioned.fill(
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Icon(
+                          Icons.person_outline_outlined,
+                          size: 45,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                const SizedBox(height: 20),
+                Text(
+                  email,
+                  style: const TextStyle(
+                    color: AppTheme.avatarBackground,
+                    fontSize: 20,
+                  ),
+                ),
+                const SizedBox(height: 50),
+                LogOutButton(
+                  onPressed: () => cubit.logOut(),
+                ),
+              ],
+            ),
+          ),
+        );
+      }
+      return Container(
+        color: AppTheme.primary,
+      );
+    });
   }
 }

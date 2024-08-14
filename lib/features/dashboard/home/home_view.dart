@@ -19,7 +19,9 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String currentDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
-    context.read<DashboardCubit>().fetchFixtures(currentDate);
+    final cubit = context.read<DashboardCubit>();
+    cubit.fetchFixtures(currentDate);
+
     return BlocBuilder<DashboardCubit, DashboardState>(
       builder: (context, state) {
         return Scaffold(
