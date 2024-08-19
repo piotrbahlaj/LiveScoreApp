@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:live_score/core/theme/app_theme.dart';
 import 'package:live_score/features/dashboard/cubit/dashboard_cubit.dart';
 
-class DashboardScoreCard extends StatelessWidget {
-  const DashboardScoreCard(
+class HomeScoreCard extends StatelessWidget {
+  const HomeScoreCard(
       {super.key,
       required this.homeTeam,
       required this.awayTeam,

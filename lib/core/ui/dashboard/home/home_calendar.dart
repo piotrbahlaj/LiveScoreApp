@@ -6,8 +6,8 @@ import 'package:live_score/core/ui/dashboard/home/home_date_element.dart';
 import 'package:live_score/core/utils/date_util.dart';
 import 'package:live_score/features/dashboard/cubit/dashboard_cubit.dart';
 
-class DashboardCalendar extends StatelessWidget {
-  const DashboardCalendar({super.key});
+class HomeCalendar extends StatelessWidget {
+  const HomeCalendar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +69,7 @@ class DashboardCalendar extends StatelessWidget {
                         onTap: () {
                           cubit.selectDate(index);
                         },
-                        child: DashboardDateElement(
+                        child: HomeDateElement(
                           date: weekDates[index],
                           isSelected: isSelected,
                         ),

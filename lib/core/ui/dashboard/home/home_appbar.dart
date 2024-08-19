@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:live_score/core/extensions/localization/app_localizations_context.dart';
 import 'package:live_score/core/theme/app_theme.dart';
 
-class DashboardAppBar extends AppBar {
-  DashboardAppBar({super.key})
+class HomeAppbar extends AppBar {
+  HomeAppbar({required BuildContext context, super.key})
       : super(
           forceMaterialTransparency: true,
           leading: Stack(
             children: [
-              const Positioned(
+              Positioned(
                 bottom: 18,
                 left: 22,
                 child: Text(
-                  'LiveScore',
-                  style: TextStyle(
+                  context.localizations.liveScore,
+                  style: const TextStyle(
                     color: AppTheme.onSecondary,
                     fontWeight: FontWeight.bold,
                     fontSize: 23,

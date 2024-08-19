@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:live_score/core/theme/app_theme.dart';
 import 'package:live_score/core/utils/date_util.dart';
 
-class DashboardDateElement extends StatelessWidget {
-  const DashboardDateElement({
+class HomeDateElement extends StatelessWidget {
+  const HomeDateElement({
     super.key,
     required this.date,
     this.isSelected = false,

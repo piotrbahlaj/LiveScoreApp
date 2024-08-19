@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class DashboardFavoritesCard extends StatelessWidget {
-  const DashboardFavoritesCard({super.key});
+class HomeFavoritesCard extends StatelessWidget {
+  const HomeFavoritesCard({super.key});
 
   @override
   Widget build(BuildContext context) {

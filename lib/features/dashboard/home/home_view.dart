@@ -26,12 +26,14 @@ class HomeView extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           backgroundColor: AppTheme.primary,
-          appBar: DashboardAppBar(),
+          appBar: HomeAppbar(
+            context: context,
+          ),
           body: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const DashboardCalendar(),
+              const HomeCalendar(),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
@@ -82,7 +84,7 @@ class HomeView extends StatelessWidget {
                         itemBuilder: (context, index) {
                           final liveFixture =
                               state.liveFixtures.response[index];
-                          return DashboardLiveCard(
+                          return HomeLiveCard(
                             time: liveFixture.fixture.status.elapsed,
                             leagueName: liveFixture.league.name,
                             homeName: liveFixture.teams.home.name,
@@ -107,7 +109,7 @@ class HomeView extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 25),
-              const DashboardTabs(),
+              const HomeTabs(),
               const SizedBox(height: 20),
               BlocBuilder<DashboardCubit, DashboardState>(
                 builder: (context, state) {
@@ -131,17 +133,17 @@ class HomeView extends StatelessWidget {
                         return Expanded(
                           child: Column(
                             children: [
-                              const Row(
+                              Row(
                                 children: [
-                                  SizedBox(width: 20),
-                                  Icon(
+                                  const SizedBox(width: 20),
+                                  const Icon(
                                     Icons.access_time_filled_outlined,
                                     color: AppTheme.onSecondary,
                                   ),
-                                  SizedBox(width: 10),
+                                  const SizedBox(width: 10),
                                   Text(
-                                    'league',
-                                    style: TextStyle(
+                                    context.localizations.league,
+                                    style: const TextStyle(
                                       color: AppTheme.cardLeagueName,
                                       fontSize: 17,
                                     ),
@@ -151,7 +153,7 @@ class HomeView extends StatelessWidget {
                               Expanded(
                                 child: ListView.builder(
                                   itemBuilder: (context, index) {
-                                    return const DashboardUpcomingCard();
+                                    return const HomeUpcomingCard();
                                   },
                                 ),
                               ),
@@ -212,7 +214,7 @@ class HomeView extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                  DashboardScoreCard(
+                                  HomeScoreCard(
                                     homeLogo: fixtures.teams.home.logo,
                                     awayLogo: fixtures.teams.away.logo,
                                     homeScore: fixtures.goals.home,
@@ -231,17 +233,17 @@ class HomeView extends StatelessWidget {
                         return Expanded(
                           child: Column(
                             children: [
-                              const Row(
+                              Row(
                                 children: [
-                                  SizedBox(width: 20),
-                                  Icon(
+                                  const SizedBox(width: 20),
+                                  const Icon(
                                     Icons.access_time_filled_outlined,
                                     color: AppTheme.onSecondary,
                                   ),
-                                  SizedBox(width: 10),
+                                  const SizedBox(width: 10),
                                   Text(
-                                    'league',
-                                    style: TextStyle(
+                                    context.localizations.league,
+                                    style: const TextStyle(
                                       color: AppTheme.cardLeagueName,
                                       fontSize: 17,
                                     ),
@@ -251,7 +253,7 @@ class HomeView extends StatelessWidget {
                               Expanded(
                                 child: ListView.builder(
                                   itemBuilder: (context, index) {
-                                    return const DashboardFavoritesCard();
+                                    return const HomeFavoritesCard();
                                   },
                                 ),
                               ),

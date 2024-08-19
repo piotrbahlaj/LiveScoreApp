@@ -4,8 +4,8 @@ import 'package:live_score/core/extensions/localization/app_localizations_contex
 import 'package:live_score/core/theme/app_theme.dart';
 import 'package:live_score/features/dashboard/cubit/dashboard_cubit.dart';
 
-class DashboardTabs extends StatelessWidget {
-  const DashboardTabs({super.key});
+class HomeTabs extends StatelessWidget {
+  const HomeTabs({super.key});
 
   @override
   Widget build(BuildContext context) {

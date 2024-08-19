@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:live_score/core/theme/app_theme.dart';
 import 'package:live_score/features/dashboard/cubit/dashboard_cubit.dart';
 
-class DashboardUpcomingCard extends StatelessWidget {
-  const DashboardUpcomingCard({super.key});
+class HomeUpcomingCard extends StatelessWidget {
+  const HomeUpcomingCard({super.key});
 
   @override
   Widget build(BuildContext context) {

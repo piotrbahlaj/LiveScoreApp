@@ -6,8 +6,8 @@ import 'package:live_score/core/ui/dashboard/home/home_live_card_team.dart';
 import 'package:live_score/core/ui/dashboard/home/home_live_card_title.dart';
 import 'package:live_score/features/dashboard/cubit/dashboard_cubit.dart';
 
-class DashboardLiveCard extends StatelessWidget {
-  const DashboardLiveCard({
+class HomeLiveCard extends StatelessWidget {
+  const HomeLiveCard({
     super.key,
     required this.leagueName,
     required this.homeName,

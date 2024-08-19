@@ -37,5 +37,6 @@
   "noLiveMatches": "Currently there are no live matches",
   "noMatchesFound": "No matches found",
   "loggedOutSuccessfully": "Logged out successfully",
-  "logInOrRegister": "Create an account or log in to continue"
+  "logInOrRegister": "Create an account or log in to continue",
+  "league": "League"
 }
