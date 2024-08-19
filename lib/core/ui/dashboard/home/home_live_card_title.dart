@@ -3,8 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:live_score/core/theme/app_theme.dart';
 
 class HomeLiveCardTitle extends StatelessWidget {
-  const HomeLiveCardTitle(
-      {super.key, required this.name, required this.logo, required this.time});
+  const HomeLiveCardTitle({
+    super.key,
+    required this.name,
+    required this.logo,
+    required this.time,
+  });
   final String name;
   final String logo;
   final int? time;

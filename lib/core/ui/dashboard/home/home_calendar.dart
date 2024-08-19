@@ -9,7 +9,7 @@ import 'package:live_score/features/dashboard/cubit/dashboard_cubit.dart';
 class HomeCalendar extends StatelessWidget {
   const HomeCalendar({super.key});
 
-  void scrollLeft(ScrollController scrollController) {
+  void _scrollLeft(ScrollController scrollController) {
     scrollController.animateTo(
       scrollController.offset - DashboardConstants.calendarScrollOffset,
       duration: const Duration(
@@ -19,7 +19,7 @@ class HomeCalendar extends StatelessWidget {
     );
   }
 
-  void scrollRight(ScrollController scrollController) {
+  void _scrollRight(ScrollController scrollController) {
     scrollController.animateTo(
       scrollController.offset + DashboardConstants.calendarScrollOffset,
       duration: const Duration(
@@ -39,10 +39,12 @@ class HomeCalendar extends StatelessWidget {
 
     WidgetsBinding.instance.addPostFrameCallback(
       (_) {
-        final int todayIndex = weekDates.indexWhere((date) =>
-            date.year == now.year &&
-            date.month == now.month &&
-            date.day == now.day);
+        final int todayIndex = weekDates.indexWhere(
+          (date) =>
+              date.year == now.year &&
+              date.month == now.month &&
+              date.day == now.day,
+        );
 
         if (todayIndex != -1) {
           const double itemWidth = DashboardConstants.calendarItemWidth;
@@ -68,7 +70,7 @@ class HomeCalendar extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 child: InkWell(
-                  onTap: () => scrollLeft(scrollController),
+                  onTap: () => _scrollLeft(scrollController),
                   child: const Icon(
                     Icons.arrow_back_ios,
                     color: AppTheme.onSecondary,
@@ -103,7 +105,7 @@ class HomeCalendar extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 child: InkWell(
-                  onTap: () => scrollRight(scrollController),
+                  onTap: () => _scrollRight(scrollController),
                   child: const Icon(
                     Icons.arrow_forward_ios,
                     color: AppTheme.onSecondary,

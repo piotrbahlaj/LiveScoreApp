@@ -6,7 +6,6 @@ import 'package:live_score/core/extensions/localization/app_localizations_contex
 import 'package:live_score/core/theme/app_theme.dart';
 import 'package:live_score/core/ui/dashboard/home/home_appbar.dart';
 import 'package:live_score/core/ui/dashboard/home/home_calendar.dart';
-import 'package:live_score/core/ui/dashboard/home/home_favorites_card.dart';
 import 'package:live_score/core/ui/dashboard/home/home_live_card.dart';
 import 'package:live_score/core/ui/dashboard/home/home_score_card.dart';
 import 'package:live_score/core/ui/dashboard/home/home_tabs.dart';
@@ -15,13 +14,12 @@ import 'package:live_score/features/dashboard/cubit/dashboard_cubit.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
-
+  DashboardCubit _loginCubit(BuildContext context) =>
+      context.read<DashboardCubit>();
   @override
   Widget build(BuildContext context) {
     final String currentDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
-    final cubit = context.read<DashboardCubit>();
-    cubit.fetchFixtures(currentDate);
-
+    _loginCubit(context).fetchFixtures(currentDate);
     return BlocBuilder<DashboardCubit, DashboardState>(
       builder: (context, state) {
         return Scaffold(
@@ -253,7 +251,7 @@ class HomeView extends StatelessWidget {
                               Expanded(
                                 child: ListView.builder(
                                   itemBuilder: (context, index) {
-                                    return const HomeFavoritesCard();
+                                    return const Card();
                                   },
                                 ),
                               ),

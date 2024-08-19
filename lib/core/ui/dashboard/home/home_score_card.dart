@@ -5,16 +5,17 @@ import 'package:live_score/core/theme/app_theme.dart';
 import 'package:live_score/features/dashboard/cubit/dashboard_cubit.dart';
 
 class HomeScoreCard extends StatelessWidget {
-  const HomeScoreCard(
-      {super.key,
-      required this.homeTeam,
-      required this.awayTeam,
-      required this.homeScore,
-      required this.awayScore,
-      required this.status,
-      required this.date,
-      required this.homeLogo,
-      required this.awayLogo});
+  const HomeScoreCard({
+    super.key,
+    required this.homeTeam,
+    required this.awayTeam,
+    required this.homeScore,
+    required this.awayScore,
+    required this.status,
+    required this.date,
+    required this.homeLogo,
+    required this.awayLogo,
+  });
   final String homeTeam;
   final String awayTeam;
   final int? homeScore;

@@ -7,6 +7,14 @@ import 'package:live_score/features/dashboard/cubit/dashboard_cubit.dart';
 class HomeTabs extends StatelessWidget {
   const HomeTabs({super.key});
 
+  String _getTitle(BuildContext context, DashboardTab tab) {
+    return switch (tab) {
+      DashboardTab.upcoming => context.localizations.upcoming,
+      DashboardTab.score => context.localizations.score,
+      DashboardTab.favorites => context.localizations.favorites,
+    };
+  }
+
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<DashboardCubit>();
@@ -16,24 +24,12 @@ class HomeTabs extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: DashboardTab.values.map((tab) {
               final isSelected = tab == state.selectedTab;
-              String title;
-              switch (tab) {
-                case DashboardTab.upcoming:
-                  title = context.localizations.upcoming;
-                  break;
-                case DashboardTab.score:
-                  title = context.localizations.score;
-                  break;
-                case DashboardTab.favorites:
-                  title = context.localizations.favorites;
-                  break;
-              }
               return GestureDetector(
                 onTap: () => cubit.selectTab(tab),
                 child: Column(
                   children: [
                     Text(
-                      title,
+                      _getTitle(context, tab),
                       style: TextStyle(
                         color: isSelected
                             ? AppTheme.onSecondary
