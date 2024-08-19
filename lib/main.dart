@@ -4,12 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:live_score/app_database.dart';
 import 'package:live_score/app_module.dart';
 import 'package:live_score/core/extensions/localization/app_localizations_context.dart';
 import 'package:live_score/firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  final database = AppDatabase();
+  List<MatchData> allItems = await database.select(database.match).get();
+  print('items in database: $allItems');
   await dotenv.load(fileName: ".env");
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,

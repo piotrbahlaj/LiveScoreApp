@@ -15,7 +15,7 @@ class HomeLiveCardTeam extends StatelessWidget {
         children: [
           SizedBox(
             width: 40,
-            height: 50,
+            height: 45,
             child: CachedNetworkImage(
               imageUrl: logo,
               placeholder: (context, url) => const SizedBox(

@@ -47,7 +47,7 @@ class HomeLiveCardTitle extends StatelessWidget {
         ),
         Container(
           height: 27,
-          width: 52,
+          width: 55,
           decoration: BoxDecoration(
             color: AppTheme.onSecondary,
             borderRadius: BorderRadius.circular(30),
