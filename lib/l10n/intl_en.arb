@@ -38,5 +38,6 @@
   "noMatchesFound": "No matches found",
   "loggedOutSuccessfully": "Logged out successfully",
   "logInOrRegister": "Create an account or log in to continue",
-  "league": "League"
+  "league": "League",
+  "today": "Today"
 }

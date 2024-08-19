@@ -52,19 +52,20 @@ class HomeLiveCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         HomeLiveCardTeam(logo: homeLogo, name: homeName),
-                        const SizedBox(width: 10),
-                        Text(
-                          '${homeScore.toString()} - ${awayScore.toString()}',
-                          style: const TextStyle(
-                            color: AppTheme.onSecondary,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 23,
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Text(
+                            '${homeScore.toString()} - ${awayScore.toString()}',
+                            style: const TextStyle(
+                              color: AppTheme.onSecondary,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 23,
+                            ),
                           ),
                         ),
-                        const SizedBox(width: 10),
                         HomeLiveCardTeam(logo: awayLogo, name: awayName),
                       ],
                     ),

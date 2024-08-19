@@ -3,10 +3,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:intl/intl.dart';
 import 'package:live_score/core/constants/dashboard_constants.dart';
+import 'package:live_score/core/extensions/date_time_extension.dart';
 import 'package:live_score/core/models/fixtures_endpoint/fixtures_endpoint_model.dart';
 import 'package:live_score/core/repositories/auth/auth_repository_interface.dart';
 import 'package:live_score/core/repositories/football/football_repository_interface.dart';
-import 'package:live_score/core/utils/date_util.dart';
 
 part 'dashboard_cubit.freezed.dart';
 part 'dashboard_state.dart';
@@ -23,8 +23,9 @@ class DashboardCubit extends Cubit<DashboardState> {
   }
 
   void selectDate(int itemIndex) {
-    final selectedDate = DateFormat('yyyy-MM-dd').format(
-        DateUtil.generateDates(DashboardConstants.calendarRange)[itemIndex]);
+    DateTime now = DateTime.now();
+    final selectedDate = DateFormat('yyyy-MM-dd')
+        .format(now.generateDates(DashboardConstants.calendarRange)[itemIndex]);
     fetchFixtures(selectedDate);
     emit(state.copyWith(selectedDateIndex: itemIndex));
   }
