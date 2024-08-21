@@ -11,6 +11,7 @@ _$FixtureImpl _$$FixtureImplFromJson(Map<String, dynamic> json) =>
       date: json['date'] as String,
       timezone: json['timezone'] as String,
       status: Status.fromJson(json['status'] as Map<String, dynamic>),
+      id: (json['id'] as num).toInt(),
     );
 
 Map<String, dynamic> _$$FixtureImplToJson(_$FixtureImpl instance) =>
@@ -18,4 +19,5 @@ Map<String, dynamic> _$$FixtureImplToJson(_$FixtureImpl instance) =>
       'date': instance.date,
       'timezone': instance.timezone,
       'status': instance.status,
+      'id': instance.id,
     };

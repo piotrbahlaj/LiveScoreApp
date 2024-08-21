@@ -10,6 +10,7 @@ class Fixture with _$Fixture {
     required String date,
     required String timezone,
     required Status status,
+    required int id,
   }) = _Fixture;
 
   factory Fixture.fromJson(Map<String, dynamic> json) =>

@@ -44,9 +44,9 @@ class $MatchTable extends Match with TableInfo<$MatchTable, MatchData> {
   static const VerificationMeta _matchDateMeta =
       const VerificationMeta('matchDate');
   @override
-  late final GeneratedColumn<DateTime> matchDate = GeneratedColumn<DateTime>(
+  late final GeneratedColumn<String> matchDate = GeneratedColumn<String>(
       'match_date', aliasedName, false,
-      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+      type: DriftSqlType.string, requiredDuringInsert: true);
   static const VerificationMeta _isFavoriteMeta =
       const VerificationMeta('isFavorite');
   @override
@@ -57,9 +57,30 @@ class $MatchTable extends Match with TableInfo<$MatchTable, MatchData> {
       defaultConstraints:
           GeneratedColumn.constraintIsAlways('CHECK ("is_favorite" IN (0, 1))'),
       defaultValue: const Constant(false));
+  static const VerificationMeta _homeLogoMeta =
+      const VerificationMeta('homeLogo');
   @override
-  List<GeneratedColumn> get $columns =>
-      [id, homeTeam, awayTeam, homeScore, awayScore, matchDate, isFavorite];
+  late final GeneratedColumn<String> homeLogo = GeneratedColumn<String>(
+      'home_logo', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _awayLogoMeta =
+      const VerificationMeta('awayLogo');
+  @override
+  late final GeneratedColumn<String> awayLogo = GeneratedColumn<String>(
+      'away_logo', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        homeTeam,
+        awayTeam,
+        homeScore,
+        awayScore,
+        matchDate,
+        isFavorite,
+        homeLogo,
+        awayLogo
+      ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -105,6 +126,14 @@ class $MatchTable extends Match with TableInfo<$MatchTable, MatchData> {
           isFavorite.isAcceptableOrUnknown(
               data['is_favorite']!, _isFavoriteMeta));
     }
+    if (data.containsKey('home_logo')) {
+      context.handle(_homeLogoMeta,
+          homeLogo.isAcceptableOrUnknown(data['home_logo']!, _homeLogoMeta));
+    }
+    if (data.containsKey('away_logo')) {
+      context.handle(_awayLogoMeta,
+          awayLogo.isAcceptableOrUnknown(data['away_logo']!, _awayLogoMeta));
+    }
     return context;
   }
 
@@ -125,9 +154,13 @@ class $MatchTable extends Match with TableInfo<$MatchTable, MatchData> {
       awayScore: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}away_score']),
       matchDate: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}match_date'])!,
+          .read(DriftSqlType.string, data['${effectivePrefix}match_date'])!,
       isFavorite: attachedDatabase.typeMapping
           .read(DriftSqlType.bool, data['${effectivePrefix}is_favorite'])!,
+      homeLogo: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}home_logo']),
+      awayLogo: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}away_logo']),
     );
   }
 
@@ -143,8 +176,10 @@ class MatchData extends DataClass implements Insertable<MatchData> {
   final String awayTeam;
   final int? homeScore;
   final int? awayScore;
-  final DateTime matchDate;
+  final String matchDate;
   final bool isFavorite;
+  final String? homeLogo;
+  final String? awayLogo;
   const MatchData(
       {required this.id,
       required this.homeTeam,
@@ -152,7 +187,9 @@ class MatchData extends DataClass implements Insertable<MatchData> {
       this.homeScore,
       this.awayScore,
       required this.matchDate,
-      required this.isFavorite});
+      required this.isFavorite,
+      this.homeLogo,
+      this.awayLogo});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -165,8 +202,14 @@ class MatchData extends DataClass implements Insertable<MatchData> {
     if (!nullToAbsent || awayScore != null) {
       map['away_score'] = Variable<int>(awayScore);
     }
-    map['match_date'] = Variable<DateTime>(matchDate);
+    map['match_date'] = Variable<String>(matchDate);
     map['is_favorite'] = Variable<bool>(isFavorite);
+    if (!nullToAbsent || homeLogo != null) {
+      map['home_logo'] = Variable<String>(homeLogo);
+    }
+    if (!nullToAbsent || awayLogo != null) {
+      map['away_logo'] = Variable<String>(awayLogo);
+    }
     return map;
   }
 
@@ -183,6 +226,12 @@ class MatchData extends DataClass implements Insertable<MatchData> {
           : Value(awayScore),
       matchDate: Value(matchDate),
       isFavorite: Value(isFavorite),
+      homeLogo: homeLogo == null && nullToAbsent
+          ? const Value.absent()
+          : Value(homeLogo),
+      awayLogo: awayLogo == null && nullToAbsent
+          ? const Value.absent()
+          : Value(awayLogo),
     );
   }
 
@@ -195,8 +244,10 @@ class MatchData extends DataClass implements Insertable<MatchData> {
       awayTeam: serializer.fromJson<String>(json['awayTeam']),
       homeScore: serializer.fromJson<int?>(json['homeScore']),
       awayScore: serializer.fromJson<int?>(json['awayScore']),
-      matchDate: serializer.fromJson<DateTime>(json['matchDate']),
+      matchDate: serializer.fromJson<String>(json['matchDate']),
       isFavorite: serializer.fromJson<bool>(json['isFavorite']),
+      homeLogo: serializer.fromJson<String?>(json['homeLogo']),
+      awayLogo: serializer.fromJson<String?>(json['awayLogo']),
     );
   }
   @override
@@ -208,8 +259,10 @@ class MatchData extends DataClass implements Insertable<MatchData> {
       'awayTeam': serializer.toJson<String>(awayTeam),
       'homeScore': serializer.toJson<int?>(homeScore),
       'awayScore': serializer.toJson<int?>(awayScore),
-      'matchDate': serializer.toJson<DateTime>(matchDate),
+      'matchDate': serializer.toJson<String>(matchDate),
       'isFavorite': serializer.toJson<bool>(isFavorite),
+      'homeLogo': serializer.toJson<String?>(homeLogo),
+      'awayLogo': serializer.toJson<String?>(awayLogo),
     };
   }
 
@@ -219,8 +272,10 @@ class MatchData extends DataClass implements Insertable<MatchData> {
           String? awayTeam,
           Value<int?> homeScore = const Value.absent(),
           Value<int?> awayScore = const Value.absent(),
-          DateTime? matchDate,
-          bool? isFavorite}) =>
+          String? matchDate,
+          bool? isFavorite,
+          Value<String?> homeLogo = const Value.absent(),
+          Value<String?> awayLogo = const Value.absent()}) =>
       MatchData(
         id: id ?? this.id,
         homeTeam: homeTeam ?? this.homeTeam,
@@ -229,6 +284,8 @@ class MatchData extends DataClass implements Insertable<MatchData> {
         awayScore: awayScore.present ? awayScore.value : this.awayScore,
         matchDate: matchDate ?? this.matchDate,
         isFavorite: isFavorite ?? this.isFavorite,
+        homeLogo: homeLogo.present ? homeLogo.value : this.homeLogo,
+        awayLogo: awayLogo.present ? awayLogo.value : this.awayLogo,
       );
   MatchData copyWithCompanion(MatchCompanion data) {
     return MatchData(
@@ -240,6 +297,8 @@ class MatchData extends DataClass implements Insertable<MatchData> {
       matchDate: data.matchDate.present ? data.matchDate.value : this.matchDate,
       isFavorite:
           data.isFavorite.present ? data.isFavorite.value : this.isFavorite,
+      homeLogo: data.homeLogo.present ? data.homeLogo.value : this.homeLogo,
+      awayLogo: data.awayLogo.present ? data.awayLogo.value : this.awayLogo,
     );
   }
 
@@ -252,14 +311,16 @@ class MatchData extends DataClass implements Insertable<MatchData> {
           ..write('homeScore: $homeScore, ')
           ..write('awayScore: $awayScore, ')
           ..write('matchDate: $matchDate, ')
-          ..write('isFavorite: $isFavorite')
+          ..write('isFavorite: $isFavorite, ')
+          ..write('homeLogo: $homeLogo, ')
+          ..write('awayLogo: $awayLogo')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(
-      id, homeTeam, awayTeam, homeScore, awayScore, matchDate, isFavorite);
+  int get hashCode => Object.hash(id, homeTeam, awayTeam, homeScore, awayScore,
+      matchDate, isFavorite, homeLogo, awayLogo);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -270,7 +331,9 @@ class MatchData extends DataClass implements Insertable<MatchData> {
           other.homeScore == this.homeScore &&
           other.awayScore == this.awayScore &&
           other.matchDate == this.matchDate &&
-          other.isFavorite == this.isFavorite);
+          other.isFavorite == this.isFavorite &&
+          other.homeLogo == this.homeLogo &&
+          other.awayLogo == this.awayLogo);
 }
 
 class MatchCompanion extends UpdateCompanion<MatchData> {
@@ -279,8 +342,10 @@ class MatchCompanion extends UpdateCompanion<MatchData> {
   final Value<String> awayTeam;
   final Value<int?> homeScore;
   final Value<int?> awayScore;
-  final Value<DateTime> matchDate;
+  final Value<String> matchDate;
   final Value<bool> isFavorite;
+  final Value<String?> homeLogo;
+  final Value<String?> awayLogo;
   const MatchCompanion({
     this.id = const Value.absent(),
     this.homeTeam = const Value.absent(),
@@ -289,6 +354,8 @@ class MatchCompanion extends UpdateCompanion<MatchData> {
     this.awayScore = const Value.absent(),
     this.matchDate = const Value.absent(),
     this.isFavorite = const Value.absent(),
+    this.homeLogo = const Value.absent(),
+    this.awayLogo = const Value.absent(),
   });
   MatchCompanion.insert({
     this.id = const Value.absent(),
@@ -296,8 +363,10 @@ class MatchCompanion extends UpdateCompanion<MatchData> {
     required String awayTeam,
     this.homeScore = const Value.absent(),
     this.awayScore = const Value.absent(),
-    required DateTime matchDate,
+    required String matchDate,
     this.isFavorite = const Value.absent(),
+    this.homeLogo = const Value.absent(),
+    this.awayLogo = const Value.absent(),
   })  : homeTeam = Value(homeTeam),
         awayTeam = Value(awayTeam),
         matchDate = Value(matchDate);
@@ -307,8 +376,10 @@ class MatchCompanion extends UpdateCompanion<MatchData> {
     Expression<String>? awayTeam,
     Expression<int>? homeScore,
     Expression<int>? awayScore,
-    Expression<DateTime>? matchDate,
+    Expression<String>? matchDate,
     Expression<bool>? isFavorite,
+    Expression<String>? homeLogo,
+    Expression<String>? awayLogo,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -318,6 +389,8 @@ class MatchCompanion extends UpdateCompanion<MatchData> {
       if (awayScore != null) 'away_score': awayScore,
       if (matchDate != null) 'match_date': matchDate,
       if (isFavorite != null) 'is_favorite': isFavorite,
+      if (homeLogo != null) 'home_logo': homeLogo,
+      if (awayLogo != null) 'away_logo': awayLogo,
     });
   }
 
@@ -327,8 +400,10 @@ class MatchCompanion extends UpdateCompanion<MatchData> {
       Value<String>? awayTeam,
       Value<int?>? homeScore,
       Value<int?>? awayScore,
-      Value<DateTime>? matchDate,
-      Value<bool>? isFavorite}) {
+      Value<String>? matchDate,
+      Value<bool>? isFavorite,
+      Value<String?>? homeLogo,
+      Value<String?>? awayLogo}) {
     return MatchCompanion(
       id: id ?? this.id,
       homeTeam: homeTeam ?? this.homeTeam,
@@ -337,6 +412,8 @@ class MatchCompanion extends UpdateCompanion<MatchData> {
       awayScore: awayScore ?? this.awayScore,
       matchDate: matchDate ?? this.matchDate,
       isFavorite: isFavorite ?? this.isFavorite,
+      homeLogo: homeLogo ?? this.homeLogo,
+      awayLogo: awayLogo ?? this.awayLogo,
     );
   }
 
@@ -359,10 +436,16 @@ class MatchCompanion extends UpdateCompanion<MatchData> {
       map['away_score'] = Variable<int>(awayScore.value);
     }
     if (matchDate.present) {
-      map['match_date'] = Variable<DateTime>(matchDate.value);
+      map['match_date'] = Variable<String>(matchDate.value);
     }
     if (isFavorite.present) {
       map['is_favorite'] = Variable<bool>(isFavorite.value);
+    }
+    if (homeLogo.present) {
+      map['home_logo'] = Variable<String>(homeLogo.value);
+    }
+    if (awayLogo.present) {
+      map['away_logo'] = Variable<String>(awayLogo.value);
     }
     return map;
   }
@@ -376,7 +459,9 @@ class MatchCompanion extends UpdateCompanion<MatchData> {
           ..write('homeScore: $homeScore, ')
           ..write('awayScore: $awayScore, ')
           ..write('matchDate: $matchDate, ')
-          ..write('isFavorite: $isFavorite')
+          ..write('isFavorite: $isFavorite, ')
+          ..write('homeLogo: $homeLogo, ')
+          ..write('awayLogo: $awayLogo')
           ..write(')'))
         .toString();
   }
@@ -399,8 +484,10 @@ typedef $$MatchTableCreateCompanionBuilder = MatchCompanion Function({
   required String awayTeam,
   Value<int?> homeScore,
   Value<int?> awayScore,
-  required DateTime matchDate,
+  required String matchDate,
   Value<bool> isFavorite,
+  Value<String?> homeLogo,
+  Value<String?> awayLogo,
 });
 typedef $$MatchTableUpdateCompanionBuilder = MatchCompanion Function({
   Value<int> id,
@@ -408,8 +495,10 @@ typedef $$MatchTableUpdateCompanionBuilder = MatchCompanion Function({
   Value<String> awayTeam,
   Value<int?> homeScore,
   Value<int?> awayScore,
-  Value<DateTime> matchDate,
+  Value<String> matchDate,
   Value<bool> isFavorite,
+  Value<String?> homeLogo,
+  Value<String?> awayLogo,
 });
 
 class $$MatchTableTableManager extends RootTableManager<
@@ -434,8 +523,10 @@ class $$MatchTableTableManager extends RootTableManager<
             Value<String> awayTeam = const Value.absent(),
             Value<int?> homeScore = const Value.absent(),
             Value<int?> awayScore = const Value.absent(),
-            Value<DateTime> matchDate = const Value.absent(),
+            Value<String> matchDate = const Value.absent(),
             Value<bool> isFavorite = const Value.absent(),
+            Value<String?> homeLogo = const Value.absent(),
+            Value<String?> awayLogo = const Value.absent(),
           }) =>
               MatchCompanion(
             id: id,
@@ -445,6 +536,8 @@ class $$MatchTableTableManager extends RootTableManager<
             awayScore: awayScore,
             matchDate: matchDate,
             isFavorite: isFavorite,
+            homeLogo: homeLogo,
+            awayLogo: awayLogo,
           ),
           createCompanionCallback: ({
             Value<int> id = const Value.absent(),
@@ -452,8 +545,10 @@ class $$MatchTableTableManager extends RootTableManager<
             required String awayTeam,
             Value<int?> homeScore = const Value.absent(),
             Value<int?> awayScore = const Value.absent(),
-            required DateTime matchDate,
+            required String matchDate,
             Value<bool> isFavorite = const Value.absent(),
+            Value<String?> homeLogo = const Value.absent(),
+            Value<String?> awayLogo = const Value.absent(),
           }) =>
               MatchCompanion.insert(
             id: id,
@@ -463,6 +558,8 @@ class $$MatchTableTableManager extends RootTableManager<
             awayScore: awayScore,
             matchDate: matchDate,
             isFavorite: isFavorite,
+            homeLogo: homeLogo,
+            awayLogo: awayLogo,
           ),
         ));
 }
@@ -495,13 +592,23 @@ class $$MatchTableFilterComposer
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
-  ColumnFilters<DateTime> get matchDate => $state.composableBuilder(
+  ColumnFilters<String> get matchDate => $state.composableBuilder(
       column: $state.table.matchDate,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
   ColumnFilters<bool> get isFavorite => $state.composableBuilder(
       column: $state.table.isFavorite,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get homeLogo => $state.composableBuilder(
+      column: $state.table.homeLogo,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get awayLogo => $state.composableBuilder(
+      column: $state.table.awayLogo,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 }
@@ -534,13 +641,23 @@ class $$MatchTableOrderingComposer
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 
-  ColumnOrderings<DateTime> get matchDate => $state.composableBuilder(
+  ColumnOrderings<String> get matchDate => $state.composableBuilder(
       column: $state.table.matchDate,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 
   ColumnOrderings<bool> get isFavorite => $state.composableBuilder(
       column: $state.table.isFavorite,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get homeLogo => $state.composableBuilder(
+      column: $state.table.homeLogo,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get awayLogo => $state.composableBuilder(
+      column: $state.table.awayLogo,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 }

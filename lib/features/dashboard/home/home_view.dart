@@ -223,6 +223,7 @@ class HomeView extends StatelessWidget {
                                     awayTeam: fixtures.teams.away.name,
                                     status: fixtures.fixture.status.short,
                                     date: formattedDate,
+                                    id: fixtures.fixture.id,
                                   ),
                                 ],
                               );
