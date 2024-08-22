@@ -7,6 +7,7 @@ import 'package:live_score/core/theme/app_theme.dart';
 import 'package:live_score/core/ui/dashboard/home/home_appbar.dart';
 import 'package:live_score/core/ui/dashboard/home/home_calendar.dart';
 import 'package:live_score/core/ui/dashboard/home/home_live_card.dart';
+import 'package:live_score/core/ui/dashboard/home/home_live_now_row.dart';
 import 'package:live_score/core/ui/dashboard/home/home_score_card.dart';
 import 'package:live_score/core/ui/dashboard/home/home_tabs.dart';
 import 'package:live_score/core/ui/dashboard/home/home_upcoming_card.dart';
@@ -32,77 +33,12 @@ class HomeView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const HomeCalendar(),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      context.localizations.liveNow,
-                      style: const TextStyle(
-                        color: AppTheme.onSecondary,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        context.localizations.seeMore,
-                        style: const TextStyle(
-                          color: AppTheme.secondary,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 13,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              const HomeLiveNowRow(),
               SizedBox(
                 height: 200,
                 child: Builder(
                   builder: (context) {
-                    if (state is Success) {
-                      if (state.liveFixtures.response.isEmpty) {
-                        return Center(
-                          child: Text(
-                            context.localizations.noLiveMatches,
-                            style: const TextStyle(
-                              color: AppTheme.cardLeagueName,
-                              fontSize: 17,
-                            ),
-                          ),
-                        );
-                      }
-                      return ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: state.liveFixtures.response.length,
-                        itemBuilder: (context, index) {
-                          final liveFixture =
-                              state.liveFixtures.response[index];
-                          return HomeLiveCard(
-                            time: liveFixture.fixture.status.elapsed,
-                            leagueName: liveFixture.league.name,
-                            homeName: liveFixture.teams.home.name,
-                            awayName: liveFixture.teams.away.name,
-                            leagueLogo: liveFixture.league.logo!,
-                            homeLogo: liveFixture.teams.home.logo!,
-                            awayLogo: liveFixture.teams.away.logo!,
-                            homeScore: liveFixture.goals.home,
-                            awayScore: liveFixture.goals.away,
-                          );
-                        },
-                      );
-                    }
-                    return const Center(
-                      child: CircularProgressIndicator(
-                        backgroundColor: AppTheme.secondary,
-                        color: AppTheme.onSecondary,
-                        strokeWidth: 3,
-                      ),
-                    );
+                    return _liveCardBuilder(context, state);
                   },
                 ),
               ),
@@ -111,170 +47,7 @@ class HomeView extends StatelessWidget {
               const SizedBox(height: 20),
               BlocBuilder<DashboardCubit, DashboardState>(
                 builder: (context, state) {
-                  if (state is Success) {
-                    if (state.fixtures.response.isEmpty) {
-                      return Center(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 100),
-                          child: Text(
-                            context.localizations.noMatchesFound,
-                            style: const TextStyle(
-                              color: AppTheme.cardLeagueName,
-                              fontSize: 17,
-                            ),
-                          ),
-                        ),
-                      );
-                    }
-                    switch (state.selectedTab) {
-                      case DashboardTab.upcoming:
-                        return Expanded(
-                          child: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  const SizedBox(width: 20),
-                                  const Icon(
-                                    Icons.access_time_filled_outlined,
-                                    color: AppTheme.onSecondary,
-                                  ),
-                                  const SizedBox(width: 10),
-                                  Text(
-                                    context.localizations.league,
-                                    style: const TextStyle(
-                                      color: AppTheme.cardLeagueName,
-                                      fontSize: 17,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Expanded(
-                                child: ListView.builder(
-                                  itemBuilder: (context, index) {
-                                    return const HomeUpcomingCard();
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      case DashboardTab.score:
-                        return Expanded(
-                          child: ListView.builder(
-                            itemCount: state.fixtures.response.length,
-                            itemBuilder: (context, index) {
-                              final fixtureDateTime = DateTime.parse(
-                                  state.fixtures.response[index].fixture.date);
-                              final formattedDate =
-                                  DateFormat('MM/dd').format(fixtureDateTime);
-                              final fixtures = state.fixtures.response[index];
-                              return Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      const SizedBox(width: 20),
-                                      SizedBox(
-                                        width: 50,
-                                        height: 20,
-                                        child: CachedNetworkImage(
-                                          imageUrl: fixtures.league.logo!,
-                                          placeholder: (context, url) =>
-                                              const Padding(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 5),
-                                            child: Center(
-                                              child: SizedBox(
-                                                width: 20,
-                                                height: 20,
-                                                child:
-                                                    CircularProgressIndicator(
-                                                  backgroundColor:
-                                                      AppTheme.secondary,
-                                                  color: AppTheme.onSecondary,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          errorWidget: (context, url, error) =>
-                                              const Icon(Icons.error),
-                                        ),
-                                      ),
-                                      const SizedBox(width: 10),
-                                      Flexible(
-                                        child: Text(
-                                          fixtures.league.name,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: const TextStyle(
-                                            color: AppTheme.cardLeagueName,
-                                            fontSize: 17,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  HomeScoreCard(
-                                    homeLogo: fixtures.teams.home.logo,
-                                    awayLogo: fixtures.teams.away.logo,
-                                    homeScore: fixtures.goals.home,
-                                    awayScore: fixtures.goals.away,
-                                    homeTeam: fixtures.teams.home.name,
-                                    awayTeam: fixtures.teams.away.name,
-                                    status: fixtures.fixture.status.short,
-                                    date: formattedDate,
-                                  ),
-                                ],
-                              );
-                            },
-                          ),
-                        );
-                      case DashboardTab.favorites:
-                        return Expanded(
-                          child: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  const SizedBox(width: 20),
-                                  const Icon(
-                                    Icons.access_time_filled_outlined,
-                                    color: AppTheme.onSecondary,
-                                  ),
-                                  const SizedBox(width: 10),
-                                  Text(
-                                    context.localizations.league,
-                                    style: const TextStyle(
-                                      color: AppTheme.cardLeagueName,
-                                      fontSize: 17,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Expanded(
-                                child: ListView.builder(
-                                  itemBuilder: (context, index) {
-                                    return const Card();
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                    }
-                  }
-                  return const Column(
-                    children: [
-                      SizedBox(height: 80),
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 25),
-                        child: Center(
-                          child: CircularProgressIndicator(
-                            backgroundColor: AppTheme.secondary,
-                            color: AppTheme.onSecondary,
-                            strokeWidth: 3,
-                          ),
-                        ),
-                      ),
-                    ],
-                  );
+                  return _tabBuilder(context, state);
                 },
               ),
             ],
@@ -283,4 +56,207 @@ class HomeView extends StatelessWidget {
       },
     );
   }
+}
+
+_liveCardBuilder(BuildContext context, DashboardState state) {
+  if (state is Success) {
+    if (state.liveFixtures.response.isEmpty) {
+      return Center(
+        child: Text(
+          context.localizations.noLiveMatches,
+          style: const TextStyle(
+            color: AppTheme.cardLeagueName,
+            fontSize: 17,
+          ),
+        ),
+      );
+    }
+    return ListView.builder(
+      scrollDirection: Axis.horizontal,
+      itemCount: state.liveFixtures.response.length,
+      itemBuilder: (context, index) {
+        final liveFixture = state.liveFixtures.response[index];
+        return HomeLiveCard(
+          time: liveFixture.fixture.status.elapsed,
+          leagueName: liveFixture.league.name,
+          homeName: liveFixture.teams.home.name,
+          awayName: liveFixture.teams.away.name,
+          leagueLogo: liveFixture.league.logo!,
+          homeLogo: liveFixture.teams.home.logo!,
+          awayLogo: liveFixture.teams.away.logo!,
+          homeScore: liveFixture.goals.home,
+          awayScore: liveFixture.goals.away,
+        );
+      },
+    );
+  }
+  return const Center(
+    child: CircularProgressIndicator(
+      backgroundColor: AppTheme.secondary,
+      color: AppTheme.onSecondary,
+      strokeWidth: 3,
+    ),
+  );
+}
+
+_tabBuilder(BuildContext context, DashboardState state) {
+  if (state is Success) {
+    if (state.fixtures.response.isEmpty) {
+      return Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 100),
+          child: Text(
+            context.localizations.noMatchesFound,
+            style: const TextStyle(
+              color: AppTheme.cardLeagueName,
+              fontSize: 17,
+            ),
+          ),
+        ),
+      );
+    }
+    switch (state.selectedTab) {
+      case DashboardTab.upcoming:
+        return Expanded(
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  const SizedBox(width: 20),
+                  const Icon(
+                    Icons.access_time_filled_outlined,
+                    color: AppTheme.onSecondary,
+                  ),
+                  const SizedBox(width: 10),
+                  Text(
+                    context.localizations.league,
+                    style: const TextStyle(
+                      color: AppTheme.cardLeagueName,
+                      fontSize: 17,
+                    ),
+                  ),
+                ],
+              ),
+              Expanded(
+                child: ListView.builder(
+                  itemBuilder: (context, index) {
+                    return const HomeUpcomingCard();
+                  },
+                ),
+              ),
+            ],
+          ),
+        );
+      case DashboardTab.score:
+        return Expanded(
+          child: ListView.builder(
+            itemCount: state.fixtures.response.length,
+            itemBuilder: (context, index) {
+              final fixtureDateTime =
+                  DateTime.parse(state.fixtures.response[index].fixture.date);
+              final formattedDate = DateFormat('MM/dd').format(fixtureDateTime);
+              final fixtures = state.fixtures.response[index];
+              return Column(
+                children: [
+                  Row(
+                    children: [
+                      const SizedBox(width: 20),
+                      SizedBox(
+                        width: 50,
+                        height: 20,
+                        child: CachedNetworkImage(
+                          imageUrl: fixtures.league.logo!,
+                          placeholder: (context, url) => const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 5),
+                            child: Center(
+                              child: SizedBox(
+                                width: 20,
+                                height: 20,
+                                child: CircularProgressIndicator(
+                                  backgroundColor: AppTheme.secondary,
+                                  color: AppTheme.onSecondary,
+                                ),
+                              ),
+                            ),
+                          ),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Flexible(
+                        child: Text(
+                          fixtures.league.name,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            color: AppTheme.cardLeagueName,
+                            fontSize: 17,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  HomeScoreCard(
+                    homeLogo: fixtures.teams.home.logo,
+                    awayLogo: fixtures.teams.away.logo,
+                    homeScore: fixtures.goals.home,
+                    awayScore: fixtures.goals.away,
+                    homeTeam: fixtures.teams.home.name,
+                    awayTeam: fixtures.teams.away.name,
+                    status: fixtures.fixture.status.short,
+                    date: formattedDate,
+                  ),
+                ],
+              );
+            },
+          ),
+        );
+      case DashboardTab.favorites:
+        return Expanded(
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  const SizedBox(width: 20),
+                  const Icon(
+                    Icons.access_time_filled_outlined,
+                    color: AppTheme.onSecondary,
+                  ),
+                  const SizedBox(width: 10),
+                  Text(
+                    context.localizations.league,
+                    style: const TextStyle(
+                      color: AppTheme.cardLeagueName,
+                      fontSize: 17,
+                    ),
+                  ),
+                ],
+              ),
+              Expanded(
+                child: ListView.builder(
+                  itemBuilder: (context, index) {
+                    return const Card();
+                  },
+                ),
+              ),
+            ],
+          ),
+        );
+    }
+  }
+  return const Column(
+    children: [
+      SizedBox(height: 80),
+      Padding(
+        padding: EdgeInsets.symmetric(vertical: 25),
+        child: Center(
+          child: CircularProgressIndicator(
+            backgroundColor: AppTheme.secondary,
+            color: AppTheme.onSecondary,
+            strokeWidth: 3,
+          ),
+        ),
+      ),
+    ],
+  );
 }

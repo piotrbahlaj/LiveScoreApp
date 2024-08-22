@@ -1,7 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:live_score/core/theme/app_theme.dart';
+import 'package:live_score/core/ui/dashboard/home/home_cached_network_image.dart';
 import 'package:live_score/features/dashboard/cubit/dashboard_cubit.dart';
 
 class HomeScoreCard extends StatelessWidget {
@@ -71,30 +71,16 @@ class HomeScoreCard extends StatelessWidget {
                           SizedBox(
                             width: 20,
                             height: 20,
-                            child: CachedNetworkImage(
-                              imageUrl: homeLogo!,
-                              placeholder: (context, url) =>
-                                  const CircularProgressIndicator(
-                                backgroundColor: AppTheme.secondary,
-                                color: AppTheme.onSecondary,
-                              ),
-                              errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error),
+                            child: HomeCachedNetworkImage(
+                              logo: homeLogo,
                             ),
                           ),
                           const SizedBox(height: 15),
                           SizedBox(
                             width: 20,
                             height: 20,
-                            child: CachedNetworkImage(
-                              imageUrl: awayLogo!,
-                              placeholder: (context, url) =>
-                                  const CircularProgressIndicator(
-                                backgroundColor: AppTheme.secondary,
-                                color: AppTheme.onSecondary,
-                              ),
-                              errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error),
+                            child: HomeCachedNetworkImage(
+                              logo: awayLogo,
                             ),
                           ),
                         ],
@@ -154,6 +140,7 @@ class HomeScoreCard extends StatelessWidget {
             ),
           );
         }
+        // if state is not success
         return const Padding(
           padding: EdgeInsets.symmetric(vertical: 25),
           child: Center(
