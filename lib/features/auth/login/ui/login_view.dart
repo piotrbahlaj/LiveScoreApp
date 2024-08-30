@@ -21,6 +21,7 @@ class LoginView extends StatelessWidget {
     final emailController = TextEditingController();
     final passwordController = TextEditingController();
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: AppTheme.primary,
       appBar: AppBar(
         automaticallyImplyLeading: true,
@@ -82,6 +83,7 @@ class LoginView extends StatelessWidget {
                             email,
                             password,
                           );
+                          FocusScope.of(context).unfocus();
                         },
                         text: context.localizations.logIn,
                       ),

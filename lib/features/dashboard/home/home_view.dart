@@ -1,9 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:live_score/core/extensions/localization/app_localizations_context.dart';
 import 'package:live_score/core/theme/app_theme.dart';
+import 'package:live_score/core/ui/dashboard/home/cached_image.dart';
 import 'package:live_score/core/ui/dashboard/home/home_appbar.dart';
 import 'package:live_score/core/ui/dashboard/home/home_calendar.dart';
 import 'package:live_score/core/ui/dashboard/home/home_live_card.dart';
@@ -24,6 +24,7 @@ class HomeView extends StatelessWidget {
     return BlocBuilder<DashboardCubit, DashboardState>(
       builder: (context, state) {
         return Scaffold(
+          resizeToAvoidBottomInset: false,
           backgroundColor: AppTheme.primary,
           appBar: HomeAppbar(
             context: context,
@@ -116,6 +117,7 @@ _tabBuilder(BuildContext context, DashboardState state) {
       );
     }
     switch (state.selectedTab) {
+      // UPCOMING TAB
       case DashboardTab.upcoming:
         return Expanded(
           child: Column(
@@ -147,6 +149,8 @@ _tabBuilder(BuildContext context, DashboardState state) {
             ],
           ),
         );
+
+      // SCORE TAB
       case DashboardTab.score:
         return Expanded(
           child: ListView.builder(
@@ -164,23 +168,8 @@ _tabBuilder(BuildContext context, DashboardState state) {
                       SizedBox(
                         width: 50,
                         height: 20,
-                        child: CachedNetworkImage(
-                          imageUrl: fixtures.league.logo!,
-                          placeholder: (context, url) => const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 5),
-                            child: Center(
-                              child: SizedBox(
-                                width: 20,
-                                height: 20,
-                                child: CircularProgressIndicator(
-                                  backgroundColor: AppTheme.secondary,
-                                  color: AppTheme.onSecondary,
-                                ),
-                              ),
-                            ),
-                          ),
-                          errorWidget: (context, url, error) =>
-                              const Icon(Icons.error),
+                        child: CachedImage(
+                          imageURL: fixtures.league.logo!,
                         ),
                       ),
                       const SizedBox(width: 10),
@@ -211,6 +200,8 @@ _tabBuilder(BuildContext context, DashboardState state) {
             },
           ),
         );
+
+      // FAVORITES TAB
       case DashboardTab.favorites:
         return Expanded(
           child: Column(
@@ -244,6 +235,8 @@ _tabBuilder(BuildContext context, DashboardState state) {
         );
     }
   }
+
+  // IF STATE IS NOT SUCCESS
   return const Column(
     children: [
       SizedBox(height: 80),
