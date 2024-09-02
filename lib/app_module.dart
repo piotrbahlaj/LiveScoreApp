@@ -18,7 +18,7 @@ class AppModule extends Module {
   @override
   void routes(r) {
     r.child('/', child: (context) => const StartScreen());
-    r.module('/auth', module: AuthModule());
-    r.module('/dashboard/', module: DashboardModule());
+    r.module(AuthModule.auth, module: AuthModule());
+    r.module(DashboardModule.dashboard, module: DashboardModule());
   }
 }

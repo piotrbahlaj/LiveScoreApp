@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:live_score/core/extensions/date_time_extension.dart';
 import 'package:live_score/core/theme/app_theme.dart';
-import 'package:live_score/core/utils/date_util.dart';
 
 class HomeDateElement extends StatelessWidget {
   const HomeDateElement({
@@ -16,14 +16,14 @@ class HomeDateElement extends StatelessWidget {
     return Column(
       children: [
         Text(
-          DateUtil.getFormattedDay(date),
+          date.getFormattedDay(context),
           style: TextStyle(
             color: isSelected ? AppTheme.onSecondary : AppTheme.onPrimary2,
             fontWeight: FontWeight.bold,
           ),
         ),
         Text(
-          DateUtil.getFormattedMonthDay(date),
+          date.getFormattedMonthDay(),
           style: TextStyle(
             color: isSelected ? AppTheme.onSecondary : AppTheme.onPrimary2,
             fontWeight: FontWeight.bold,

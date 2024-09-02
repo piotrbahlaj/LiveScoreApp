@@ -11,6 +11,7 @@ class StartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: AppTheme.primary,
       appBar: AppBar(
         automaticallyImplyLeading: false,

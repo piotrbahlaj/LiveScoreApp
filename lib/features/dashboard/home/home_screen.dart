@@ -6,6 +6,7 @@ import 'package:live_score/features/dashboard/home/home_view.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
+  static const home = '/home';
 
   @override
   Widget build(BuildContext context) {

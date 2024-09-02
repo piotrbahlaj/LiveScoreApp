@@ -39,5 +39,6 @@
   "loggedOutSuccessfully": "Logged out successfully",
   "logInOrRegister": "Create an account or log in to continue",
   "league": "League",
-  "noCachedMatchData": "No cached match data"
+  "noCachedMatchData": "No cached match data",
+  "today": "Today"
 }

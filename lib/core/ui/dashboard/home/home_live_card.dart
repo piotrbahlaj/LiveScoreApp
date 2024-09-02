@@ -38,7 +38,7 @@ class HomeLiveCard extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 5),
             child: SizedBox(
               width: 340,
-              height: 200,
+              height: 220,
               child: Card(
                 color: AppTheme.onPrimary3,
                 child: Column(
@@ -52,24 +52,26 @@ class HomeLiveCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         HomeLiveCardTeam(logo: homeLogo, name: homeName),
-                        const SizedBox(width: 10),
-                        Text(
-                          '${homeScore.toString()} - ${awayScore.toString()}',
-                          style: const TextStyle(
-                            color: AppTheme.onSecondary,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 23,
+                        Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Text(
+                            '${homeScore.toString()} - ${awayScore.toString()}',
+                            style: const TextStyle(
+                              color: AppTheme.onSecondary,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 23,
+                            ),
                           ),
                         ),
-                        const SizedBox(width: 10),
                         HomeLiveCardTeam(logo: awayLogo, name: awayName),
                       ],
                     ),
-                    const SizedBox(height: 4),
+                    const SizedBox(height: 5),
                     const DetailsButton(),
+                    const SizedBox(height: 5),
                   ],
                 ),
               ),

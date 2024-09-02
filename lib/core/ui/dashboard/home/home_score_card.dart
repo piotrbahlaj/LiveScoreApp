@@ -1,7 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:live_score/core/theme/app_theme.dart';
+import 'package:live_score/core/ui/dashboard/home/cached_image.dart';
+import 'package:live_score/core/ui/dashboard/home/loading_state_indicator.dart';
 import 'package:live_score/features/dashboard/cubit/dashboard_cubit.dart';
 
 class HomeScoreCard extends StatelessWidget {
@@ -84,36 +85,21 @@ class HomeScoreCard extends StatelessWidget {
                           horizontal: 5,
                           vertical: 10,
                         ),
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              width: 20,
-                              height: 20,
-                              child: CachedNetworkImage(
-                                imageUrl: homeLogo!,
-                                placeholder: (context, url) =>
-                                    const CircularProgressIndicator(
-                                  backgroundColor: AppTheme.secondary,
-                                  color: AppTheme.onSecondary,
-                                ),
-                                errorWidget: (context, url, error) =>
-                                    const Icon(Icons.error),
-                              ),
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            width: 20,
+                            height: 20,
+                            child: CachedImage(
+                              imageURL: homeLogo!,
                             ),
-                            const SizedBox(height: 15),
-                            SizedBox(
-                              width: 20,
-                              height: 20,
-                              child: CachedNetworkImage(
-                                imageUrl: awayLogo!,
-                                placeholder: (context, url) =>
-                                    const CircularProgressIndicator(
-                                  backgroundColor: AppTheme.secondary,
-                                  color: AppTheme.onSecondary,
-                                ),
-                                errorWidget: (context, url, error) =>
-                                    const Icon(Icons.error),
-                              ),
+                          ),
+                          const SizedBox(height: 15),
+                          SizedBox(
+                            width: 20,
+                            height: 20,
+                            child: CachedImage(
+                              imageURL: awayLogo!,
                             ),
                           ],
                         ),
@@ -173,15 +159,10 @@ class HomeScoreCard extends StatelessWidget {
             ),
           );
         }
-        return const Padding(
-          padding: EdgeInsets.symmetric(vertical: 25),
-          child: Center(
-            child: CircularProgressIndicator(
-              backgroundColor: AppTheme.secondary,
-              color: AppTheme.onSecondary,
-              strokeWidth: 3,
-            ),
-          ),
+        // if state is not success
+        return const LoadingStateIndicator(
+          verticalPadding: 25,
+          horizontalPadding: 0,
         );
       },
     );

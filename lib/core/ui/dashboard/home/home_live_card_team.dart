@@ -1,9 +1,13 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:live_score/core/theme/app_theme.dart';
+import 'package:live_score/core/ui/dashboard/home/cached_image.dart';
 
 class HomeLiveCardTeam extends StatelessWidget {
-  const HomeLiveCardTeam({super.key, required this.logo, required this.name});
+  const HomeLiveCardTeam({
+    super.key,
+    required this.logo,
+    required this.name,
+  });
   final String logo;
   final String name;
 
@@ -11,35 +15,28 @@ class HomeLiveCardTeam extends StatelessWidget {
   Widget build(BuildContext context) {
     return Flexible(
       flex: 1,
-      child: Column(
-        children: [
-          SizedBox(
-            width: 40,
-            height: 45,
-            child: CachedNetworkImage(
-              imageUrl: logo,
-              placeholder: (context, url) => const SizedBox(
-                height: 30,
-                width: 30,
-                child: CircularProgressIndicator(
-                  backgroundColor: AppTheme.secondary,
-                  color: AppTheme.onSecondary,
-                ),
+      child: SizedBox(
+        width: 100,
+        height: 95,
+        child: Column(
+          children: [
+            SizedBox(
+              width: 40,
+              height: 50,
+              child: CachedImage(imageURL: logo),
+            ),
+            const SizedBox(height: 5),
+            Text(
+              name,
+              softWrap: true,
+              overflow: TextOverflow.clip,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                color: AppTheme.onSecondary,
               ),
-              errorWidget: (context, url, error) => const Icon(Icons.error),
-            ),
-          ),
-          const SizedBox(height: 5),
-          Text(
-            name,
-            softWrap: true,
-            overflow: TextOverflow.clip,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              color: AppTheme.onSecondary,
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }

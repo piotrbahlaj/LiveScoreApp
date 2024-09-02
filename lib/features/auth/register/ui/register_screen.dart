@@ -7,6 +7,7 @@ import 'package:live_score/features/auth/shared/cubit/obscure_text_cubit.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
+  static const register = '/register';
 
   @override
   Widget build(BuildContext context) {

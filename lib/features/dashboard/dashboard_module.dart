@@ -16,6 +16,7 @@ import 'package:live_score/features/dashboard/home/home_screen.dart';
 import 'package:live_score/services/api_service.dart';
 
 class DashboardModule extends Module {
+  static const dashboard = '/dashboard';
   @override
   void binds(i) {
     i.addLazySingleton<EnvironmentConfigInterface>(EnvironmentConfig.new);
@@ -36,9 +37,11 @@ class DashboardModule extends Module {
       '/',
       child: (context) => const DashboardLayout(),
       children: [
-        ChildRoute('/home', child: (context) => const HomeScreen()),
-        ChildRoute('/favorites', child: (context) => const FavoritesScreen()),
-        ChildRoute('/account', child: (context) => const AccountScreen()),
+        ChildRoute(HomeScreen.home, child: (context) => const HomeScreen()),
+        ChildRoute(FavoritesScreen.favorites,
+            child: (context) => const FavoritesScreen()),
+        ChildRoute(AccountScreen.account,
+            child: (context) => const AccountScreen()),
       ],
     );
   }

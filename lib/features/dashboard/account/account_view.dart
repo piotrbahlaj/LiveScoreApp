@@ -11,89 +11,94 @@ import 'package:live_score/features/dashboard/cubit/dashboard_cubit.dart';
 class AccountView extends StatelessWidget {
   const AccountView({super.key});
 
+  void _accountViewListener(BuildContext context) {
+    final state = context.read<DashboardCubit>().state;
+    if (state is LoggedOut) {
+      ScaffoldMessenger.of(context).clearSnackBars();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            context.localizations.loggedOutSuccessfully,
+          ),
+        ),
+      );
+      Modular.to.navigate(Routes.login);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<DashboardCubit>();
     cubit.loadUser();
     return BlocConsumer<DashboardCubit, DashboardState>(
-        listener: (context, state) {
-      if (state is LoggedOut) {
-        ScaffoldMessenger.of(context).clearSnackBars();
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              context.localizations.loggedOutSuccessfully,
-            ),
-          ),
-        );
-        Modular.to.navigate(Routes.login);
-      }
-    }, builder: (context, state) {
-      if (state is LoggedIn) {
-        final user = state.user;
-        final email = user?.email ?? 'John Doe';
-        return Scaffold(
-          backgroundColor: AppTheme.primary,
-          appBar: AppBar(
-            leadingWidth: 200,
-            toolbarHeight: 100,
+      listener: (context, state) => _accountViewListener(context),
+      builder: (context, state) {
+        if (state is LoggedIn) {
+          final user = state.user;
+          final email = user?.email;
+          return Scaffold(
             backgroundColor: AppTheme.primary,
-            leading: Padding(
-              padding: const EdgeInsets.all(15),
-              child: Text(
-                context.localizations.myAccount,
-                style: const TextStyle(
-                  color: AppTheme.onSecondary,
-                  fontSize: 23,
-                  fontWeight: FontWeight.bold,
+            appBar: AppBar(
+              leadingWidth: 200,
+              toolbarHeight: 100,
+              backgroundColor: AppTheme.primary,
+              leading: Padding(
+                padding: const EdgeInsets.all(15),
+                child: Text(
+                  context.localizations.myAccount,
+                  style: const TextStyle(
+                    color: AppTheme.onSecondary,
+                    fontSize: 23,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
-          ),
-          body: Center(
-            child: Column(
-              children: [
-                Stack(
-                  children: [
-                    Container(
-                      height: 60,
-                      width: 60,
-                      decoration: BoxDecoration(
-                        color: AppTheme.avatarBackground,
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                    ),
-                    const Positioned.fill(
-                      child: Align(
-                        alignment: Alignment.center,
-                        child: Icon(
-                          Icons.person_outline_outlined,
-                          size: 45,
+            body: Center(
+              child: Column(
+                children: [
+                  Stack(
+                    children: [
+                      Container(
+                        height: 60,
+                        width: 60,
+                        decoration: BoxDecoration(
+                          color: AppTheme.avatarBackground,
+                          borderRadius: BorderRadius.circular(30),
                         ),
                       ),
-                    )
-                  ],
-                ),
-                const SizedBox(height: 20),
-                Text(
-                  email,
-                  style: const TextStyle(
-                    color: AppTheme.avatarBackground,
-                    fontSize: 20,
+                      const Positioned.fill(
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Icon(
+                            Icons.person_outline_outlined,
+                            size: 45,
+                          ),
+                        ),
+                      )
+                    ],
                   ),
-                ),
-                const SizedBox(height: 50),
-                LogOutButton(
-                  onPressed: () => cubit.logOut(),
-                ),
-              ],
+                  const SizedBox(height: 20),
+                  Text(
+                    email!,
+                    style: const TextStyle(
+                      color: AppTheme.avatarBackground,
+                      fontSize: 20,
+                    ),
+                  ),
+                  const SizedBox(height: 50),
+                  LogOutButton(
+                    onPressed: () => cubit.logOut(),
+                  ),
+                ],
+              ),
             ),
-          ),
+          );
+        }
+        return Container(
+          color: AppTheme.primary,
         );
-      }
-      return Container(
-        color: AppTheme.primary,
-      );
-    });
+      },
+    );
   }
 }
