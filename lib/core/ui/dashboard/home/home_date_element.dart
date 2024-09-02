@@ -13,18 +13,17 @@ class HomeDateElement extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DateTime now = DateTime.now();
     return Column(
       children: [
         Text(
-          now.getFormattedDay(date, context),
+          date.getFormattedDay(context),
           style: TextStyle(
             color: isSelected ? AppTheme.onSecondary : AppTheme.onPrimary2,
             fontWeight: FontWeight.bold,
           ),
         ),
         Text(
-          now.getFormattedMonthDay(date),
+          date.getFormattedMonthDay(),
           style: TextStyle(
             color: isSelected ? AppTheme.onSecondary : AppTheme.onPrimary2,
             fontWeight: FontWeight.bold,

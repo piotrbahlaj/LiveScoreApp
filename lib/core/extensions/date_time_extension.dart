@@ -3,20 +3,19 @@ import 'package:intl/intl.dart';
 import 'package:live_score/core/extensions/localization/app_localizations_context.dart';
 
 extension DateTimeExtension on DateTime {
-  String getFormattedDay(DateTime date, BuildContext context) {
+  String getFormattedDay(BuildContext context) {
     DateFormat dayFormat = DateFormat('E');
     DateTime today = DateTime.now();
-    String day = date.year == today.year &&
-            date.month == today.month &&
-            date.day == today.day
-        ? context.localizations.today
-        : dayFormat.format(date);
+    String day =
+        year == today.year && month == today.month && this.day == today.day
+            ? context.localizations.today
+            : dayFormat.format(this);
     return day;
   }
 
-  String getFormattedMonthDay(DateTime date) {
+  String getFormattedMonthDay() {
     DateFormat monthDayFormat = DateFormat('d MMM');
-    String monthDay = monthDayFormat.format(date);
+    String monthDay = monthDayFormat.format(this);
     return monthDay;
   }
 
