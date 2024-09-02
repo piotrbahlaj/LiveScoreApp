@@ -1,4 +1,4 @@
-import 'package:live_score/core/models/fixture_response/fixture_response_model.dart';
+import 'package:live_score/core/models/fixtures_endpoint/fixtures_endpoint_model.dart';
 import 'package:live_score/core/repositories/football/football_repository_interface.dart';
 import 'package:live_score/services/api_service.dart';
 
@@ -7,12 +7,22 @@ class FootballRepository implements FootballRepositoryInterface {
   final ApiService service;
 
   @override
-  Future<FixtureResponseModel> getFixtures() async {
+  Future<FixturesEndpointModel> getFixtures({required String date}) async {
     try {
-      final response = await service.getFixtures();
+      final response = await service.getFixtures(date);
       return response;
     } catch (e) {
-      throw Exception(e);
+      throw Exception(e.toString());
+    }
+  }
+
+  @override
+  Future<FixturesEndpointModel> getLiveFixtures({required String live}) async {
+    try {
+      final response = await service.getLiveFixtures(live);
+      return response;
+    } catch (e) {
+      throw Exception(e.toString());
     }
   }
 }

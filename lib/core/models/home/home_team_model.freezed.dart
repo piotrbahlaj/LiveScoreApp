@@ -21,7 +21,8 @@ Home _$HomeFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Home {
   String get name => throw _privateConstructorUsedError;
-  bool get winner => throw _privateConstructorUsedError;
+  bool? get winner => throw _privateConstructorUsedError;
+  String? get logo => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -33,7 +34,7 @@ abstract class $HomeCopyWith<$Res> {
   factory $HomeCopyWith(Home value, $Res Function(Home) then) =
       _$HomeCopyWithImpl<$Res, Home>;
   @useResult
-  $Res call({String name, bool winner});
+  $Res call({String name, bool? winner, String? logo});
 }
 
 /// @nodoc
@@ -50,17 +51,22 @@ class _$HomeCopyWithImpl<$Res, $Val extends Home>
   @override
   $Res call({
     Object? name = null,
-    Object? winner = null,
+    Object? winner = freezed,
+    Object? logo = freezed,
   }) {
     return _then(_value.copyWith(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      winner: null == winner
+      winner: freezed == winner
           ? _value.winner
           : winner // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
+      logo: freezed == logo
+          ? _value.logo
+          : logo // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -72,7 +78,7 @@ abstract class _$$HomeImplCopyWith<$Res> implements $HomeCopyWith<$Res> {
       __$$HomeImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, bool winner});
+  $Res call({String name, bool? winner, String? logo});
 }
 
 /// @nodoc
@@ -86,17 +92,22 @@ class __$$HomeImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = null,
-    Object? winner = null,
+    Object? winner = freezed,
+    Object? logo = freezed,
   }) {
     return _then(_$HomeImpl(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      winner: null == winner
+      winner: freezed == winner
           ? _value.winner
           : winner // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
+      logo: freezed == logo
+          ? _value.logo
+          : logo // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -104,7 +115,8 @@ class __$$HomeImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$HomeImpl implements _Home {
-  const _$HomeImpl({required this.name, required this.winner});
+  const _$HomeImpl(
+      {required this.name, required this.winner, required this.logo});
 
   factory _$HomeImpl.fromJson(Map<String, dynamic> json) =>
       _$$HomeImplFromJson(json);
@@ -112,11 +124,13 @@ class _$HomeImpl implements _Home {
   @override
   final String name;
   @override
-  final bool winner;
+  final bool? winner;
+  @override
+  final String? logo;
 
   @override
   String toString() {
-    return 'Home(name: $name, winner: $winner)';
+    return 'Home(name: $name, winner: $winner, logo: $logo)';
   }
 
   @override
@@ -125,12 +139,13 @@ class _$HomeImpl implements _Home {
         (other.runtimeType == runtimeType &&
             other is _$HomeImpl &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.winner, winner) || other.winner == winner));
+            (identical(other.winner, winner) || other.winner == winner) &&
+            (identical(other.logo, logo) || other.logo == logo));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, name, winner);
+  int get hashCode => Object.hash(runtimeType, name, winner, logo);
 
   @JsonKey(ignore: true)
   @override
@@ -148,14 +163,18 @@ class _$HomeImpl implements _Home {
 
 abstract class _Home implements Home {
   const factory _Home(
-      {required final String name, required final bool winner}) = _$HomeImpl;
+      {required final String name,
+      required final bool? winner,
+      required final String? logo}) = _$HomeImpl;
 
   factory _Home.fromJson(Map<String, dynamic> json) = _$HomeImpl.fromJson;
 
   @override
   String get name;
   @override
-  bool get winner;
+  bool? get winner;
+  @override
+  String? get logo;
   @override
   @JsonKey(ignore: true)
   _$$HomeImplCopyWith<_$HomeImpl> get copyWith =>

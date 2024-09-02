@@ -1,5 +1,6 @@
-import 'package:live_score/core/models/fixture_response/fixture_response_model.dart';
+import 'package:live_score/core/models/fixtures_endpoint/fixtures_endpoint_model.dart';
 
 abstract interface class FootballRepositoryInterface {
-  Future<FixtureResponseModel> getFixtures();
+  Future<FixturesEndpointModel> getFixtures({required String date});
+  Future<FixturesEndpointModel> getLiveFixtures({required String live});
 }

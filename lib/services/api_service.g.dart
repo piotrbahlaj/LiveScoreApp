@@ -19,13 +19,13 @@ class _ApiService implements ApiService {
   String? baseUrl;
 
   @override
-  Future<FixtureResponseModel> getFixtures() async {
+  Future<FixturesEndpointModel> getFixtures(String date) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'date': date};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<FixtureResponseModel>(Options(
+        _setStreamType<FixturesEndpointModel>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -41,7 +41,34 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final _value = FixtureResponseModel.fromJson(_result.data!);
+    final _value = FixturesEndpointModel.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<FixturesEndpointModel> getLiveFixtures(String live) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'live': live};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<FixturesEndpointModel>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/fixtures',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = FixturesEndpointModel.fromJson(_result.data!);
     return _value;
   }
 

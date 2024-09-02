@@ -23,6 +23,7 @@ class RegisterView extends StatelessWidget {
     final confirmPasswordController = TextEditingController();
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: AppTheme.primary,
       appBar: AppBar(
         automaticallyImplyLeading: true,
@@ -108,6 +109,7 @@ class RegisterView extends StatelessWidget {
                         password,
                         confirmPassword,
                       );
+                      FocusScope.of(context).unfocus();
                     },
                     text: context.localizations.register,
                   ),

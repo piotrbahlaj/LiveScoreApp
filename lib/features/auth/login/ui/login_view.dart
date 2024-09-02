@@ -21,6 +21,7 @@ class LoginView extends StatelessWidget {
     final emailController = TextEditingController();
     final passwordController = TextEditingController();
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: AppTheme.primary,
       appBar: AppBar(
         automaticallyImplyLeading: true,
@@ -30,7 +31,7 @@ class LoginView extends StatelessWidget {
         backgroundColor: AppTheme.transparent,
         elevation: 0,
         title: Text(
-          context.localizations.welcome,
+          context.localizations.logInToYourAccount,
           style: const TextStyle(
             color: AppTheme.onSecondary,
             fontWeight: FontWeight.bold,
@@ -82,6 +83,7 @@ class LoginView extends StatelessWidget {
                             email,
                             password,
                           );
+                          FocusScope.of(context).unfocus();
                         },
                         text: context.localizations.logIn,
                       ),
@@ -147,7 +149,7 @@ class LoginView extends StatelessWidget {
             ),
           ),
         );
-        Modular.to.pushNamed(Routes.dashboard);
+        Modular.to.navigate(Routes.home);
         return null;
       },
     );

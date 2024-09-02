@@ -8,6 +8,7 @@ import 'package:live_score/features/auth/register/cubit/register_cubit.dart';
 import 'package:live_score/features/auth/register/ui/register_screen.dart';
 
 class AuthModule extends Module {
+  static const auth = '/auth';
   @override
   void binds(i) {
     i.addLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
@@ -15,12 +16,18 @@ class AuthModule extends Module {
       AuthRepository.new,
     );
     i.addLazySingleton<RegisterCubit>(RegisterCubit.new);
-    i.addLazySingleton<LoginCubit>(LoginCubit.new);
+    i.addLazySingleton<LoginCubit>(
+      LoginCubit.new,
+      config: BindConfig(
+        onDispose: (cubit) => cubit.close(),
+      ),
+    );
   }
 
   @override
   void routes(r) {
-    r.child('/register/', child: (context) => const RegisterScreen());
-    r.child('/login/', child: (context) => const LoginScreen());
+    r.child(RegisterScreen.register,
+        child: (context) => const RegisterScreen());
+    r.child(LoginScreen.login, child: (context) => const LoginScreen());
   }
 }

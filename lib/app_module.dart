@@ -3,9 +3,9 @@ import 'package:live_score/config/environment_config.dart';
 import 'package:live_score/config/environment_config_interface.dart';
 import 'package:live_score/core/network/api_client.dart';
 import 'package:live_score/features/auth/auth_module.dart';
-import 'package:live_score/features/dashboard/dashboard_screen.dart';
-import 'package:live_score/features/home/home_screen.dart';
+import 'package:live_score/features/dashboard/dashboard_module.dart';
 import 'package:live_score/services/api_service.dart';
+import 'package:live_score/start_screen.dart';
 
 class AppModule extends Module {
   @override
@@ -17,8 +17,8 @@ class AppModule extends Module {
 
   @override
   void routes(r) {
-    r.child('/', child: (context) => const HomeScreen());
-    r.child('/dashboard/', child: (context) => const DashboardScreen());
-    r.module('/auth', module: AuthModule());
+    r.child('/', child: (context) => const StartScreen());
+    r.module(AuthModule.auth, module: AuthModule());
+    r.module(DashboardModule.dashboard, module: DashboardModule());
   }
 }

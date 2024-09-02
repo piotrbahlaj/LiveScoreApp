@@ -7,7 +7,8 @@ part 'away_team_model.g.dart';
 class Away with _$Away {
   const factory Away({
     required String name,
-    required bool winner,
+    required bool? winner,
+    required String? logo,
   }) = _Away;
 
   factory Away.fromJson(Map<String, dynamic> json) => _$AwayFromJson(json);

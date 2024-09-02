@@ -28,11 +28,7 @@ class AuthRepository implements AuthRepositoryInterface {
 
   @override
   Future<void> logOut() async {
-    try {
-      await auth.signOut();
-    } on FirebaseAuthException catch (e) {
-      throw FirebaseAuthException(code: e.code);
-    }
+    await auth.signOut();
   }
 
   @override

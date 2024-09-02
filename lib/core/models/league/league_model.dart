@@ -8,8 +8,8 @@ class League with _$League {
   const factory League({
     required String name,
     required String country,
-    required int season,
     required String round,
+    required String? logo,
   }) = _League;
 
   factory League.fromJson(Map<String, dynamic> json) => _$LeagueFromJson(json);
