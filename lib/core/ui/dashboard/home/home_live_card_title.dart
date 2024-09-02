@@ -1,6 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:live_score/core/theme/app_theme.dart';
+import 'package:live_score/core/ui/dashboard/home/cached_image.dart';
 
 class HomeLiveCardTitle extends StatelessWidget {
   const HomeLiveCardTitle({
@@ -25,14 +25,8 @@ class HomeLiveCardTitle extends StatelessWidget {
               SizedBox(
                 width: 30,
                 height: 30,
-                child: CachedNetworkImage(
-                  imageUrl: logo,
-                  placeholder: (context, url) =>
-                      const CircularProgressIndicator(
-                    backgroundColor: AppTheme.secondary,
-                    color: AppTheme.onSecondary,
-                  ),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                child: CachedImage(
+                  imageURL: logo,
                 ),
               ),
               const SizedBox(width: 10),

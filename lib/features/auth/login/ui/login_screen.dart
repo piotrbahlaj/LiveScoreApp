@@ -7,6 +7,7 @@ import 'package:live_score/features/auth/shared/cubit/obscure_text_cubit.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
+  static const login = '/login';
 
   @override
   Widget build(BuildContext context) {

@@ -6,6 +6,7 @@ import 'package:live_score/features/dashboard/favorites/favorites_view.dart';
 
 class FavoritesScreen extends StatelessWidget {
   const FavoritesScreen({super.key});
+  static const favorites = '/favorites';
 
   @override
   Widget build(BuildContext context) {

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:live_score/core/theme/app_theme.dart';
-import 'package:live_score/core/ui/dashboard/home/home_cached_network_image.dart';
+import 'package:live_score/core/ui/dashboard/home/cached_image.dart';
+import 'package:live_score/core/ui/dashboard/home/loading_state_indicator.dart';
 import 'package:live_score/features/dashboard/cubit/dashboard_cubit.dart';
 
 class HomeScoreCard extends StatelessWidget {
@@ -71,16 +72,16 @@ class HomeScoreCard extends StatelessWidget {
                           SizedBox(
                             width: 20,
                             height: 20,
-                            child: HomeCachedNetworkImage(
-                              logo: homeLogo,
+                            child: CachedImage(
+                              imageURL: homeLogo!,
                             ),
                           ),
                           const SizedBox(height: 15),
                           SizedBox(
                             width: 20,
                             height: 20,
-                            child: HomeCachedNetworkImage(
-                              logo: awayLogo,
+                            child: CachedImage(
+                              imageURL: awayLogo!,
                             ),
                           ),
                         ],
@@ -141,15 +142,9 @@ class HomeScoreCard extends StatelessWidget {
           );
         }
         // if state is not success
-        return const Padding(
-          padding: EdgeInsets.symmetric(vertical: 25),
-          child: Center(
-            child: CircularProgressIndicator(
-              backgroundColor: AppTheme.secondary,
-              color: AppTheme.onSecondary,
-              strokeWidth: 3,
-            ),
-          ),
+        return const LoadingStateIndicator(
+          verticalPadding: 25,
+          horizontalPadding: 0,
         );
       },
     );

@@ -14,7 +14,6 @@ class DetailsButton extends StatelessWidget {
         ),
         backgroundColor: AppTheme.secondary,
         fixedSize: const Size(300, 20),
-        maximumSize: const Size(300, 40),
       ),
       onPressed: () {},
       child: Text(

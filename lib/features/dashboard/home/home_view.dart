@@ -36,14 +36,14 @@ class HomeView extends StatelessWidget {
               const HomeCalendar(),
               const HomeLiveNowRow(),
               SizedBox(
-                height: 200,
+                height: 220,
                 child: Builder(
                   builder: (context) {
                     return _liveCardBuilder(context, state);
                   },
                 ),
               ),
-              const SizedBox(height: 25),
+              const SizedBox(height: 10),
               const HomeTabs(),
               const SizedBox(height: 20),
               BlocBuilder<DashboardCubit, DashboardState>(

@@ -38,7 +38,7 @@ class HomeLiveCard extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 5),
             child: SizedBox(
               width: 340,
-              height: 200,
+              height: 220,
               child: Card(
                 color: AppTheme.onPrimary3,
                 child: Column(
@@ -56,7 +56,7 @@ class HomeLiveCard extends StatelessWidget {
                       children: [
                         HomeLiveCardTeam(logo: homeLogo, name: homeName),
                         Padding(
-                          padding: const EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.all(5.0),
                           child: Text(
                             '${homeScore.toString()} - ${awayScore.toString()}',
                             style: const TextStyle(
@@ -69,8 +69,9 @@ class HomeLiveCard extends StatelessWidget {
                         HomeLiveCardTeam(logo: awayLogo, name: awayName),
                       ],
                     ),
-                    const SizedBox(height: 4),
+                    const SizedBox(height: 5),
                     const DetailsButton(),
+                    const SizedBox(height: 5),
                   ],
                 ),
               ),

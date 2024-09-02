@@ -6,6 +6,7 @@ import 'package:live_score/features/dashboard/cubit/dashboard_cubit.dart';
 
 class AccountScreen extends StatelessWidget {
   const AccountScreen({super.key});
+  static const account = '/account';
 
   @override
   Widget build(BuildContext context) {
