@@ -16,7 +16,6 @@ class FavoritesCard extends StatelessWidget {
     required this.homeLogo,
     required this.awayLogo,
     required this.id,
-    required this.onDelete,
   });
   final String homeTeam;
   final String awayTeam;
@@ -27,20 +26,14 @@ class FavoritesCard extends StatelessWidget {
   final String? homeLogo;
   final String? awayLogo;
   final int id;
-  final VoidCallback onDelete;
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<DashboardCubit>();
     return BlocBuilder<DashboardCubit, DashboardState>(
       builder: (context, state) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: InkWell(
-            onTap: () {
-              cubit.deleteMatch(id).then((_) => onDelete());
-              print('Deleting match with id: $id');
-            },
             child: Card(
               color: AppTheme.onPrimary3,
               child: SizedBox(

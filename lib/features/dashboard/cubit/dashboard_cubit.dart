@@ -83,6 +83,7 @@ class DashboardCubit extends Cubit<DashboardState> {
     int id,
     String? homeLogo,
     String? awayLogo,
+    String status,
   ) async {
     try {
       return database.cacheMatch(
@@ -95,6 +96,7 @@ class DashboardCubit extends Cubit<DashboardState> {
           id: drift.Value(id),
           homeLogo: drift.Value(homeLogo),
           awayLogo: drift.Value(awayLogo),
+          status: status,
         ),
       );
     } catch (e) {
@@ -103,7 +105,6 @@ class DashboardCubit extends Cubit<DashboardState> {
   }
 
   Future<List<MatchData>> loadCachedMatches() async {
-    emit(const DashboardState.loading());
     try {
       return database.loadCachedMatches();
     } catch (e) {

@@ -29,6 +29,11 @@ class $MatchTable extends Match with TableInfo<$MatchTable, MatchData> {
   late final GeneratedColumn<String> awayTeam = GeneratedColumn<String>(
       'away_team', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _statusMeta = const VerificationMeta('status');
+  @override
+  late final GeneratedColumn<String> status = GeneratedColumn<String>(
+      'status', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
   static const VerificationMeta _homeScoreMeta =
       const VerificationMeta('homeScore');
   @override
@@ -74,6 +79,7 @@ class $MatchTable extends Match with TableInfo<$MatchTable, MatchData> {
         id,
         homeTeam,
         awayTeam,
+        status,
         homeScore,
         awayScore,
         matchDate,
@@ -105,6 +111,12 @@ class $MatchTable extends Match with TableInfo<$MatchTable, MatchData> {
           awayTeam.isAcceptableOrUnknown(data['away_team']!, _awayTeamMeta));
     } else if (isInserting) {
       context.missing(_awayTeamMeta);
+    }
+    if (data.containsKey('status')) {
+      context.handle(_statusMeta,
+          status.isAcceptableOrUnknown(data['status']!, _statusMeta));
+    } else if (isInserting) {
+      context.missing(_statusMeta);
     }
     if (data.containsKey('home_score')) {
       context.handle(_homeScoreMeta,
@@ -149,6 +161,8 @@ class $MatchTable extends Match with TableInfo<$MatchTable, MatchData> {
           .read(DriftSqlType.string, data['${effectivePrefix}home_team'])!,
       awayTeam: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}away_team'])!,
+      status: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}status'])!,
       homeScore: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}home_score']),
       awayScore: attachedDatabase.typeMapping
@@ -174,6 +188,7 @@ class MatchData extends DataClass implements Insertable<MatchData> {
   final int id;
   final String homeTeam;
   final String awayTeam;
+  final String status;
   final int? homeScore;
   final int? awayScore;
   final String matchDate;
@@ -184,6 +199,7 @@ class MatchData extends DataClass implements Insertable<MatchData> {
       {required this.id,
       required this.homeTeam,
       required this.awayTeam,
+      required this.status,
       this.homeScore,
       this.awayScore,
       required this.matchDate,
@@ -196,6 +212,7 @@ class MatchData extends DataClass implements Insertable<MatchData> {
     map['id'] = Variable<int>(id);
     map['home_team'] = Variable<String>(homeTeam);
     map['away_team'] = Variable<String>(awayTeam);
+    map['status'] = Variable<String>(status);
     if (!nullToAbsent || homeScore != null) {
       map['home_score'] = Variable<int>(homeScore);
     }
@@ -218,6 +235,7 @@ class MatchData extends DataClass implements Insertable<MatchData> {
       id: Value(id),
       homeTeam: Value(homeTeam),
       awayTeam: Value(awayTeam),
+      status: Value(status),
       homeScore: homeScore == null && nullToAbsent
           ? const Value.absent()
           : Value(homeScore),
@@ -242,6 +260,7 @@ class MatchData extends DataClass implements Insertable<MatchData> {
       id: serializer.fromJson<int>(json['id']),
       homeTeam: serializer.fromJson<String>(json['homeTeam']),
       awayTeam: serializer.fromJson<String>(json['awayTeam']),
+      status: serializer.fromJson<String>(json['status']),
       homeScore: serializer.fromJson<int?>(json['homeScore']),
       awayScore: serializer.fromJson<int?>(json['awayScore']),
       matchDate: serializer.fromJson<String>(json['matchDate']),
@@ -257,6 +276,7 @@ class MatchData extends DataClass implements Insertable<MatchData> {
       'id': serializer.toJson<int>(id),
       'homeTeam': serializer.toJson<String>(homeTeam),
       'awayTeam': serializer.toJson<String>(awayTeam),
+      'status': serializer.toJson<String>(status),
       'homeScore': serializer.toJson<int?>(homeScore),
       'awayScore': serializer.toJson<int?>(awayScore),
       'matchDate': serializer.toJson<String>(matchDate),
@@ -270,6 +290,7 @@ class MatchData extends DataClass implements Insertable<MatchData> {
           {int? id,
           String? homeTeam,
           String? awayTeam,
+          String? status,
           Value<int?> homeScore = const Value.absent(),
           Value<int?> awayScore = const Value.absent(),
           String? matchDate,
@@ -280,6 +301,7 @@ class MatchData extends DataClass implements Insertable<MatchData> {
         id: id ?? this.id,
         homeTeam: homeTeam ?? this.homeTeam,
         awayTeam: awayTeam ?? this.awayTeam,
+        status: status ?? this.status,
         homeScore: homeScore.present ? homeScore.value : this.homeScore,
         awayScore: awayScore.present ? awayScore.value : this.awayScore,
         matchDate: matchDate ?? this.matchDate,
@@ -292,6 +314,7 @@ class MatchData extends DataClass implements Insertable<MatchData> {
       id: data.id.present ? data.id.value : this.id,
       homeTeam: data.homeTeam.present ? data.homeTeam.value : this.homeTeam,
       awayTeam: data.awayTeam.present ? data.awayTeam.value : this.awayTeam,
+      status: data.status.present ? data.status.value : this.status,
       homeScore: data.homeScore.present ? data.homeScore.value : this.homeScore,
       awayScore: data.awayScore.present ? data.awayScore.value : this.awayScore,
       matchDate: data.matchDate.present ? data.matchDate.value : this.matchDate,
@@ -308,6 +331,7 @@ class MatchData extends DataClass implements Insertable<MatchData> {
           ..write('id: $id, ')
           ..write('homeTeam: $homeTeam, ')
           ..write('awayTeam: $awayTeam, ')
+          ..write('status: $status, ')
           ..write('homeScore: $homeScore, ')
           ..write('awayScore: $awayScore, ')
           ..write('matchDate: $matchDate, ')
@@ -319,8 +343,8 @@ class MatchData extends DataClass implements Insertable<MatchData> {
   }
 
   @override
-  int get hashCode => Object.hash(id, homeTeam, awayTeam, homeScore, awayScore,
-      matchDate, isFavorite, homeLogo, awayLogo);
+  int get hashCode => Object.hash(id, homeTeam, awayTeam, status, homeScore,
+      awayScore, matchDate, isFavorite, homeLogo, awayLogo);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -328,6 +352,7 @@ class MatchData extends DataClass implements Insertable<MatchData> {
           other.id == this.id &&
           other.homeTeam == this.homeTeam &&
           other.awayTeam == this.awayTeam &&
+          other.status == this.status &&
           other.homeScore == this.homeScore &&
           other.awayScore == this.awayScore &&
           other.matchDate == this.matchDate &&
@@ -340,6 +365,7 @@ class MatchCompanion extends UpdateCompanion<MatchData> {
   final Value<int> id;
   final Value<String> homeTeam;
   final Value<String> awayTeam;
+  final Value<String> status;
   final Value<int?> homeScore;
   final Value<int?> awayScore;
   final Value<String> matchDate;
@@ -350,6 +376,7 @@ class MatchCompanion extends UpdateCompanion<MatchData> {
     this.id = const Value.absent(),
     this.homeTeam = const Value.absent(),
     this.awayTeam = const Value.absent(),
+    this.status = const Value.absent(),
     this.homeScore = const Value.absent(),
     this.awayScore = const Value.absent(),
     this.matchDate = const Value.absent(),
@@ -361,6 +388,7 @@ class MatchCompanion extends UpdateCompanion<MatchData> {
     this.id = const Value.absent(),
     required String homeTeam,
     required String awayTeam,
+    required String status,
     this.homeScore = const Value.absent(),
     this.awayScore = const Value.absent(),
     required String matchDate,
@@ -369,11 +397,13 @@ class MatchCompanion extends UpdateCompanion<MatchData> {
     this.awayLogo = const Value.absent(),
   })  : homeTeam = Value(homeTeam),
         awayTeam = Value(awayTeam),
+        status = Value(status),
         matchDate = Value(matchDate);
   static Insertable<MatchData> custom({
     Expression<int>? id,
     Expression<String>? homeTeam,
     Expression<String>? awayTeam,
+    Expression<String>? status,
     Expression<int>? homeScore,
     Expression<int>? awayScore,
     Expression<String>? matchDate,
@@ -385,6 +415,7 @@ class MatchCompanion extends UpdateCompanion<MatchData> {
       if (id != null) 'id': id,
       if (homeTeam != null) 'home_team': homeTeam,
       if (awayTeam != null) 'away_team': awayTeam,
+      if (status != null) 'status': status,
       if (homeScore != null) 'home_score': homeScore,
       if (awayScore != null) 'away_score': awayScore,
       if (matchDate != null) 'match_date': matchDate,
@@ -398,6 +429,7 @@ class MatchCompanion extends UpdateCompanion<MatchData> {
       {Value<int>? id,
       Value<String>? homeTeam,
       Value<String>? awayTeam,
+      Value<String>? status,
       Value<int?>? homeScore,
       Value<int?>? awayScore,
       Value<String>? matchDate,
@@ -408,6 +440,7 @@ class MatchCompanion extends UpdateCompanion<MatchData> {
       id: id ?? this.id,
       homeTeam: homeTeam ?? this.homeTeam,
       awayTeam: awayTeam ?? this.awayTeam,
+      status: status ?? this.status,
       homeScore: homeScore ?? this.homeScore,
       awayScore: awayScore ?? this.awayScore,
       matchDate: matchDate ?? this.matchDate,
@@ -428,6 +461,9 @@ class MatchCompanion extends UpdateCompanion<MatchData> {
     }
     if (awayTeam.present) {
       map['away_team'] = Variable<String>(awayTeam.value);
+    }
+    if (status.present) {
+      map['status'] = Variable<String>(status.value);
     }
     if (homeScore.present) {
       map['home_score'] = Variable<int>(homeScore.value);
@@ -456,6 +492,7 @@ class MatchCompanion extends UpdateCompanion<MatchData> {
           ..write('id: $id, ')
           ..write('homeTeam: $homeTeam, ')
           ..write('awayTeam: $awayTeam, ')
+          ..write('status: $status, ')
           ..write('homeScore: $homeScore, ')
           ..write('awayScore: $awayScore, ')
           ..write('matchDate: $matchDate, ')
@@ -482,6 +519,7 @@ typedef $$MatchTableCreateCompanionBuilder = MatchCompanion Function({
   Value<int> id,
   required String homeTeam,
   required String awayTeam,
+  required String status,
   Value<int?> homeScore,
   Value<int?> awayScore,
   required String matchDate,
@@ -493,6 +531,7 @@ typedef $$MatchTableUpdateCompanionBuilder = MatchCompanion Function({
   Value<int> id,
   Value<String> homeTeam,
   Value<String> awayTeam,
+  Value<String> status,
   Value<int?> homeScore,
   Value<int?> awayScore,
   Value<String> matchDate,
@@ -521,6 +560,7 @@ class $$MatchTableTableManager extends RootTableManager<
             Value<int> id = const Value.absent(),
             Value<String> homeTeam = const Value.absent(),
             Value<String> awayTeam = const Value.absent(),
+            Value<String> status = const Value.absent(),
             Value<int?> homeScore = const Value.absent(),
             Value<int?> awayScore = const Value.absent(),
             Value<String> matchDate = const Value.absent(),
@@ -532,6 +572,7 @@ class $$MatchTableTableManager extends RootTableManager<
             id: id,
             homeTeam: homeTeam,
             awayTeam: awayTeam,
+            status: status,
             homeScore: homeScore,
             awayScore: awayScore,
             matchDate: matchDate,
@@ -543,6 +584,7 @@ class $$MatchTableTableManager extends RootTableManager<
             Value<int> id = const Value.absent(),
             required String homeTeam,
             required String awayTeam,
+            required String status,
             Value<int?> homeScore = const Value.absent(),
             Value<int?> awayScore = const Value.absent(),
             required String matchDate,
@@ -554,6 +596,7 @@ class $$MatchTableTableManager extends RootTableManager<
             id: id,
             homeTeam: homeTeam,
             awayTeam: awayTeam,
+            status: status,
             homeScore: homeScore,
             awayScore: awayScore,
             matchDate: matchDate,
@@ -579,6 +622,11 @@ class $$MatchTableFilterComposer
 
   ColumnFilters<String> get awayTeam => $state.composableBuilder(
       column: $state.table.awayTeam,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get status => $state.composableBuilder(
+      column: $state.table.status,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
@@ -628,6 +676,11 @@ class $$MatchTableOrderingComposer
 
   ColumnOrderings<String> get awayTeam => $state.composableBuilder(
       column: $state.table.awayTeam,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get status => $state.composableBuilder(
+      column: $state.table.status,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 

@@ -39,6 +39,8 @@
   "loggedOutSuccessfully": "Logged out successfully",
   "logInOrRegister": "Create an account or log in to continue",
   "league": "League",
-  "noCachedMatchData": "No cached match data",
-  "today": "Today"
+  "noFavoritesYet": "You haven't marked any matches as a favorite yet.",
+  "today": "Today",
+  "deletedFromFavorites": "Successfully deleted from favorites",
+  "delete": "Delete"
 }

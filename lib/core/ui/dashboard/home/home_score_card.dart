@@ -48,6 +48,7 @@ class HomeScoreCard extends StatelessWidget {
                   id,
                   homeLogo,
                   awayLogo,
+                  status,
                 );
                 print('Caching data for id: $id');
               },
@@ -85,21 +86,22 @@ class HomeScoreCard extends StatelessWidget {
                           horizontal: 5,
                           vertical: 10,
                         ),
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            width: 20,
-                            height: 20,
-                            child: CachedImage(
-                              imageURL: homeLogo!,
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              width: 20,
+                              height: 20,
+                              child: CachedImage(
+                                imageURL: homeLogo!,
+                              ),
                             ),
-                          ),
-                          const SizedBox(height: 15),
-                          SizedBox(
-                            width: 20,
-                            height: 20,
-                            child: CachedImage(
-                              imageURL: awayLogo!,
+                            const SizedBox(height: 15),
+                            SizedBox(
+                              width: 20,
+                              height: 20,
+                              child: CachedImage(
+                                imageURL: awayLogo!,
+                              ),
                             ),
                           ],
                         ),

@@ -51,8 +51,12 @@ class FavoritesView extends StatelessWidget {
               if (matches.isEmpty) {
                 return Center(
                   child: Text(
-                    context.localizations.noCachedMatchData,
-                    style: const TextStyle(color: AppTheme.onSecondary),
+                    context.localizations.noFavoritesYet,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      color: AppTheme.onSecondary,
+                      fontSize: 20,
+                    ),
                   ),
                 );
               }
@@ -65,17 +69,59 @@ class FavoritesView extends StatelessWidget {
                   final String formattedDate =
                       DateFormat('MM/dd').format(parsedDate);
 
-                  return FavoritesCard(
-                    homeLogo: match.homeLogo,
-                    awayLogo: match.awayLogo,
-                    homeScore: match.homeScore,
-                    awayScore: match.awayScore,
-                    homeTeam: match.homeTeam,
-                    awayTeam: match.awayTeam,
-                    status: '',
-                    date: formattedDate,
-                    id: match.id,
-                    onDelete: () => matches.removeAt(index),
+                  return Dismissible(
+                    direction: DismissDirection.endToStart,
+                    background: Container(
+                      decoration: BoxDecoration(
+                        color: AppTheme.secondary,
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            const Icon(
+                              Icons.delete,
+                              color: AppTheme.onSecondary,
+                            ),
+                            const SizedBox(width: 5),
+                            Text(
+                              context.localizations.delete,
+                              style: const TextStyle(
+                                color: AppTheme.onSecondary,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    key: Key(match.toString()),
+                    onDismissed: (direction) {
+                      ScaffoldMessenger.of(context).clearSnackBars();
+                      cubit
+                          .deleteMatch(match.id)
+                          .then((_) => matches.removeAt(index));
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            context.localizations.deletedFromFavorites,
+                          ),
+                        ),
+                      );
+                      print('Deleting match with id: ${match.id}');
+                    },
+                    child: FavoritesCard(
+                      homeLogo: match.homeLogo,
+                      awayLogo: match.awayLogo,
+                      homeScore: match.homeScore,
+                      awayScore: match.awayScore,
+                      homeTeam: match.homeTeam,
+                      awayTeam: match.awayTeam,
+                      status: match.status,
+                      date: formattedDate,
+                      id: match.id,
+                    ),
                   );
                 },
               );

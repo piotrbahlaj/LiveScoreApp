@@ -4,6 +4,7 @@ class Match extends Table {
   IntColumn get id => integer().autoIncrement()();
   TextColumn get homeTeam => text()();
   TextColumn get awayTeam => text()();
+  TextColumn get status => text()();
   IntColumn get homeScore => integer().nullable()();
   IntColumn get awayScore => integer().nullable()();
   TextColumn get matchDate => text()();
