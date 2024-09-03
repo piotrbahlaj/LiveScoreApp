@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart'
+    hide ModularWatchExtension;
 import 'package:intl/intl.dart';
 import 'package:live_score/app_database.dart';
+import 'package:live_score/core/constants/routes.dart';
 import 'package:live_score/core/extensions/localization/app_localizations_context.dart';
 import 'package:live_score/core/theme/app_theme.dart';
 import 'package:live_score/core/ui/dashboard/favorites/favorites_card.dart';
@@ -103,6 +106,7 @@ class FavoritesView extends StatelessWidget {
                     status: match.status,
                     date: formattedDate,
                     id: match.id,
+                    onTap: () => Modular.to.pushNamed(Routes.details),
                   ),
                 );
               },

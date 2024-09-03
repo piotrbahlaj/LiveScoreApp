@@ -6,4 +6,6 @@ class Routes {
   static const home = '/dashboard/home';
   static const favorites = '/dashboard/favorites';
   static const account = '/dashboard/account';
+  //DETAILS
+  static const details = '/details/';
 }

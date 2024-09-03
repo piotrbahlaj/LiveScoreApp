@@ -16,6 +16,7 @@ class FavoritesCard extends StatelessWidget {
     required this.homeLogo,
     required this.awayLogo,
     required this.id,
+    required this.onTap,
   });
   final String homeTeam;
   final String awayTeam;
@@ -26,6 +27,7 @@ class FavoritesCard extends StatelessWidget {
   final String? homeLogo;
   final String? awayLogo;
   final int id;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +36,7 @@ class FavoritesCard extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: InkWell(
+            onTap: onTap,
             child: Card(
               color: AppTheme.onPrimary3,
               child: SizedBox(

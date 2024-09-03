@@ -4,6 +4,7 @@ import 'package:live_score/config/environment_config_interface.dart';
 import 'package:live_score/core/network/api_client.dart';
 import 'package:live_score/features/auth/auth_module.dart';
 import 'package:live_score/features/dashboard/dashboard_module.dart';
+import 'package:live_score/features/details/details_module.dart';
 import 'package:live_score/services/api_service.dart';
 import 'package:live_score/start_screen.dart';
 
@@ -20,5 +21,6 @@ class AppModule extends Module {
     r.child('/', child: (context) => const StartScreen());
     r.module(AuthModule.auth, module: AuthModule());
     r.module(DashboardModule.dashboard, module: DashboardModule());
+    r.module(DetailsModule.details, module: DetailsModule());
   }
 }
