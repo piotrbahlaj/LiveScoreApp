@@ -113,7 +113,6 @@ class DashboardCubit extends Cubit<DashboardState> {
   }
 
   Future<int> deleteMatch(int id) async {
-    emit(const DashboardState.loading());
     try {
       return database.deleteMatch(id);
     } catch (e) {
