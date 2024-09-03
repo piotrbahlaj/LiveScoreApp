@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:live_score/core/theme/app_theme.dart';
 
 class LoadingStateIndicator extends StatelessWidget {
-  const LoadingStateIndicator(
-      {super.key,
-      required this.verticalPadding,
-      required this.horizontalPadding});
+  const LoadingStateIndicator({
+    super.key,
+    required this.verticalPadding,
+    required this.horizontalPadding,
+  });
   final double verticalPadding;
   final double horizontalPadding;
 

@@ -39,5 +39,8 @@
   "loggedOutSuccessfully": "Logged out successfully",
   "logInOrRegister": "Create an account or log in to continue",
   "league": "League",
-  "today": "Today"
+  "noFavoritesYet": "You haven't marked any matches as a favorite yet.",
+  "today": "Today",
+  "deletedFromFavorites": "Successfully deleted from favorites",
+  "delete": "Delete"
 }

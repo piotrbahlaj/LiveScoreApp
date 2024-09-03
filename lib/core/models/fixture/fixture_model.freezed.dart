@@ -23,6 +23,7 @@ mixin _$Fixture {
   String get date => throw _privateConstructorUsedError;
   String get timezone => throw _privateConstructorUsedError;
   Status get status => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +35,7 @@ abstract class $FixtureCopyWith<$Res> {
   factory $FixtureCopyWith(Fixture value, $Res Function(Fixture) then) =
       _$FixtureCopyWithImpl<$Res, Fixture>;
   @useResult
-  $Res call({String date, String timezone, Status status});
+  $Res call({String date, String timezone, Status status, int id});
 
   $StatusCopyWith<$Res> get status;
 }
@@ -55,6 +56,7 @@ class _$FixtureCopyWithImpl<$Res, $Val extends Fixture>
     Object? date = null,
     Object? timezone = null,
     Object? status = null,
+    Object? id = null,
   }) {
     return _then(_value.copyWith(
       date: null == date
@@ -69,6 +71,10 @@ class _$FixtureCopyWithImpl<$Res, $Val extends Fixture>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as Status,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 
@@ -88,7 +94,7 @@ abstract class _$$FixtureImplCopyWith<$Res> implements $FixtureCopyWith<$Res> {
       __$$FixtureImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String date, String timezone, Status status});
+  $Res call({String date, String timezone, Status status, int id});
 
   @override
   $StatusCopyWith<$Res> get status;
@@ -108,6 +114,7 @@ class __$$FixtureImplCopyWithImpl<$Res>
     Object? date = null,
     Object? timezone = null,
     Object? status = null,
+    Object? id = null,
   }) {
     return _then(_$FixtureImpl(
       date: null == date
@@ -122,6 +129,10 @@ class __$$FixtureImplCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as Status,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -130,7 +141,10 @@ class __$$FixtureImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$FixtureImpl implements _Fixture {
   const _$FixtureImpl(
-      {required this.date, required this.timezone, required this.status});
+      {required this.date,
+      required this.timezone,
+      required this.status,
+      required this.id});
 
   factory _$FixtureImpl.fromJson(Map<String, dynamic> json) =>
       _$$FixtureImplFromJson(json);
@@ -141,10 +155,12 @@ class _$FixtureImpl implements _Fixture {
   final String timezone;
   @override
   final Status status;
+  @override
+  final int id;
 
   @override
   String toString() {
-    return 'Fixture(date: $date, timezone: $timezone, status: $status)';
+    return 'Fixture(date: $date, timezone: $timezone, status: $status, id: $id)';
   }
 
   @override
@@ -155,12 +171,13 @@ class _$FixtureImpl implements _Fixture {
             (identical(other.date, date) || other.date == date) &&
             (identical(other.timezone, timezone) ||
                 other.timezone == timezone) &&
-            (identical(other.status, status) || other.status == status));
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.id, id) || other.id == id));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, date, timezone, status);
+  int get hashCode => Object.hash(runtimeType, date, timezone, status, id);
 
   @JsonKey(ignore: true)
   @override
@@ -180,7 +197,8 @@ abstract class _Fixture implements Fixture {
   const factory _Fixture(
       {required final String date,
       required final String timezone,
-      required final Status status}) = _$FixtureImpl;
+      required final Status status,
+      required final int id}) = _$FixtureImpl;
 
   factory _Fixture.fromJson(Map<String, dynamic> json) = _$FixtureImpl.fromJson;
 
@@ -190,6 +208,8 @@ abstract class _Fixture implements Fixture {
   String get timezone;
   @override
   Status get status;
+  @override
+  int get id;
   @override
   @JsonKey(ignore: true)
   _$$FixtureImplCopyWith<_$FixtureImpl> get copyWith =>

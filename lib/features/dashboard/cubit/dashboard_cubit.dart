@@ -1,7 +1,9 @@
 import 'package:bloc/bloc.dart';
+import 'package:drift/drift.dart' as drift;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:intl/intl.dart';
+import 'package:live_score/app_database.dart';
 import 'package:live_score/core/constants/dashboard_constants.dart';
 import 'package:live_score/core/extensions/date_time_extension.dart';
 import 'package:live_score/core/models/fixtures_endpoint/fixtures_endpoint_model.dart';
@@ -15,7 +17,8 @@ class DashboardCubit extends Cubit<DashboardState> {
   final FootballRepositoryInterface repository;
   final AuthRepositoryInterface auth;
   final FirebaseAuth firebaseAuth;
-  DashboardCubit(this.repository, this.auth, this.firebaseAuth)
+  final AppDatabase database;
+  DashboardCubit(this.repository, this.auth, this.firebaseAuth, this.database)
       : super(const DashboardState.initial());
 
   void setScrollOffset(double offset) {
@@ -41,7 +44,6 @@ class DashboardCubit extends Cubit<DashboardState> {
           date ?? DateFormat('yyyy-MM-dd').format(DateTime.now());
       final fixtures = await repository.getFixtures(date: selectedDate);
       final liveFixtures = await repository.getLiveFixtures(live: 'all');
-
       emit(
         DashboardState.success(
           fixtures,
@@ -70,5 +72,51 @@ class DashboardCubit extends Cubit<DashboardState> {
     emit(
       DashboardState.loggedIn(user),
     );
+  }
+
+  Future<int> cacheMatch(
+    String homeTeam,
+    String awayTeam,
+    String matchDate,
+    int? awayScore,
+    int? homeScore,
+    int id,
+    String? homeLogo,
+    String? awayLogo,
+    String status,
+  ) async {
+    try {
+      return database.cacheMatch(
+        MatchCompanion.insert(
+          homeTeam: homeTeam,
+          awayTeam: awayTeam,
+          matchDate: matchDate,
+          homeScore: drift.Value(homeScore),
+          awayScore: drift.Value(awayScore),
+          id: drift.Value(id),
+          homeLogo: drift.Value(homeLogo),
+          awayLogo: drift.Value(awayLogo),
+          status: status,
+        ),
+      );
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<List<MatchData>> loadCachedMatches() async {
+    try {
+      return database.loadCachedMatches();
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<int> deleteMatch(int id) async {
+    try {
+      return database.deleteMatch(id);
+    } catch (e) {
+      throw Exception(e.toString());
+    }
   }
 }

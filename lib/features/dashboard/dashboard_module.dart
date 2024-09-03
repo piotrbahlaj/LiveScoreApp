@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:live_score/app_database.dart';
 import 'package:live_score/config/environment_config.dart';
 import 'package:live_score/config/environment_config_interface.dart';
 import 'package:live_score/core/network/api_client.dart';
@@ -22,11 +23,12 @@ class DashboardModule extends Module {
     i.addLazySingleton(ApiClient.new);
     i.addLazySingleton(ApiService.new);
     i.addLazySingleton<DashboardCubit>(DashboardCubit.new);
+    i.addLazySingleton<AuthRepositoryInterface>(AuthRepository.new);
+    i.addLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
     i.addLazySingleton<FootballRepositoryInterface>(
       FootballRepository.new,
     );
-    i.addLazySingleton<AuthRepositoryInterface>(AuthRepository.new);
-    i.addLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
+    i.addLazySingleton<AppDatabase>(AppDatabase.new);
   }
 
   @override
