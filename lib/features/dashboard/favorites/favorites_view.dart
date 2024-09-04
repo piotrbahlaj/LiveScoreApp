@@ -106,6 +106,9 @@ class FavoritesView extends StatelessWidget {
                     status: match.status,
                     date: formattedDate,
                     id: match.id,
+                    leagueLogo: match.leagueLogo,
+                    leagueName: match.leagueName,
+                    time: match.time,
                     onTap: () => Modular.to.pushNamed(Routes.details),
                   ),
                 );

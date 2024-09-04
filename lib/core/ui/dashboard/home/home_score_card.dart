@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:live_score/core/theme/app_theme.dart';
-import 'package:live_score/core/ui/dashboard/home/cached_image.dart';
-import 'package:live_score/core/ui/dashboard/home/loading_state_indicator.dart';
+import 'package:live_score/core/ui/cached_image.dart';
+import 'package:live_score/core/ui/loading_state_indicator.dart';
 import 'package:live_score/features/dashboard/cubit/dashboard_cubit.dart';
 
 class HomeScoreCard extends StatelessWidget {
@@ -17,6 +17,9 @@ class HomeScoreCard extends StatelessWidget {
     required this.homeLogo,
     required this.awayLogo,
     required this.id,
+    required this.leagueName,
+    required this.leagueLogo,
+    this.time,
   });
   final String homeTeam;
   final String awayTeam;
@@ -27,7 +30,9 @@ class HomeScoreCard extends StatelessWidget {
   final String? homeLogo;
   final String? awayLogo;
   final int id;
-
+  final String leagueName;
+  final String? leagueLogo;
+  final int? time;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<DashboardCubit, DashboardState>(
@@ -49,6 +54,9 @@ class HomeScoreCard extends StatelessWidget {
                   homeLogo,
                   awayLogo,
                   status,
+                  leagueName,
+                  leagueLogo,
+                  time,
                 );
                 print('Caching data for id: $id');
               },

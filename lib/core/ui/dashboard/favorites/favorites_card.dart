@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:live_score/core/theme/app_theme.dart';
-import 'package:live_score/core/ui/dashboard/home/cached_image.dart';
+import 'package:live_score/core/ui/cached_image.dart';
 import 'package:live_score/features/dashboard/cubit/dashboard_cubit.dart';
 
 class FavoritesCard extends StatelessWidget {
@@ -17,6 +17,9 @@ class FavoritesCard extends StatelessWidget {
     required this.awayLogo,
     required this.id,
     required this.onTap,
+    required this.leagueName,
+    required this.leagueLogo,
+    this.time,
   });
   final String homeTeam;
   final String awayTeam;
@@ -27,6 +30,9 @@ class FavoritesCard extends StatelessWidget {
   final String? homeLogo;
   final String? awayLogo;
   final int id;
+  final String leagueName;
+  final String? leagueLogo;
+  final int? time;
   final VoidCallback onTap;
 
   @override

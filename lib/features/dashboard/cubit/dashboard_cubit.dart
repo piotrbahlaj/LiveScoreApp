@@ -84,6 +84,9 @@ class DashboardCubit extends Cubit<DashboardState> {
     String? homeLogo,
     String? awayLogo,
     String status,
+    String leagueName,
+    String? leagueLogo,
+    int? time,
   ) async {
     try {
       return database.cacheMatch(
@@ -97,6 +100,9 @@ class DashboardCubit extends Cubit<DashboardState> {
           homeLogo: drift.Value(homeLogo),
           awayLogo: drift.Value(awayLogo),
           status: status,
+          leagueName: leagueName,
+          leagueLogo: drift.Value(leagueLogo),
+          time: drift.Value(time),
         ),
       );
     } catch (e) {

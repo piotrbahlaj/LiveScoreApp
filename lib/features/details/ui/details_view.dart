@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:live_score/core/theme/app_theme.dart';
+import 'package:live_score/core/ui/loading_state_indicator.dart';
+import 'package:live_score/features/details/ui/cubit/details_cubit.dart';
 
 class DetailsView extends StatelessWidget {
   const DetailsView({super.key});
@@ -30,16 +33,36 @@ class DetailsView extends StatelessWidget {
               size: 30,
               color: AppTheme.onSecondary,
             ),
-          )
+          ),
         ],
       ),
       backgroundColor: AppTheme.primary,
-      body: const Column(
-        children: [
-          // Details card with basic info, like live card
-
-          // Summary, stats, standings
-        ],
+      body: BlocBuilder<DetailsCubit, DetailsState>(
+        builder: (context, state) {
+          if (state is Success) {
+            return const Column(
+              children: [
+                // Details card with basic info, like live card
+                // DetailsCard(
+                //   leagueName: leagueName,
+                //   homeName: homeName,
+                //   awayName: awayName,
+                //   leagueLogo: leagueLogo,
+                //   homeLogo: homeLogo,
+                //   awayLogo: awayLogo,
+                //   homeScore: homeScore,
+                //   awayScore: awayScore,
+                //   time: time,
+                // ),
+                // Summary, stats, standings
+              ],
+            );
+          }
+          return const LoadingStateIndicator(
+            verticalPadding: 20,
+            horizontalPadding: 20,
+          );
+        },
       ),
     );
   }

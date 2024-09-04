@@ -6,7 +6,7 @@ import 'package:live_score/core/constants/routes.dart';
 import 'package:live_score/core/extensions/localization/app_localizations_context.dart';
 import 'package:live_score/core/theme/app_theme.dart';
 import 'package:live_score/core/ui/dashboard/account/log_out_button.dart';
-import 'package:live_score/core/ui/dashboard/home/loading_state_indicator.dart';
+import 'package:live_score/core/ui/loading_state_indicator.dart';
 import 'package:live_score/features/dashboard/cubit/dashboard_cubit.dart';
 
 class AccountView extends StatelessWidget {

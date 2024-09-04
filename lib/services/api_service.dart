@@ -19,4 +19,9 @@ abstract class ApiService {
   Future<FixturesEndpointModel> getLiveFixtures(
     @Query('live') String live,
   );
+
+  @GET('/fixtures/events')
+  Future<FixturesEndpointModel> getMatchDetails(
+    @Query('id') int id,
+  );
 }

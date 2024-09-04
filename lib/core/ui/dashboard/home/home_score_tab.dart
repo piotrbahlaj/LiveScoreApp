@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:live_score/core/theme/app_theme.dart';
-import 'package:live_score/core/ui/dashboard/home/cached_image.dart';
+import 'package:live_score/core/ui/cached_image.dart';
 import 'package:live_score/core/ui/dashboard/home/home_score_card.dart';
 import 'package:live_score/features/dashboard/cubit/dashboard_cubit.dart';
 
@@ -58,6 +58,9 @@ class HomeScoreTab extends StatelessWidget {
                       status: fixtures.fixture.status.short,
                       date: formattedDate,
                       id: fixtures.fixture.id,
+                      leagueLogo: fixtures.league.logo,
+                      leagueName: fixtures.league.name,
+                      time: fixtures.fixture.status.elapsed,
                     ),
                   ],
                 );

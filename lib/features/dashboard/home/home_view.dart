@@ -9,7 +9,7 @@ import 'package:live_score/core/ui/dashboard/home/home_live_card.dart';
 import 'package:live_score/core/ui/dashboard/home/home_live_now_row.dart';
 import 'package:live_score/core/ui/dashboard/home/home_score_tab.dart';
 import 'package:live_score/core/ui/dashboard/home/home_tabs.dart';
-import 'package:live_score/core/ui/dashboard/home/loading_state_indicator.dart';
+import 'package:live_score/core/ui/loading_state_indicator.dart';
 import 'package:live_score/features/dashboard/cubit/dashboard_cubit.dart';
 import 'package:live_score/features/dashboard/favorites/favorites_view.dart';
 

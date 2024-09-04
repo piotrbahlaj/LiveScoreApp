@@ -25,4 +25,14 @@ class FootballRepository implements FootballRepositoryInterface {
       throw Exception(e.toString());
     }
   }
+
+  @override
+  Future<FixturesEndpointModel> getMatchDetails({required int id}) async {
+    try {
+      final response = await service.getMatchDetails(id);
+      return response;
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
 }

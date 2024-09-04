@@ -11,4 +11,7 @@ class Match extends Table {
   BoolColumn get isFavorite => boolean().withDefault(const Constant(false))();
   TextColumn get homeLogo => text().nullable()();
   TextColumn get awayLogo => text().nullable()();
+  TextColumn get leagueName => text()();
+  TextColumn get leagueLogo => text().nullable()();
+  IntColumn get time => integer().nullable()();
 }

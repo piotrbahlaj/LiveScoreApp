@@ -74,6 +74,23 @@ class $MatchTable extends Match with TableInfo<$MatchTable, MatchData> {
   late final GeneratedColumn<String> awayLogo = GeneratedColumn<String>(
       'away_logo', aliasedName, true,
       type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _leagueNameMeta =
+      const VerificationMeta('leagueName');
+  @override
+  late final GeneratedColumn<String> leagueName = GeneratedColumn<String>(
+      'league_name', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _leagueLogoMeta =
+      const VerificationMeta('leagueLogo');
+  @override
+  late final GeneratedColumn<String> leagueLogo = GeneratedColumn<String>(
+      'league_logo', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _timeMeta = const VerificationMeta('time');
+  @override
+  late final GeneratedColumn<int> time = GeneratedColumn<int>(
+      'time', aliasedName, true,
+      type: DriftSqlType.int, requiredDuringInsert: false);
   @override
   List<GeneratedColumn> get $columns => [
         id,
@@ -85,7 +102,10 @@ class $MatchTable extends Match with TableInfo<$MatchTable, MatchData> {
         matchDate,
         isFavorite,
         homeLogo,
-        awayLogo
+        awayLogo,
+        leagueName,
+        leagueLogo,
+        time
       ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -146,6 +166,24 @@ class $MatchTable extends Match with TableInfo<$MatchTable, MatchData> {
       context.handle(_awayLogoMeta,
           awayLogo.isAcceptableOrUnknown(data['away_logo']!, _awayLogoMeta));
     }
+    if (data.containsKey('league_name')) {
+      context.handle(
+          _leagueNameMeta,
+          leagueName.isAcceptableOrUnknown(
+              data['league_name']!, _leagueNameMeta));
+    } else if (isInserting) {
+      context.missing(_leagueNameMeta);
+    }
+    if (data.containsKey('league_logo')) {
+      context.handle(
+          _leagueLogoMeta,
+          leagueLogo.isAcceptableOrUnknown(
+              data['league_logo']!, _leagueLogoMeta));
+    }
+    if (data.containsKey('time')) {
+      context.handle(
+          _timeMeta, time.isAcceptableOrUnknown(data['time']!, _timeMeta));
+    }
     return context;
   }
 
@@ -175,6 +213,12 @@ class $MatchTable extends Match with TableInfo<$MatchTable, MatchData> {
           .read(DriftSqlType.string, data['${effectivePrefix}home_logo']),
       awayLogo: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}away_logo']),
+      leagueName: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}league_name'])!,
+      leagueLogo: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}league_logo']),
+      time: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}time']),
     );
   }
 
@@ -195,6 +239,9 @@ class MatchData extends DataClass implements Insertable<MatchData> {
   final bool isFavorite;
   final String? homeLogo;
   final String? awayLogo;
+  final String leagueName;
+  final String? leagueLogo;
+  final int? time;
   const MatchData(
       {required this.id,
       required this.homeTeam,
@@ -205,7 +252,10 @@ class MatchData extends DataClass implements Insertable<MatchData> {
       required this.matchDate,
       required this.isFavorite,
       this.homeLogo,
-      this.awayLogo});
+      this.awayLogo,
+      required this.leagueName,
+      this.leagueLogo,
+      this.time});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -226,6 +276,13 @@ class MatchData extends DataClass implements Insertable<MatchData> {
     }
     if (!nullToAbsent || awayLogo != null) {
       map['away_logo'] = Variable<String>(awayLogo);
+    }
+    map['league_name'] = Variable<String>(leagueName);
+    if (!nullToAbsent || leagueLogo != null) {
+      map['league_logo'] = Variable<String>(leagueLogo);
+    }
+    if (!nullToAbsent || time != null) {
+      map['time'] = Variable<int>(time);
     }
     return map;
   }
@@ -250,6 +307,11 @@ class MatchData extends DataClass implements Insertable<MatchData> {
       awayLogo: awayLogo == null && nullToAbsent
           ? const Value.absent()
           : Value(awayLogo),
+      leagueName: Value(leagueName),
+      leagueLogo: leagueLogo == null && nullToAbsent
+          ? const Value.absent()
+          : Value(leagueLogo),
+      time: time == null && nullToAbsent ? const Value.absent() : Value(time),
     );
   }
 
@@ -267,6 +329,9 @@ class MatchData extends DataClass implements Insertable<MatchData> {
       isFavorite: serializer.fromJson<bool>(json['isFavorite']),
       homeLogo: serializer.fromJson<String?>(json['homeLogo']),
       awayLogo: serializer.fromJson<String?>(json['awayLogo']),
+      leagueName: serializer.fromJson<String>(json['leagueName']),
+      leagueLogo: serializer.fromJson<String?>(json['leagueLogo']),
+      time: serializer.fromJson<int?>(json['time']),
     );
   }
   @override
@@ -283,6 +348,9 @@ class MatchData extends DataClass implements Insertable<MatchData> {
       'isFavorite': serializer.toJson<bool>(isFavorite),
       'homeLogo': serializer.toJson<String?>(homeLogo),
       'awayLogo': serializer.toJson<String?>(awayLogo),
+      'leagueName': serializer.toJson<String>(leagueName),
+      'leagueLogo': serializer.toJson<String?>(leagueLogo),
+      'time': serializer.toJson<int?>(time),
     };
   }
 
@@ -296,7 +364,10 @@ class MatchData extends DataClass implements Insertable<MatchData> {
           String? matchDate,
           bool? isFavorite,
           Value<String?> homeLogo = const Value.absent(),
-          Value<String?> awayLogo = const Value.absent()}) =>
+          Value<String?> awayLogo = const Value.absent(),
+          String? leagueName,
+          Value<String?> leagueLogo = const Value.absent(),
+          Value<int?> time = const Value.absent()}) =>
       MatchData(
         id: id ?? this.id,
         homeTeam: homeTeam ?? this.homeTeam,
@@ -308,6 +379,9 @@ class MatchData extends DataClass implements Insertable<MatchData> {
         isFavorite: isFavorite ?? this.isFavorite,
         homeLogo: homeLogo.present ? homeLogo.value : this.homeLogo,
         awayLogo: awayLogo.present ? awayLogo.value : this.awayLogo,
+        leagueName: leagueName ?? this.leagueName,
+        leagueLogo: leagueLogo.present ? leagueLogo.value : this.leagueLogo,
+        time: time.present ? time.value : this.time,
       );
   MatchData copyWithCompanion(MatchCompanion data) {
     return MatchData(
@@ -322,6 +396,11 @@ class MatchData extends DataClass implements Insertable<MatchData> {
           data.isFavorite.present ? data.isFavorite.value : this.isFavorite,
       homeLogo: data.homeLogo.present ? data.homeLogo.value : this.homeLogo,
       awayLogo: data.awayLogo.present ? data.awayLogo.value : this.awayLogo,
+      leagueName:
+          data.leagueName.present ? data.leagueName.value : this.leagueName,
+      leagueLogo:
+          data.leagueLogo.present ? data.leagueLogo.value : this.leagueLogo,
+      time: data.time.present ? data.time.value : this.time,
     );
   }
 
@@ -337,14 +416,29 @@ class MatchData extends DataClass implements Insertable<MatchData> {
           ..write('matchDate: $matchDate, ')
           ..write('isFavorite: $isFavorite, ')
           ..write('homeLogo: $homeLogo, ')
-          ..write('awayLogo: $awayLogo')
+          ..write('awayLogo: $awayLogo, ')
+          ..write('leagueName: $leagueName, ')
+          ..write('leagueLogo: $leagueLogo, ')
+          ..write('time: $time')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(id, homeTeam, awayTeam, status, homeScore,
-      awayScore, matchDate, isFavorite, homeLogo, awayLogo);
+  int get hashCode => Object.hash(
+      id,
+      homeTeam,
+      awayTeam,
+      status,
+      homeScore,
+      awayScore,
+      matchDate,
+      isFavorite,
+      homeLogo,
+      awayLogo,
+      leagueName,
+      leagueLogo,
+      time);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -358,7 +452,10 @@ class MatchData extends DataClass implements Insertable<MatchData> {
           other.matchDate == this.matchDate &&
           other.isFavorite == this.isFavorite &&
           other.homeLogo == this.homeLogo &&
-          other.awayLogo == this.awayLogo);
+          other.awayLogo == this.awayLogo &&
+          other.leagueName == this.leagueName &&
+          other.leagueLogo == this.leagueLogo &&
+          other.time == this.time);
 }
 
 class MatchCompanion extends UpdateCompanion<MatchData> {
@@ -372,6 +469,9 @@ class MatchCompanion extends UpdateCompanion<MatchData> {
   final Value<bool> isFavorite;
   final Value<String?> homeLogo;
   final Value<String?> awayLogo;
+  final Value<String> leagueName;
+  final Value<String?> leagueLogo;
+  final Value<int?> time;
   const MatchCompanion({
     this.id = const Value.absent(),
     this.homeTeam = const Value.absent(),
@@ -383,6 +483,9 @@ class MatchCompanion extends UpdateCompanion<MatchData> {
     this.isFavorite = const Value.absent(),
     this.homeLogo = const Value.absent(),
     this.awayLogo = const Value.absent(),
+    this.leagueName = const Value.absent(),
+    this.leagueLogo = const Value.absent(),
+    this.time = const Value.absent(),
   });
   MatchCompanion.insert({
     this.id = const Value.absent(),
@@ -395,10 +498,14 @@ class MatchCompanion extends UpdateCompanion<MatchData> {
     this.isFavorite = const Value.absent(),
     this.homeLogo = const Value.absent(),
     this.awayLogo = const Value.absent(),
+    required String leagueName,
+    this.leagueLogo = const Value.absent(),
+    this.time = const Value.absent(),
   })  : homeTeam = Value(homeTeam),
         awayTeam = Value(awayTeam),
         status = Value(status),
-        matchDate = Value(matchDate);
+        matchDate = Value(matchDate),
+        leagueName = Value(leagueName);
   static Insertable<MatchData> custom({
     Expression<int>? id,
     Expression<String>? homeTeam,
@@ -410,6 +517,9 @@ class MatchCompanion extends UpdateCompanion<MatchData> {
     Expression<bool>? isFavorite,
     Expression<String>? homeLogo,
     Expression<String>? awayLogo,
+    Expression<String>? leagueName,
+    Expression<String>? leagueLogo,
+    Expression<int>? time,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -422,6 +532,9 @@ class MatchCompanion extends UpdateCompanion<MatchData> {
       if (isFavorite != null) 'is_favorite': isFavorite,
       if (homeLogo != null) 'home_logo': homeLogo,
       if (awayLogo != null) 'away_logo': awayLogo,
+      if (leagueName != null) 'league_name': leagueName,
+      if (leagueLogo != null) 'league_logo': leagueLogo,
+      if (time != null) 'time': time,
     });
   }
 
@@ -435,7 +548,10 @@ class MatchCompanion extends UpdateCompanion<MatchData> {
       Value<String>? matchDate,
       Value<bool>? isFavorite,
       Value<String?>? homeLogo,
-      Value<String?>? awayLogo}) {
+      Value<String?>? awayLogo,
+      Value<String>? leagueName,
+      Value<String?>? leagueLogo,
+      Value<int?>? time}) {
     return MatchCompanion(
       id: id ?? this.id,
       homeTeam: homeTeam ?? this.homeTeam,
@@ -447,6 +563,9 @@ class MatchCompanion extends UpdateCompanion<MatchData> {
       isFavorite: isFavorite ?? this.isFavorite,
       homeLogo: homeLogo ?? this.homeLogo,
       awayLogo: awayLogo ?? this.awayLogo,
+      leagueName: leagueName ?? this.leagueName,
+      leagueLogo: leagueLogo ?? this.leagueLogo,
+      time: time ?? this.time,
     );
   }
 
@@ -483,6 +602,15 @@ class MatchCompanion extends UpdateCompanion<MatchData> {
     if (awayLogo.present) {
       map['away_logo'] = Variable<String>(awayLogo.value);
     }
+    if (leagueName.present) {
+      map['league_name'] = Variable<String>(leagueName.value);
+    }
+    if (leagueLogo.present) {
+      map['league_logo'] = Variable<String>(leagueLogo.value);
+    }
+    if (time.present) {
+      map['time'] = Variable<int>(time.value);
+    }
     return map;
   }
 
@@ -498,7 +626,10 @@ class MatchCompanion extends UpdateCompanion<MatchData> {
           ..write('matchDate: $matchDate, ')
           ..write('isFavorite: $isFavorite, ')
           ..write('homeLogo: $homeLogo, ')
-          ..write('awayLogo: $awayLogo')
+          ..write('awayLogo: $awayLogo, ')
+          ..write('leagueName: $leagueName, ')
+          ..write('leagueLogo: $leagueLogo, ')
+          ..write('time: $time')
           ..write(')'))
         .toString();
   }
@@ -526,6 +657,9 @@ typedef $$MatchTableCreateCompanionBuilder = MatchCompanion Function({
   Value<bool> isFavorite,
   Value<String?> homeLogo,
   Value<String?> awayLogo,
+  required String leagueName,
+  Value<String?> leagueLogo,
+  Value<int?> time,
 });
 typedef $$MatchTableUpdateCompanionBuilder = MatchCompanion Function({
   Value<int> id,
@@ -538,6 +672,9 @@ typedef $$MatchTableUpdateCompanionBuilder = MatchCompanion Function({
   Value<bool> isFavorite,
   Value<String?> homeLogo,
   Value<String?> awayLogo,
+  Value<String> leagueName,
+  Value<String?> leagueLogo,
+  Value<int?> time,
 });
 
 class $$MatchTableTableManager extends RootTableManager<
@@ -567,6 +704,9 @@ class $$MatchTableTableManager extends RootTableManager<
             Value<bool> isFavorite = const Value.absent(),
             Value<String?> homeLogo = const Value.absent(),
             Value<String?> awayLogo = const Value.absent(),
+            Value<String> leagueName = const Value.absent(),
+            Value<String?> leagueLogo = const Value.absent(),
+            Value<int?> time = const Value.absent(),
           }) =>
               MatchCompanion(
             id: id,
@@ -579,6 +719,9 @@ class $$MatchTableTableManager extends RootTableManager<
             isFavorite: isFavorite,
             homeLogo: homeLogo,
             awayLogo: awayLogo,
+            leagueName: leagueName,
+            leagueLogo: leagueLogo,
+            time: time,
           ),
           createCompanionCallback: ({
             Value<int> id = const Value.absent(),
@@ -591,6 +734,9 @@ class $$MatchTableTableManager extends RootTableManager<
             Value<bool> isFavorite = const Value.absent(),
             Value<String?> homeLogo = const Value.absent(),
             Value<String?> awayLogo = const Value.absent(),
+            required String leagueName,
+            Value<String?> leagueLogo = const Value.absent(),
+            Value<int?> time = const Value.absent(),
           }) =>
               MatchCompanion.insert(
             id: id,
@@ -603,6 +749,9 @@ class $$MatchTableTableManager extends RootTableManager<
             isFavorite: isFavorite,
             homeLogo: homeLogo,
             awayLogo: awayLogo,
+            leagueName: leagueName,
+            leagueLogo: leagueLogo,
+            time: time,
           ),
         ));
 }
@@ -659,6 +808,21 @@ class $$MatchTableFilterComposer
       column: $state.table.awayLogo,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get leagueName => $state.composableBuilder(
+      column: $state.table.leagueName,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get leagueLogo => $state.composableBuilder(
+      column: $state.table.leagueLogo,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get time => $state.composableBuilder(
+      column: $state.table.time,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
 }
 
 class $$MatchTableOrderingComposer
@@ -711,6 +875,21 @@ class $$MatchTableOrderingComposer
 
   ColumnOrderings<String> get awayLogo => $state.composableBuilder(
       column: $state.table.awayLogo,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get leagueName => $state.composableBuilder(
+      column: $state.table.leagueName,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get leagueLogo => $state.composableBuilder(
+      column: $state.table.leagueLogo,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get time => $state.composableBuilder(
+      column: $state.table.time,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 }

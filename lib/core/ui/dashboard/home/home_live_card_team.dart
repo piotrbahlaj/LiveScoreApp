@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:live_score/core/theme/app_theme.dart';
-import 'package:live_score/core/ui/dashboard/home/cached_image.dart';
+import 'package:live_score/core/ui/cached_image.dart';
 
 class HomeLiveCardTeam extends StatelessWidget {
   const HomeLiveCardTeam({
@@ -8,7 +8,7 @@ class HomeLiveCardTeam extends StatelessWidget {
     required this.logo,
     required this.name,
   });
-  final String logo;
+  final String? logo;
   final String name;
 
   @override
@@ -23,7 +23,7 @@ class HomeLiveCardTeam extends StatelessWidget {
             SizedBox(
               width: 40,
               height: 50,
-              child: CachedImage(imageURL: logo),
+              child: CachedImage(imageURL: logo!),
             ),
             const SizedBox(height: 5),
             Text(
